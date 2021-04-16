@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/hifrizreact/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/hifrizreact/static/js/main.8159bac3.chunk.js",
-    "main.js.map": "/hifrizreact/static/js/main.8159bac3.chunk.js.map",
-    "runtime-main.js": "/hifrizreact/static/js/runtime-main.a20ce7ed.js",
-    "runtime-main.js.map": "/hifrizreact/static/js/runtime-main.a20ce7ed.js.map",
-    "static/js/2.e4c7adac.chunk.js": "/hifrizreact/static/js/2.e4c7adac.chunk.js",
-    "static/js/2.e4c7adac.chunk.js.map": "/hifrizreact/static/js/2.e4c7adac.chunk.js.map",
-    "static/js/3.7dc25bb0.chunk.js": "/hifrizreact/static/js/3.7dc25bb0.chunk.js",
-    "static/js/3.7dc25bb0.chunk.js.map": "/hifrizreact/static/js/3.7dc25bb0.chunk.js.map",
-    "index.html": "/hifrizreact/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/hifrizreact/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.e4c7adac.chunk.js.LICENSE.txt": "/hifrizreact/static/js/2.e4c7adac.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/hifrizreact/static/media/logo.6ce24c58.svg"
+    "main.css": "/hifriz-react/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/hifriz-react/static/js/main.8159bac3.chunk.js",
+    "main.js.map": "/hifriz-react/static/js/main.8159bac3.chunk.js.map",
+    "runtime-main.js": "/hifriz-react/static/js/runtime-main.f253df0e.js",
+    "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.f253df0e.js.map",
+    "static/js/2.e4c7adac.chunk.js": "/hifriz-react/static/js/2.e4c7adac.chunk.js",
+    "static/js/2.e4c7adac.chunk.js.map": "/hifriz-react/static/js/2.e4c7adac.chunk.js.map",
+    "static/js/3.7dc25bb0.chunk.js": "/hifriz-react/static/js/3.7dc25bb0.chunk.js",
+    "static/js/3.7dc25bb0.chunk.js.map": "/hifriz-react/static/js/3.7dc25bb0.chunk.js.map",
+    "index.html": "/hifriz-react/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/hifriz-react/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.e4c7adac.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.e4c7adac.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/hifriz-react/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a20ce7ed.js",
+    "static/js/runtime-main.f253df0e.js",
     "static/js/2.e4c7adac.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
     "static/js/main.8159bac3.chunk.js"
