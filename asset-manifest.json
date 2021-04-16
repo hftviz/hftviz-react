@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/hifrizreact/hifrizreact.github.io.git/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/hifrizreact/hifrizreact.github.io.git/static/js/main.8159bac3.chunk.js",
+    "main.js.map": "/hifrizreact/hifrizreact.github.io.git/static/js/main.8159bac3.chunk.js.map",
+    "runtime-main.js": "/hifrizreact/hifrizreact.github.io.git/static/js/runtime-main.bc442dd8.js",
+    "runtime-main.js.map": "/hifrizreact/hifrizreact.github.io.git/static/js/runtime-main.bc442dd8.js.map",
+    "static/js/2.e4c7adac.chunk.js": "/hifrizreact/hifrizreact.github.io.git/static/js/2.e4c7adac.chunk.js",
+    "static/js/2.e4c7adac.chunk.js.map": "/hifrizreact/hifrizreact.github.io.git/static/js/2.e4c7adac.chunk.js.map",
+    "static/js/3.7dc25bb0.chunk.js": "/hifrizreact/hifrizreact.github.io.git/static/js/3.7dc25bb0.chunk.js",
+    "static/js/3.7dc25bb0.chunk.js.map": "/hifrizreact/hifrizreact.github.io.git/static/js/3.7dc25bb0.chunk.js.map",
+    "index.html": "/hifrizreact/hifrizreact.github.io.git/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/hifrizreact/hifrizreact.github.io.git/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.e4c7adac.chunk.js.LICENSE.txt": "/hifrizreact/hifrizreact.github.io.git/static/js/2.e4c7adac.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/hifrizreact/hifrizreact.github.io.git/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bc442dd8.js",
+    "static/js/2.e4c7adac.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.8159bac3.chunk.js"
+  ]
+}
