@@ -32,7 +32,7 @@ class Popup extends React.Component {
         <div className="modal-main" ref={this.setWrapperRef}>
             {this.props.children}
             <button type="button" onClick={this.props.handleClose} className="closeButton">
-            X
+                &times;
             </button>
         </div>
         </div>

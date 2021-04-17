@@ -2,14 +2,12 @@ import React from 'react';
 import ReadMe from './ReadMe/ReadMe';
 import logo from '../pics/logo.png';
 import SearchBar from './SearchBar/SearchBar';
+import SelectedBox from './SelectedBox/SelectedBox';
 
 
 
 class Menu extends React.Component {
     render() {
-
-        console.log(this.props.selectedStocks);
-
         return(
 
             <div id="panel-menu"> 
@@ -32,8 +30,11 @@ class Menu extends React.Component {
                     filterText={this.props.filterText}
                     stockNames={this.props.stockNames}
                 />
-                {/* <SelectedBox />
-                <Sort />
+                <SelectedBox 
+                    onChangeSelectedStocks={this.props.onChangeSelectedStocks}
+                    selectedStocks={this.props.selectedStocks}
+                />
+                {/* <Sort />
                 <BinSize />
                 <DateBox /> */}
                 {/* Creating the button for view overview or details */}

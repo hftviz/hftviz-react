@@ -42,16 +42,30 @@ class Viz extends React.Component {
             filterText: filterText
         });
     };
-    handleChangeSelectedStocks(stock){
+    handleChangeSelectedStocks(stock, action){
+        if (action === 'add'){
+            if (this.state.selectedStocks.length === 10){
+                    alert("You reached the maximum capacity. Please remove some stocks.");
+            } else {
+                this.setState({
+                    selectedStocks: [...new Set(this.state.selectedStocks.concat([stock]))]
+                });
+            }
+        };
 
-        if (this.state.selectedStocks.length === 10){
-                alert("You reached the maximum capacity. Please remove some stocks.");
-        } else {
+        if (action === 'remove'){
+            let index = this.state.selectedStocks.indexOf(stock);
+
+            // remove the element
+            this.state.selectedStocks.splice(index, 1)
+
+            // update the state
             this.setState({
-                selectedStocks: [...new Set(this.state.selectedStocks.concat([stock]))]
+                selectedStocks: this.state.selectedStocks
             });
-        }
+        };
     };
+
     handleChangeSort(sortType){
         this.setState({
             sortType: sortType

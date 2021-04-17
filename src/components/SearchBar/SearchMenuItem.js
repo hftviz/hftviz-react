@@ -8,7 +8,7 @@ class SearchMenuItem extends React.Component {
     }
 
     handleSelectedStocks(name){
-        this.props.onChangeSelectedStocks(name);
+        this.props.onChangeSelectedStocks(name, 'add');
 
         // Put this to remove the menu after selecting the stock. Because the upper functions in SearchBar has .targe.value, 
         // we form the input like below.
