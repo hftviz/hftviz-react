@@ -42,10 +42,15 @@ class Viz extends React.Component {
             filterText: filterText
         });
     };
-    handleChangeSelectedStocks(selectedStocks){
-        this.setState({
-            selectedStocks: selectedStocks
-        });
+    handleChangeSelectedStocks(stock){
+
+        if (this.state.selectedStocks.length === 10){
+                alert("You reached the maximum capacity. Please remove some stocks.");
+        } else {
+            this.setState({
+                selectedStocks: [...new Set(this.state.selectedStocks.concat([stock]))]
+            });
+        }
     };
     handleChangeSort(sortType){
         this.setState({

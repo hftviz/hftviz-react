@@ -1,10 +1,15 @@
 import React from 'react';
-import ReadMe from './ReadMe/ReadMe'
+import ReadMe from './ReadMe/ReadMe';
 import logo from '../pics/logo.png';
+import SearchBar from './SearchBar/SearchBar';
+
 
 
 class Menu extends React.Component {
     render() {
+
+        console.log(this.props.selectedStocks);
+
         return(
 
             <div id="panel-menu"> 
@@ -21,8 +26,13 @@ class Menu extends React.Component {
                 </div>
 
                 <ReadMe vizType={this.props.vizType}/>
-                {/* <SearchBox />
-                <SelectedBox />
+                <SearchBar 
+                    onChangeFilterText={this.props.onChangeFilterText}
+                    onChangeSelectedStocks={this.props.onChangeSelectedStocks}
+                    filterText={this.props.filterText}
+                    stockNames={this.props.stockNames}
+                />
+                {/* <SelectedBox />
                 <Sort />
                 <BinSize />
                 <DateBox /> */}

@@ -19,7 +19,7 @@ class ReadMe extends React.Component {
       
     render() {
       return (
-        <div>
+        <div style={{width:'100%', height:'5%', marginLeft:'1%', marginTop:'3%'}}>
           <button type='button' onClick={this.showModal} id="ReadMe">How to read this Visualization?</button>
           <Popup show={this.state.show} handleClose={this.hideModal} >
                 <SlideShow vizType={this.props.vizType} />

@@ -15,12 +15,13 @@ body {
 .stock {
     background-color: #faf9f9;
     font-size: 0.8vw;
-    width: 80%;
+    width: 95%;
     border: 0.5px solid #ddd;
     border-radius: 5%;
     text-align: center;
-    margin-left: 10%;
+    margin-left: 1%;
     font-family: 'Oswald';
+    z-index: 1;
 }
 
 .stock:hover {
@@ -221,13 +222,11 @@ body {
 }
 
 #ReadMe{
-    width: 95%;
-    height: 100%;
+    width: 96%;
+    height: 80%;
+    margin-left: 0%;
     border: #d4d4d4 solid 1px;
     border-radius: 5px;
-    float: left;
-    margin-left: 1%;
-    margin-top: 3%;
     color: #ffffff;
     background-color: #12aa26;
     position: relative;
@@ -255,9 +254,9 @@ body {
 
 #searchBar {
     display: '';
-    margin-bottom: 10%;
-    margin-top: 16%;
-    margin-left: 10%;
+    margin-bottom: 0%;
+    margin-top: 5%;
+    margin-left: 1%;
     background-image: url('../pics/search.png');
     /* Add a search icon to input */
     background-position: left;
@@ -265,8 +264,8 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     /* Do not repeat the icon image */
-    width: 80%;
-    /* Full-width */
+    width: 93.5%;
+    float: left;
     font-size: 0.8vw;
     font-family: 'Oswald';
     /* Increase font-size */
