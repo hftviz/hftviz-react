@@ -220,6 +220,23 @@ body {
     text-align: justify;
 }
 
+#ReadMe{
+    width: 95%;
+    height: 100%;
+    border: #d4d4d4 solid 1px;
+    border-radius: 5px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 3%;
+    color: #ffffff;
+    background-color: #12aa26;
+    position: relative;
+    display: inline-block;
+    font-size: 0.8vw;
+    font-family: 'Oswald';
+    text-align: center;
+}
+
 #main-panel {
     width: 85%;
     height: 100%;

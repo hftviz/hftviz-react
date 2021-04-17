@@ -1,12 +1,9 @@
 import React from 'react';
+import ReadMe from './ReadMe/ReadMe'
 import logo from '../pics/logo.png';
 
+
 class Menu extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
-
     render() {
         return(
 
@@ -23,14 +20,14 @@ class Menu extends React.Component {
                     </p>
                 </div>
 
-                <ReadMe />
-                <SearchBox />
+                <ReadMe vizType={this.props.vizType}/>
+                {/* <SearchBox />
                 <SelectedBox />
                 <Sort />
                 <BinSize />
-                <DateBox />
+                <DateBox /> */}
                 {/* Creating the button for view overview or details */}
-                <ViewOD />
+                {/* <ViewOD /> */}
 
             </div>
 
