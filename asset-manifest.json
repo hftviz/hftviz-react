@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hifriz-react/static/css/main.cdcbce90.chunk.css",
-    "main.js": "/hifriz-react/static/js/main.15f0907a.chunk.js",
-    "main.js.map": "/hifriz-react/static/js/main.15f0907a.chunk.js.map",
+    "main.js": "/hifriz-react/static/js/main.fde4553d.chunk.js",
+    "main.js.map": "/hifriz-react/static/js/main.fde4553d.chunk.js.map",
     "runtime-main.js": "/hifriz-react/static/js/runtime-main.cabc745d.js",
     "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.cabc745d.js.map",
     "static/js/2.c4c8a743.chunk.js": "/hifriz-react/static/js/2.c4c8a743.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.cabc745d.js",
     "static/js/2.c4c8a743.chunk.js",
     "static/css/main.cdcbce90.chunk.css",
-    "static/js/main.15f0907a.chunk.js"
+    "static/js/main.fde4553d.chunk.js"
   ]
 }
