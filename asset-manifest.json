@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/hifriz-react/static/css/main.f3e0a1bc.chunk.css",
-    "main.js": "/hifriz-react/static/js/main.8b8fb16b.chunk.js",
-    "main.js.map": "/hifriz-react/static/js/main.8b8fb16b.chunk.js.map",
-    "runtime-main.js": "/hifriz-react/static/js/runtime-main.ec6d42c2.js",
-    "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.ec6d42c2.js.map",
-    "static/js/2.c4c8a743.chunk.js": "/hifriz-react/static/js/2.c4c8a743.chunk.js",
-    "static/js/2.c4c8a743.chunk.js.map": "/hifriz-react/static/js/2.c4c8a743.chunk.js.map",
-    "static/js/3.5bed9394.chunk.js": "/hifriz-react/static/js/3.5bed9394.chunk.js",
-    "static/js/3.5bed9394.chunk.js.map": "/hifriz-react/static/js/3.5bed9394.chunk.js.map",
+    "main.css": "/hifriz-react/static/css/main.09b03316.chunk.css",
+    "main.js": "/hifriz-react/static/js/main.9a24526c.chunk.js",
+    "main.js.map": "/hifriz-react/static/js/main.9a24526c.chunk.js.map",
+    "runtime-main.js": "/hifriz-react/static/js/runtime-main.24b24e1a.js",
+    "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.24b24e1a.js.map",
+    "static/js/2.f73d4c33.chunk.js": "/hifriz-react/static/js/2.f73d4c33.chunk.js",
+    "static/js/2.f73d4c33.chunk.js.map": "/hifriz-react/static/js/2.f73d4c33.chunk.js.map",
+    "static/js/3.946c9557.chunk.js": "/hifriz-react/static/js/3.946c9557.chunk.js",
+    "static/js/3.946c9557.chunk.js.map": "/hifriz-react/static/js/3.946c9557.chunk.js.map",
     "index.html": "/hifriz-react/index.html",
-    "static/css/main.f3e0a1bc.chunk.css.map": "/hifriz-react/static/css/main.f3e0a1bc.chunk.css.map",
-    "static/js/2.c4c8a743.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.c4c8a743.chunk.js.LICENSE.txt",
+    "static/css/main.09b03316.chunk.css.map": "/hifriz-react/static/css/main.09b03316.chunk.css.map",
+    "static/js/2.f73d4c33.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.f73d4c33.chunk.js.LICENSE.txt",
     "static/media/corrwithMarket.8a1310df.png": "/hifriz-react/static/media/corrwithMarket.8a1310df.png",
     "static/media/liq.334ce6e0.png": "/hifriz-react/static/media/liq.334ce6e0.png",
     "static/media/liqCorr.ece7b11a.png": "/hifriz-react/static/media/liqCorr.ece7b11a.png",
     "static/media/lob.0501cb99.png": "/hifriz-react/static/media/lob.0501cb99.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.ec6d42c2.js",
-    "static/js/2.c4c8a743.chunk.js",
-    "static/css/main.f3e0a1bc.chunk.css",
-    "static/js/main.8b8fb16b.chunk.js"
+    "static/js/runtime-main.24b24e1a.js",
+    "static/js/2.f73d4c33.chunk.js",
+    "static/css/main.09b03316.chunk.css",
+    "static/js/main.9a24526c.chunk.js"
   ]
 }
