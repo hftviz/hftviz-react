@@ -3,6 +3,7 @@ import ReadMe from './ReadMe/ReadMe';
 import logo from '../pics/logo.png';
 import SearchBar from './SearchBar/SearchBar';
 import SelectedBox from './SelectedBox/SelectedBox';
+import Sort from './Sort/Sort';
 
 
 
@@ -34,8 +35,12 @@ class Menu extends React.Component {
                     onChangeSelectedStocks={this.props.onChangeSelectedStocks}
                     selectedStocks={this.props.selectedStocks}
                 />
-                {/* <Sort />
-                <BinSize />
+                <Sort 
+                    vizType={this.props.vizType} 
+                    sortData={this.props.sortData}
+                    onChangeSort={this.props.onChangeSort}
+                />
+                {/* <BinSize />
                 <DateBox /> */}
                 {/* Creating the button for view overview or details */}
                 {/* <ViewOD /> */}

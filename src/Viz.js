@@ -11,7 +11,7 @@ class Viz extends React.Component {
         this.state = {
             filterText: '',
             selectedStocks: [],
-            sortType: '',
+            sortData: this.props.stockNames,
             binSize: 0,
             dateTime: '2019-01-03',
             vizType: 'overview'
@@ -66,9 +66,9 @@ class Viz extends React.Component {
         };
     };
 
-    handleChangeSort(sortType){
+    handleChangeSort(sortData){
         this.setState({
-            sortType: sortType
+            sortData: sortData
         });
     };
     handleChangeBinSize(binSize){
@@ -101,7 +101,7 @@ class Viz extends React.Component {
                     stockNames = {this.props.stockNames}
                     filterText = {this.state.filterText}
                     selectedStocks = {this.state.selectedStocks}
-                    sortType = {this.state.sortType}
+                    sortData = {this.state.sortData}
                     binSize = {this.state.binSize}
                     dateTime = {this.state.dateTime}
                     vizType = {this.state.vizType}
@@ -120,7 +120,7 @@ class Viz extends React.Component {
                     stockNames = {this.props.stockNames}
                     filterText = {this.state.filterText}
                     selectedStocks = {this.state.selectedStocks}
-                    sortType = {this.state.sortType}
+                    sortData = {this.state.sortData}
                     binSize = {this.state.binSize}
                     dateTime = {this.state.dateTime}
                     vizType = {this.state.vizType}

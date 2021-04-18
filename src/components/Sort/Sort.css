@@ -1,0 +1,33 @@
+#sortMenu{
+    height: 3%;
+    border: #050505 solid 1px;
+    color: white;
+    border-radius: 5px;
+    width: 96%;
+    font-size: 1vw;
+    font-family: 'Oswald';
+    text-align: left;
+    position: relative;
+    margin-top: 60%;
+    margin-left: 1%;
+    background-color: black;
+}
+
+.sortCriteria{
+    height: 100%;
+    border: #050505 solid 1px;
+    color: white;
+    border-radius: 5px;
+    width: 95%;
+    font-size: 1vw;
+    font-family: 'Oswald';
+    text-align: justify;
+    position: inherit;
+    margin-top: 2%;
+    margin-left: 1%;
+    background-color: rgb(163, 163, 163);
+}
+
+.sortCriteria:hover{
+    background-color: rgb(224, 224, 224);
+}

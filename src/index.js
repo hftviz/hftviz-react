@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Viz from './Viz';
 import './components/components.css'
 import reportWebVitals from './reportWebVitals';
-import stockNames from '../src/data/constituents.json'
+import stockNames from '../src/data/stockNames.json'
 import data from '../src/data/sampleData.json'
 
 
