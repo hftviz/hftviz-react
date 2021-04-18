@@ -12,7 +12,7 @@ class Viz extends React.Component {
             filterText: '',
             selectedStocks: [],
             sortData: this.props.stockNames,
-            binSize: 0,
+            binSize: 5,
             dateTime: '2019-01-03',
             vizType: 'overview'
         };

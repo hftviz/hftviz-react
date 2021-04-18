@@ -276,7 +276,9 @@ body {
     font-size: 0.8vw;
     font-family: 'Oswald';
     text-align: justify;
-    position: absolute;
+    position: inherit;
+    display:'block';
+    float:'left';
 }
 
 #main-panel {

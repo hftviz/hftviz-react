@@ -1,0 +1,25 @@
+#binSize {
+    height: 5%;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    width: 96%;
+    font-size: 1vw;
+    font-family: 'Oswald';
+    text-align: left;
+    position: inherit;
+    margin-top: 5%;
+    margin-left: 1%;
+}
+
+#inputRange{
+    width: 70%;
+    display: inline-block;
+}
+
+#output{
+    height: 100%;
+    width: 25%;
+    display: inline-block;
+    float: right;
+    margin-top: 2%;
+}

@@ -54,7 +54,7 @@ class Sort extends React.Component {
         if(this.props.vizType === 'overview'){
 
             return(
-                <div>
+                <div style={{position:'inherit'}}>
                     <button id="sortMenu" onClick={this.handleClick}>
                         Sort By: {this.state.sortName}
                     </button>

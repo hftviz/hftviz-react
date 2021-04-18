@@ -4,6 +4,7 @@ import logo from '../pics/logo.png';
 import SearchBar from './SearchBar/SearchBar';
 import SelectedBox from './SelectedBox/SelectedBox';
 import Sort from './Sort/Sort';
+import BinSize from './BinSize/BinSize';
 
 
 
@@ -40,8 +41,8 @@ class Menu extends React.Component {
                     sortData={this.props.sortData}
                     onChangeSort={this.props.onChangeSort}
                 />
-                {/* <BinSize />
-                <DateBox /> */}
+                <BinSize binSize={this.props.binSize} vizType={this.props.vizType} onChangeBinSize={this.props.onChangeBinSize}/>
+                {/* <DateBox /> */}
                 {/* Creating the button for view overview or details */}
                 {/* <ViewOD /> */}
 
