@@ -9,17 +9,14 @@ class Viz extends React.Component {
 
         // this keeps the state for controlling the viz
         this.state = {
-            filterText: '',
             selectedStocks: [],
             sortData: this.props.stockNames,
             binSize: 5,
             dateTime: '',
-            vizType: 'overview'
+            vizType: 'overview',
+            zoomLevel: 'daily',
         };
-
-        // this keeps the filter text updated.
-        this.handleChangeFilterText = this.handleChangeFilterText.bind(this);
-
+        
         // this keeps the selected stocks list in the state updated.
         this.handleChangeSelectedStocks = this.handleChangeSelectedStocks.bind(this);
 
@@ -35,13 +32,12 @@ class Viz extends React.Component {
         // this function is triggered when we change the state from overview to details visualization. 
         // View OD and ReadMe components will use Viz Type.
         this.handleChangeVizType = this.handleChangeVizType.bind(this);
+
+        // handling change zoom to load the relevant data
+        // note: in the production, we have to set the data based on zoom level. first, we start with the hour-minute base.
+        this.handleChangeZoom = this.handleChangeZoom.bind(this);
     }
 
-    handleChangeFilterText(filterText){
-        this.setState({
-            filterText: filterText
-        });
-    };
     handleChangeSelectedStocks(stock, action){
         if (action === 'add'){
             if (this.state.selectedStocks.length === 10){
@@ -86,6 +82,11 @@ class Viz extends React.Component {
             vizType: vizType
         });
     };
+    handleChangeZoom(zoomLevel){
+        this.setState({
+            zoomLevel: zoomLevel
+        });
+    };
 
 
 
@@ -98,7 +99,6 @@ class Viz extends React.Component {
 
                 {/* Define menu with the variables */}
                 <Menu 
-                    stockNames = {this.props.stockNames}
                     filterText = {this.state.filterText}
                     selectedStocks = {this.state.selectedStocks}
                     sortData = {this.state.sortData}
@@ -116,7 +116,8 @@ class Viz extends React.Component {
 
                 {/* Define panel with the variables */}
                 <Panel 
-                    data = {this.props.data}
+                    detailData = {this.props.detailData}
+                    overviewData = {this.props.overviewData}
                     stockNames = {this.props.stockNames}
                     filterText = {this.state.filterText}
                     selectedStocks = {this.state.selectedStocks}
@@ -124,6 +125,7 @@ class Viz extends React.Component {
                     binSize = {this.state.binSize}
                     dateTime = {this.state.dateTime}
                     vizType = {this.state.vizType}
+                    zoomLevel = {this.state.zoomLevel}
                     
                     onChangeFilterText = {this.handleChangeFilterText}
                     onChangeSelectedStocks = {this.handleChangeSelectedStocks}
@@ -131,6 +133,7 @@ class Viz extends React.Component {
                     onChangeBinSize = {this.handleChangeBinSize}
                     onChangeDate = {this.handleChangeDate}
                     onChangeVizType = {this.handleChangeVizType}
+                    onChangeZoomLevel = {this.handleChangeZoom}
                 />
             </div>
         );

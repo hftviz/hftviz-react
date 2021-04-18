@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import Viz from './Viz';
 import './components/components.css'
 import reportWebVitals from './reportWebVitals';
-import stockNames from '../src/data/stockNames.json'
-import data from '../src/data/sampleData.json'
-
+import stockNames from '../src/data/stockNames.json';
+import detailData from '../src/data/sampleData.json';
+import overviewData from '../src/data/overviewSampleData.json';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Viz data={data} stockNames={stockNames}/>
+    <Viz detailData={detailData} overviewData={overviewData} stockNames={stockNames}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

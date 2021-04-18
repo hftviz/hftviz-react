@@ -9,9 +9,17 @@ class Panel extends React.Component {
         let children;
 
         if (this.props.vizType === "overview"){ 
-            children = <Overview /> ;
+            children = <Overview
+                            overviewData = {this.props.overviewData}
+                            selectedStocks = {this.props.selectedStocks}
+                            sortData = {this.props.sortData}
+                            binSize = {this.props.binSize}
+                            dateTime = {this.props.dateTime}
+                        /> ;
         } else {
-            children = <Details />;
+            children = <Details 
+                            detailData = {this.props.detailData}
+                        />;
         };
         return(
 

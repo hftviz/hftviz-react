@@ -31,8 +31,7 @@ class Menu extends React.Component {
                 <SearchBar 
                     onChangeFilterText={this.props.onChangeFilterText}
                     onChangeSelectedStocks={this.props.onChangeSelectedStocks}
-                    filterText={this.props.filterText}
-                    stockNames={this.props.stockNames}
+                    stockNames={this.props.sortData}
                 />
                 <SelectedBox 
                     onChangeSelectedStocks={this.props.onChangeSelectedStocks}

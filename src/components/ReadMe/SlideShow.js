@@ -1,6 +1,9 @@
 import React from 'react';
 import './Popup.css';
 import overviewImage from '../../pics/overview.png';
+import overviewImage2 from '../../pics/overview-details2.png';
+import overviewImage3 from '../../pics/overview-details3.png';
+import overviewImage4 from '../../pics/overview-details4.png';
 import lobImage from '../../pics/lob.png';
 import liqImage from '../../pics/liq.png';
 import liqCorrImage from '../../pics/liqCorr.png';
@@ -25,8 +28,13 @@ class SlideShow extends React.Component {
         selectedCaptions = [];
 
         if( this.props.vizType === 'overview'){
-            selectedImages = [overviewImage];
-            selectedCaptions = ["This is the overview caption. It describes the parts of the visualization."];
+            selectedImages = [overviewImage,overviewImage2,overviewImage3,overviewImage4];
+            selectedCaptions = [
+                "This is the viz-1 caption. It describes the parts of the visualization.", 
+                "This is the viz-2 caption. It describes the parts of the visualization.",
+                "This is the viz-3 caption. It describes the parts of the visualization.",
+                "This is the viz-4 caption. It describes the parts of the visualization."
+            ];
         } else{
             selectedImages = [lobImage, liqImage, liqCorrImage, corrwithMarket];
             selectedCaptions = [

@@ -207,13 +207,14 @@ body {
     left: 30%;
     border-radius: 30%;
     border:rgba(116, 115, 115, 0.6) solid 1px;
-    font-size: 1vw;
-    font-family: 'Oswald';
+    background-size:cover;
+    background-position: center;
+    background-image: url("../pics/close.png");
+    background-repeat: no-repeat;
 }
 
 .closeSelectedItem:hover{
-    background-color: rgb(214, 25, 25);
-    color: white;
+    background-image: url("../pics/closeIconHover.png");
 }
 
 #root{
