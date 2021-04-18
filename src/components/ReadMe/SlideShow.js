@@ -6,11 +6,14 @@ import liqImage from '../../pics/liq.png';
 import liqCorrImage from '../../pics/liqCorr.png';
 import corrwithMarket from '../../pics/corrwithMarket.png';
 
+// Warning that received from the browser: the better way for updating state is to update it via setState.
 class SlideShow extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {slideIndex: 0, images:[], slideCaptions:[]} ;
+        this.state = {slideIndex: 0} ;
+
+        this.localVars = {images:[], slideCaptions:[]};
 
         this.handleNextSlide = this.handleNextSlide.bind(this);
         this.handlePreviousSlide = this.handlePreviousSlide.bind(this);
@@ -34,14 +37,14 @@ class SlideShow extends React.Component {
             ];
         }
 
-        this.state.images = selectedImages;
-        this.state.slideCaptions = selectedCaptions;
+        this.localVars.images = selectedImages;
+        this.localVars.slideCaptions = selectedCaptions;
     }
 
 
     handleNextSlide(){
 
-        let sliderLength = this.state.images.length;
+        let sliderLength = this.localVars.images.length;
 
         this.setState({
             slideIndex: (((this.state.slideIndex + 1)%sliderLength)+sliderLength)%sliderLength
@@ -50,7 +53,7 @@ class SlideShow extends React.Component {
 
     handlePreviousSlide(){
 
-        let sliderLength = this.state.images.length;
+        let sliderLength = this.localVars.images.length;
 
         this.setState({
             slideIndex: (((this.state.slideIndex - 1)%sliderLength)+sliderLength)%sliderLength
@@ -68,8 +71,8 @@ class SlideShow extends React.Component {
 
                 <button className="nextSlide" onClick={this.handleNextSlide}> &#62; </button>
                 <button className="previousSlide" onClick={this.handlePreviousSlide}> &#60; </button>
-                <img className="slideImage" src={this.state.images[this.state.slideIndex]} alt="slide show"/>
-                <div className="caption">{this.state.slideCaptions[this.state.slideIndex]}</div>
+                <img className="slideImage" src={this.localVars.images[this.state.slideIndex]} alt="slide show"/>
+                <div className="caption">{this.localVars.slideCaptions[this.state.slideIndex]}</div>
             
             </div>
 
