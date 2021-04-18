@@ -23,8 +23,6 @@ class SortItem extends React.Component {
         });
 
         this.props.onChangeSort(sortedData);
-
-        console.log(sortedData);
         
     }
 

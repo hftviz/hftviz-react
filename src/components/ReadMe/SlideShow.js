@@ -14,9 +14,10 @@ class SlideShow extends React.Component {
 
         this.handleNextSlide = this.handleNextSlide.bind(this);
         this.handlePreviousSlide = this.handlePreviousSlide.bind(this);
+        this.handleSlideShow = this.handleSlideShow.bind(this);
     }
 
-    componentDidMount(){
+    handleSlideShow(){
         let selectedImages = [],
         selectedCaptions = [];
 
@@ -33,9 +34,8 @@ class SlideShow extends React.Component {
             ];
         }
 
-        this.setState({
-            images: selectedImages, slideCaptions:selectedCaptions
-        });
+        this.state.images = selectedImages;
+        this.state.slideCaptions = selectedCaptions;
     }
 
 
@@ -59,6 +59,9 @@ class SlideShow extends React.Component {
 
 
     render() {
+
+        this.handleSlideShow();
+
         return(
 
             <div className="slideShow"> 
