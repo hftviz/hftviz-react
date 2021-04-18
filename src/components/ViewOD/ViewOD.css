@@ -1,0 +1,14 @@
+#viewButton{
+    height: 3%;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    width: 95%;
+    font-size: 1vw;
+    font-family: 'Oswald';
+    text-align: center;
+    position: inherit;
+    margin-top: 20%;
+    margin-left: 1%;
+    background-color: rgb(55, 83, 245);
+    border: rgb(180, 180, 180) solid 1px;
+}

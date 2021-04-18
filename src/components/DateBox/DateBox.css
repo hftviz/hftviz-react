@@ -1,0 +1,12 @@
+#inputDate{
+    height: 3%;
+    color: rgb(150, 148, 148);
+    border-radius: 5px;
+    width: 94%;
+    font-size: 1vw;
+    font-family: 'Oswald';
+    text-align: center;
+    position: inherit;
+    margin-top: 5%;
+    margin-left: 1%;
+}
