@@ -7,7 +7,7 @@ import stockNames from '../src/data/stockNames.json';
 import detailData from '../src/data/sampleData.json';
 import overviewData from '../src/data/overviewSampleData.json';
 
-
+// IMPORTANT NOTE: Berkshire Hathaway and Brown Forman Corp have invalid symbol in javascript. The program can't read them.
 
 ReactDOM.render(
   <React.StrictMode>

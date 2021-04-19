@@ -15,6 +15,7 @@ class Panel extends React.Component {
                             sortData = {this.props.sortData}
                             binSize = {this.props.binSize}
                             dateTime = {this.props.dateTime}
+                            onChangeSelectedStocks={this.props.onChangeSelectedStocks}
                         /> ;
         } else {
             children = <Details 
