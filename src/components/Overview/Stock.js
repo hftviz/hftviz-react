@@ -1,43 +1,34 @@
 import React from 'react';
 import "./Overview.css";
-import DrawOverview from "./DrawOverview.js"
+import Draw from './Draw';
 
-class Stock extends React.PureComponent {
+class Stock extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = { isSelected:false };
-        this.canvasRef = React.createRef();
         this.handleClick = this.handleClick.bind(this);
+        this.state = {data: this.props.overviewData}
 
     }
+
 
     handleClick(){
         let stockName = this.props.fullName + '--' + this.props.symbol;
         this.props.onChangeSelectedStocks(stockName, 'add');
     }
 
-    componentDidMount(){
-        DrawOverview(this.props.data, this.canvasRef.current.id , this.props.minVal, this.props.maxVal);
-    }
-
-    componentDidUpdate(){
-        if (this.props.isSelected !== this.state.isSelected){
-            this.setState(state => ({isSelected: !state.isSelected}));
-            DrawOverview(this.props.data, this.canvasRef.current.id , this.props.minVal, this.props.maxVal);
-        };
-    }
-
-    // componentDidUpdate(){
-    //     DrawOverview(this.props.data, this.canvasRef.current.id , this.props.minVal, this.props.maxVal);
-    // }
-
     render() {
 
         if(this.props.isSelected){
             return(
-                <fieldset id={this.props.symbol} className="stockVizSelected" ref={this.canvasRef} onClick={this.handleClick}>
+                <fieldset id={this.props.symbol} className="stockVizSelected">
                     <legend className="stockNameLegend">{this.props.symbol}</legend>
+                    <Draw
+                        dateTime={this.props.dateTime}
+                        fullName={this.props.fullName}
+                        symbol={this.props.symbol}
+                        binSize={this.props.binSize}
+                     />
                     <div className="stockVizText">
                         {this.props.fullName} 
                     </div>
@@ -48,7 +39,13 @@ class Stock extends React.PureComponent {
 
             return(
 
-                <div id={this.props.symbol} className="stockViz" ref={this.canvasRef} onClick={this.handleClick}> 
+                <div id={this.props.symbol} className="stockViz" onClick={this.handleClick}> 
+                    <Draw
+                        dateTime={this.props.dateTime}
+                        fullName={this.props.fullName}
+                        symbol={this.props.symbol}
+                        binSize={this.props.binSize}
+                     />
                     <div className="stockVizText">
                         {this.props.fullName} 
                     </div>

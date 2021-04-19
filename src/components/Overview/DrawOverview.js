@@ -1,12 +1,37 @@
 import * as d3 from 'd3';
 
-function DrawOverview(dataPrice, container, minVal, maxVal){
+
+function splitToChunks(array, parts) {
+    let result = [];
+    for (let i = parts; i > 0; i--) {
+        let chunk = array.splice(0, Math.ceil(array.length / i));
+        let sum = chunk.reduce((a, b) => a+b , 0);
+        result.push(sum);
+    }
+    
+    
+    return result;
+}
+
+
+
+function DrawOverview(allData, companyName, date, container, minVal, maxVal, binSize){
+    let dataFiltered = allData[companyName][date]["priceChange"];
+
+    console.log(allData[companyName][date], binSize);
+
+    // console.log('im running ---' + container + '---- at :'+ binSize 
+    //     + ' with min and max' + minVal + ',' + maxVal + ' with data ' + allData);
+    
+    let dataPrice = splitToChunks(dataFiltered, binSize);
+
+
     // Set some base properties.
     // Some come from an options object
     // pass when `Matrix` is called.
-    const width = "100%",
-        height = "100%",
-        startColor = "#b30000",
+    // const width = "100%",
+    //     height = "100%",
+    const startColor = "#b30000",
         middleColor = "#ffffff",
         endColor = "#00b300",
         data = [dataPrice];
@@ -20,11 +45,6 @@ function DrawOverview(dataPrice, container, minVal, maxVal){
     // Create the SVG container
     const svg = d3
         .select('#'+ container)
-        .append("svg")
-        .attr("id", container + 'svg')
-        .attr("width", width)
-        .attr("height", height)
-        .attr("display", "block")
         .append("g")
         .attr("transform", "translate(0,0)")
 

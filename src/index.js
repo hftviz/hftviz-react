@@ -4,14 +4,13 @@ import Viz from './Viz';
 import './components/components.css'
 import reportWebVitals from './reportWebVitals';
 import stockNames from '../src/data/stockNames.json';
-import detailData from '../src/data/sampleData.json';
-import overviewData from '../src/data/overviewSampleData.json';
+// import detailData from '../src/data/sampleData.json';
 
 // IMPORTANT NOTE: Berkshire Hathaway and Brown Forman Corp have invalid symbol in javascript. The program can't read them.
 
 ReactDOM.render(
   <React.StrictMode>
-    <Viz detailData={detailData} overviewData={overviewData} stockNames={stockNames}/>
+    <Viz stockNames={stockNames}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

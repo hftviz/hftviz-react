@@ -10,7 +10,6 @@ class Panel extends React.Component {
 
         if (this.props.vizType === "overview"){ 
             children = <Overview
-                            overviewData = {this.props.overviewData}
                             selectedStocks = {this.props.selectedStocks}
                             sortData = {this.props.sortData}
                             binSize = {this.props.binSize}
@@ -19,7 +18,6 @@ class Panel extends React.Component {
                         /> ;
         } else {
             children = <Details 
-                            detailData = {this.props.detailData}
                         />;
         };
         return(

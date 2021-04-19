@@ -12,7 +12,7 @@ class Viz extends React.Component {
             selectedStocks: [],
             sortData: this.props.stockNames,
             binSize: 5,
-            dateTime: '',
+            dateTime: '2019-01-04',
             vizType: 'overview',
             zoomLevel: 'daily',
         };
@@ -117,7 +117,6 @@ class Viz extends React.Component {
                 {/* Define panel with the variables */}
                 <Panel 
                     detailData = {this.props.detailData}
-                    overviewData = {this.props.overviewData}
                     stockNames = {this.props.stockNames}
                     filterText = {this.state.filterText}
                     selectedStocks = {this.state.selectedStocks}
