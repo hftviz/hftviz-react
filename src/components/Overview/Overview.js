@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Overview.css";
 import OverviewStocks from './OverviewStocks';
-import Legend from '../Legend/Legend';
+import OverviewLegend from '../OverviewLegend/OverviewLegend';
 
 class Overview extends React.Component {
 
@@ -22,7 +22,10 @@ class Overview extends React.Component {
                 </div>
 
                 <div id="overviewLegend">
-                    <Legend />
+                    <OverviewLegend
+                        binSize = {this.props.binSize}
+                        dateTime = {this.props.dateTime}
+                     />
                 </div>
 
             </div>
