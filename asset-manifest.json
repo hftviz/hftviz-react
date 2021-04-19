@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/hifriz-react/static/css/main.38bd379c.chunk.css",
-    "main.js": "/hifriz-react/static/js/main.f05ff724.chunk.js",
-    "main.js.map": "/hifriz-react/static/js/main.f05ff724.chunk.js.map",
-    "runtime-main.js": "/hifriz-react/static/js/runtime-main.778eaec7.js",
-    "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.778eaec7.js.map",
-    "static/js/2.62ac1650.chunk.js": "/hifriz-react/static/js/2.62ac1650.chunk.js",
-    "static/js/2.62ac1650.chunk.js.map": "/hifriz-react/static/js/2.62ac1650.chunk.js.map",
-    "static/js/3.1c817084.chunk.js": "/hifriz-react/static/js/3.1c817084.chunk.js",
-    "static/js/3.1c817084.chunk.js.map": "/hifriz-react/static/js/3.1c817084.chunk.js.map",
+    "main.css": "/hifriz-react/static/css/main.41053474.chunk.css",
+    "main.js": "/hifriz-react/static/js/main.d1f144af.chunk.js",
+    "main.js.map": "/hifriz-react/static/js/main.d1f144af.chunk.js.map",
+    "runtime-main.js": "/hifriz-react/static/js/runtime-main.260e4219.js",
+    "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.260e4219.js.map",
+    "static/js/2.81bf5759.chunk.js": "/hifriz-react/static/js/2.81bf5759.chunk.js",
+    "static/js/2.81bf5759.chunk.js.map": "/hifriz-react/static/js/2.81bf5759.chunk.js.map",
+    "static/js/3.5d0f34dd.chunk.js": "/hifriz-react/static/js/3.5d0f34dd.chunk.js",
+    "static/js/3.5d0f34dd.chunk.js.map": "/hifriz-react/static/js/3.5d0f34dd.chunk.js.map",
     "index.html": "/hifriz-react/index.html",
-    "static/css/main.38bd379c.chunk.css.map": "/hifriz-react/static/css/main.38bd379c.chunk.css.map",
-    "static/js/2.62ac1650.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.62ac1650.chunk.js.LICENSE.txt",
+    "static/css/main.41053474.chunk.css.map": "/hifriz-react/static/css/main.41053474.chunk.css.map",
+    "static/js/2.81bf5759.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.81bf5759.chunk.js.LICENSE.txt",
     "static/media/components.css": "/hifriz-react/static/media/closeIconHover.163a64a8.png",
     "static/media/corrwithMarket.8a1310df.png": "/hifriz-react/static/media/corrwithMarket.8a1310df.png",
     "static/media/liq.334ce6e0.png": "/hifriz-react/static/media/liq.334ce6e0.png",
@@ -22,9 +22,9 @@
     "static/media/overview.38b0ad21.png": "/hifriz-react/static/media/overview.38b0ad21.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.778eaec7.js",
-    "static/js/2.62ac1650.chunk.js",
-    "static/css/main.38bd379c.chunk.css",
-    "static/js/main.f05ff724.chunk.js"
+    "static/js/runtime-main.260e4219.js",
+    "static/js/2.81bf5759.chunk.js",
+    "static/css/main.41053474.chunk.css",
+    "static/js/main.d1f144af.chunk.js"
   ]
 }
