@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/hifriz-react/static/css/main.38bd379c.chunk.css",
-    "main.js": "/hifriz-react/static/js/main.b9af0d3a.chunk.js",
-    "main.js.map": "/hifriz-react/static/js/main.b9af0d3a.chunk.js.map",
+    "main.js": "/hifriz-react/static/js/main.f05ff724.chunk.js",
+    "main.js.map": "/hifriz-react/static/js/main.f05ff724.chunk.js.map",
     "runtime-main.js": "/hifriz-react/static/js/runtime-main.778eaec7.js",
     "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.778eaec7.js.map",
-    "static/js/2.12e6114f.chunk.js": "/hifriz-react/static/js/2.12e6114f.chunk.js",
-    "static/js/2.12e6114f.chunk.js.map": "/hifriz-react/static/js/2.12e6114f.chunk.js.map",
+    "static/js/2.62ac1650.chunk.js": "/hifriz-react/static/js/2.62ac1650.chunk.js",
+    "static/js/2.62ac1650.chunk.js.map": "/hifriz-react/static/js/2.62ac1650.chunk.js.map",
     "static/js/3.1c817084.chunk.js": "/hifriz-react/static/js/3.1c817084.chunk.js",
     "static/js/3.1c817084.chunk.js.map": "/hifriz-react/static/js/3.1c817084.chunk.js.map",
     "index.html": "/hifriz-react/index.html",
     "static/css/main.38bd379c.chunk.css.map": "/hifriz-react/static/css/main.38bd379c.chunk.css.map",
-    "static/js/2.12e6114f.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.12e6114f.chunk.js.LICENSE.txt",
+    "static/js/2.62ac1650.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.62ac1650.chunk.js.LICENSE.txt",
     "static/media/components.css": "/hifriz-react/static/media/closeIconHover.163a64a8.png",
     "static/media/corrwithMarket.8a1310df.png": "/hifriz-react/static/media/corrwithMarket.8a1310df.png",
     "static/media/liq.334ce6e0.png": "/hifriz-react/static/media/liq.334ce6e0.png",
@@ -23,8 +23,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.778eaec7.js",
-    "static/js/2.12e6114f.chunk.js",
+    "static/js/2.62ac1650.chunk.js",
     "static/css/main.38bd379c.chunk.css",
-    "static/js/main.b9af0d3a.chunk.js"
+    "static/js/main.f05ff724.chunk.js"
   ]
 }
