@@ -106,7 +106,6 @@ class Viz extends React.Component {
                     dateTime = {this.state.dateTime}
                     vizType = {this.state.vizType}
 
-                    onChangeFilterText = {this.handleChangeFilterText}
                     onChangeSelectedStocks = {this.handleChangeSelectedStocks}
                     onChangeSort = {this.handleChangeSort}
                     onChangeBinSize = {this.handleChangeBinSize}
@@ -126,7 +125,6 @@ class Viz extends React.Component {
                     vizType = {this.state.vizType}
                     zoomLevel = {this.state.zoomLevel}
                     
-                    onChangeFilterText = {this.handleChangeFilterText}
                     onChangeSelectedStocks = {this.handleChangeSelectedStocks}
                     onChangeSort = {this.handleChangeSort}
                     onChangeBinSize = {this.handleChangeBinSize}

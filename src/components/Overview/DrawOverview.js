@@ -3,10 +3,16 @@ import * as d3 from 'd3';
 
 function splitToChunks(array, parts) {
     let result = [];
+    let indicator = 0;
+    let remainedLength = array.length;
+
     for (let i = parts; i > 0; i--) {
-        let chunk = array.splice(0, Math.ceil(array.length / i));
+        let chunk = array.slice(indicator, indicator + Math.ceil(remainedLength / i));
+        indicator = indicator + Math.ceil(remainedLength / i);
+        remainedLength = remainedLength - chunk.length;
         let sum = chunk.reduce((a, b) => a+b , 0);
         result.push(sum);
+
     }
     
     
@@ -15,16 +21,17 @@ function splitToChunks(array, parts) {
 
 
 
-function DrawOverview(allData, companyName, date, container, minVal, maxVal, binSize){
+function DrawOverview(allData, companyName, date, container, binSize){
     let dataFiltered = allData[companyName][date]["priceChange"];
-
-    console.log(allData[companyName][date], binSize);
 
     // console.log('im running ---' + container + '---- at :'+ binSize 
     //     + ' with min and max' + minVal + ',' + maxVal + ' with data ' + allData);
     
+    // split data to chunks
     let dataPrice = splitToChunks(dataFiltered, binSize);
 
+    let minVal = Math.min(...dataPrice);
+    let maxVal = Math.max(...dataPrice);
 
     // Set some base properties.
     // Some come from an options object
@@ -41,6 +48,9 @@ function DrawOverview(allData, companyName, date, container, minVal, maxVal, bin
     const numrows = data.length
         // assume all subarrays have same length
     const numcols = data[0].length
+
+    // clean inside of the svg
+    document.getElementById(container).innerHTML = "";
 
     // Create the SVG container
     const svg = d3

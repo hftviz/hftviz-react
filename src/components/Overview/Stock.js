@@ -7,7 +7,6 @@ class Stock extends React.Component {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
-        this.state = {data: this.props.overviewData}
 
     }
 
