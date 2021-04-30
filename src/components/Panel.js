@@ -18,6 +18,8 @@ class Panel extends React.Component {
                         /> ;
         } else {
             children = <Details 
+                            selectedStocks = {this.props.selectedStocks}
+                            dateTime = {this.props.dateTime}
                         />;
         };
         return(

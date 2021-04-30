@@ -1,0 +1,52 @@
+.LOB{
+    height: 9%;
+    width: 100%;
+    background-color: #faf9f9;
+    display: inline-block;
+    float: left;
+    position: inherit;
+}
+
+.title{
+    height: 5%;
+    width: 100%;
+    font-size: 1.5vw;
+    font-family: Oswald;
+    text-align: center;
+    display: inline-block;
+}
+
+#details{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: #faf9f9;
+}
+
+#lob{
+    height: 100%;
+    width: 40%;
+    float: left;
+    background-color: #faf9f9;
+    display: inline-block;
+    position: relative;
+}
+
+#lob-legend{
+    height: 100%;
+    width: 5%;
+    float: left;
+    background-color: #faf9f9;
+    display: inline-block;
+    position: relative;
+}
+
+#metrics{
+    height: 100%;
+    width: 55%;
+    float: left;
+    background-color: #faf9f9;
+    display: inline-block;
+    position: relative;
+}
+
