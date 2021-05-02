@@ -28,35 +28,49 @@ for directory in os.listdir(root_addr):
         # read total.csv        
         df = pd.read_csv(next_layer + '/total.csv', header=0)
 
-        bid_messages = []
-        ask_messages = []
-        cancel_messages = []
-        volume_messages = []
+        bid_messages = {"value":[], "time":[], "ms":[]}
+        ask_messages = {"value":[], "time":[], "ms":[]}
+        cancel_messages = {"value":[], "time":[], "ms":[]}
+        volume_messages = {"value":[], "time":[], "ms":[]}
 
         # ask volume is negative (initiate or cancel)
         # bid volume is positive (initiate or cancel)
         for index, row in df.iterrows():
 
             time = str(datetime.timedelta(seconds=row['time']))
-            millisec = int(1000*row['time'])
+            millisec = int(1000000*row['time'])
 
             if row['type'] == 1:
                 if row['direction'] == 1:
-                    bid_messages.append({'price': row['price'] / 10000, 'time':time, 'milliseconds': millisec})
-                    volume_messages.append({'volume': 1*row['size'], 'time':time, 'milliseconds': millisec})
+                    bid_messages["value"].append(row['price'] / 10000)
+                    bid_messages["time"].append(time)
+                    bid_messages["ms"].append(millisec)
+                    volume_messages["value"].append(1*row['size'])
+                    volume_messages["time"].append(time)
+                    volume_messages["ms"].append(millisec)
                 
                 if row['direction'] == -1:
-                    ask_messages.append({'price': row['price'] / 10000, 'time':time, 'milliseconds': millisec})
-                    volume_messages.append({'volume': -1*row['size'] , 'time':time, 'milliseconds': millisec})
+                    ask_messages["value"].append(row['price'] / 10000)
+                    ask_messages["time"].append(time)
+                    ask_messages["ms"].append(millisec)
+                    volume_messages["value"].append(-1*row['size'])
+                    volume_messages["time"].append(time)
+                    volume_messages["ms"].append(millisec)
 
             if (row['type'] == 2) or (row['type'] == 3):
-                cancel_messages.append({'price': row['price'] / 10000, 'time':time, 'milliseconds': millisec})
+                cancel_messages["value"].append(row['price'] / 10000)
+                cancel_messages["time"].append(time)
+                cancel_messages["ms"].append(millisec)
 
                 if row['direction'] == 1:
-                    volume_messages.append({'volume': 1*row['size'], 'time':time, 'milliseconds': millisec})
+                    volume_messages["value"].append(1*row['size'])
+                    volume_messages["time"].append(time)
+                    volume_messages["ms"].append(millisec)
                 
                 if row['direction'] == -1:
-                    volume_messages.append({'volume': -1*row['size'], 'time':time, 'milliseconds': millisec})
+                    volume_messages["value"].append(-1*row['size'])
+                    volume_messages["time"].append(time)
+                    volume_messages["ms"].append(millisec)
                 
         
         ask_output.update({symbol: {date_time: ask_messages}})
@@ -76,9 +90,3 @@ with open("./cancel.json", "w") as f:
 
 with open("./volume.json", "w") as f:
     json.dump(volume_output, f)
-
-
-        
-
-
-

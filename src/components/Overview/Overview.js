@@ -5,6 +5,11 @@ import OverviewLegend from '../OverviewLegend/OverviewLegend';
 
 class Overview extends React.Component {
 
+    // IMPORTANT NOTE FOR FURTHURE UPDATE:
+    // We need to put data here to calculate min, max and level of data and pass it
+    // to the children divisions.
+    //
+
     render() {
 
         return(

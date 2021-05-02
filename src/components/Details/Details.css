@@ -1,5 +1,5 @@
 .LOB{
-    height: 9%;
+    height: 16%;
     width: 100%;
     background-color: #faf9f9;
     display: inline-block;
@@ -8,12 +8,35 @@
 }
 
 .title{
-    height: 5%;
+    height: 2%;
     width: 100%;
-    font-size: 1.5vw;
+    font-size: 1vw;
     font-family: Oswald;
     text-align: center;
     display: inline-block;
+    margin-bottom: 1%;
+}
+
+.lob-svg{
+    height: 90%;
+    width: 100%;
+    display: block;
+    position: relative;
+}
+
+.axis {
+    font-size: 0.7vw;
+    font-family: 'Oswald';
+}
+
+.lob-row-cell{
+    border: 1vw solid black;
+}
+
+.lob-line{
+    stroke: chocolate;
+    stroke-width: 1;
+    fill: none;
 }
 
 #details{
@@ -49,4 +72,6 @@
     display: inline-block;
     position: relative;
 }
+
+
 

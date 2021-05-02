@@ -40,7 +40,7 @@ class Viz extends React.Component {
 
     handleChangeSelectedStocks(stock, action){
         if (action === 'add'){
-            if (this.state.selectedStocks.length === 10){
+            if (this.state.selectedStocks.length === 5){
                     alert("You reached the maximum capacity. Please remove some stocks.");
             } else {
                 this.setState({
