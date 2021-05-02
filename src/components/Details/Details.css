@@ -39,6 +39,11 @@
     fill: none;
 }
 
+.legend-text{
+    font-size: 0.3vw;
+    font-family: Oswald;
+}
+
 #details{
     height: 100%;
     width: 100%;
@@ -62,6 +67,11 @@
     background-color: #faf9f9;
     display: inline-block;
     position: relative;
+}
+
+#drawLobLegend{
+    height: 100%;
+    width: 100%;
 }
 
 #metrics{

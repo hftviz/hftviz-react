@@ -14,7 +14,7 @@ class Viz extends React.Component {
             binSize: 5,
             dateTime: '2019-01-04',
             vizType: 'overview',
-            zoomLevel: 'daily',
+            zoomLevel: 1,
         };
         
         // this keeps the selected stocks list in the state updated.

@@ -1,7 +1,6 @@
 import React from 'react';
 import "./Details.css";
 import drawLOB from './drawLOB';
-import levels from './levels.js';
 
 
 class Lob extends React.Component {
@@ -14,27 +13,26 @@ class Lob extends React.Component {
     componentDidMount(){
 
         let date = "2012-06-21"; // for production, we need to use this.props.dateTime
-        let names = ["Apple Inc.--AAPL", "Microsoft Corp.--MSFT", "Intel Corp.--INTC", "Amazon.com Inc.--AMZN", "Alphabet Inc. (Class C)--GOOG"]; // in production: this.props.dateTime
-        let name = names[Math.floor(Math.random() * names.length)];
+        let names = ["Apple Inc.--AAPL", "Microsoft Corp.--MSFT", "Intel Corp.--INTC", "Amazon.com Inc.--AMZN", "Alphabet Inc. (Class C)--GOOG"];
+        let name = names[Math.floor(Math.random() * names.length)]; // in production, you can change name var with "this.props.name"
 
-        if (this.props.zoomLevel === 1 ) 
-            {
-                let source = levels.level1;
-                // make copy from source
-                let level = JSON.parse(JSON.stringify(source));
-
+        // deep copy of data
+        let source = this.props.level;
+        // make copy from source
+        let data = JSON.parse(JSON.stringify(source));
 
 
-                drawLOB(
-                    this.canvasRef.current.id,
-                    date,
-                    name,
-                    level.volume,
-                    level.bid,
-                    level.ask,
-                    level.cancel
-                );
-            }
+        drawLOB(
+            this.canvasRef.current.id,
+            date,
+            name,
+            data.volume,
+            data.bid,
+            data.ask,
+            data.cancel,
+            this.props.minMessageNum,
+            this.props.maxMessageNum
+        );
     }
 
     // for zoom changing

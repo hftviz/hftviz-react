@@ -20,6 +20,7 @@ class Panel extends React.Component {
             children = <Details 
                             selectedStocks = {this.props.selectedStocks}
                             dateTime = {this.props.dateTime}
+                            zoomLevel = {this.props.zoomLevel}
                         />;
         };
         return(

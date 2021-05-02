@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-function drawLOB(container, date, name, volumeData, bidData, askData, cancelData){
+function drawLOB(container, date, name, volumeData, bidData, askData, cancelData, minMessageNum, maxMessageNum){
 
     // extract symbol
     let symbol = name.split('--')[1];
@@ -13,7 +13,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     const height_num = division.clientHeight,
         width_num = division.clientWidth,
         xScale = 0.95,
-        yScale = 0.7,
+        yScale = 0.65,
         startPoint = 0.09,
         messageNumStartColor = "#e6ccff",
         messageNumEndColor = "#26004d";
@@ -50,32 +50,24 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     const minDate = d3.min(groups, group => {
         return d3.min(group[Object.keys(group)[0]]["time"])
     });
-
-    // message numbers
-    const minMessageNum = d3.min(groups, group => {
-            return d3.min(group[Object.keys(group)[0]]["messageNum"])
-        }),
-          maxMessageNum = d3.max(groups, group => {
-            return d3.max(group[Object.keys(group)[0]]["messageNum"])
-        });
-
+    
     // draw the viz
     let svg = d3.select('#' + container)
                 .append('svg')
                 .attr('id', symbol+'--svg')
                 .attr('class', 'lob-svg')
-                .attr("viewBox", `0 0 ${width_num} ${0.8 * height_num}`)
+                .attr("viewBox", `0 0 ${width_num} ${0.75 * height_num}`)
                 .append("g")
                 .attr('class', 'lob-svg');
+    
     // set title
-
     let tempName = container.split("-")[1]; // in production, Use name instead of tempName
     svg.append("text")
         .attr("x", "50%")             
-        .attr("y", "-0.5%")
+        .attr("y", "0%")
         .attr("text-anchor", "middle") 
         .style("margin-bottom", "1%")
-        .style("font-size", "0.5vw")  
+        .style("font-size", "0.7vw")  
         .text(tempName);
 
     // define axis
