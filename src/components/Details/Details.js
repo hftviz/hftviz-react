@@ -3,13 +3,14 @@ import "./Details.css";
 import Lob from "./Lob";
 import levels from './levels.js';
 import LobLegend from './LobLegend';
+import Liquidity from './Liquidity';
 
 class Details extends React.Component {
     constructor(props){
         super(props);
 
         // state
-        this.state = {zoomLevel: 1, min: 0, max: 0};
+        this.state = {zoomLevel: 1};
 
         // bind handlers
         this.handleZoomChange = this.handleZoomChange.bind(this);
@@ -92,8 +93,31 @@ class Details extends React.Component {
                     />
                 </div>
                 <div id="metrics">
-                    <div className="title">Liquidity</div>
-                    
+                    {/* the data will be replaced by liquidity data later */}
+                    <Liquidity  
+                                title="Effective Spread"
+                                key="L1" 
+                                stocks={addedMarket} 
+                                dateTime={this.props.dateTime} 
+                                zoomLevel={this.state.zoomLevel}
+                                data = {level.ask}
+                    />
+                    <Liquidity  
+                                title="Realized Spread"
+                                key="L2" 
+                                stocks={addedMarket} 
+                                dateTime={this.props.dateTime} 
+                                zoomLevel={this.state.zoomLevel}
+                                data = {level.ask}
+                    />
+                    <Liquidity  
+                                title="Price Impact"
+                                key="L3" 
+                                stocks={addedMarket} 
+                                dateTime={this.props.dateTime} 
+                                zoomLevel={this.state.zoomLevel}
+                                data = {level.ask}
+                    />
                 </div>
             </div>
 

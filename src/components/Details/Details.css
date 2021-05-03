@@ -17,6 +17,16 @@
     margin-bottom: 1%;
 }
 
+.liqTitle {
+    height: 2%;
+    width: 100%;
+    font-size: 1vw;
+    font-family: Oswald;
+    text-align: left;
+    display: inline-block;
+    margin-bottom: 3%;
+}
+
 .lob-svg{
     height: 90%;
     width: 100%;
@@ -42,6 +52,27 @@
 .legend-text{
     font-size: 0.3vw;
     font-family: Oswald;
+}
+
+.liquidity{
+    margin-top: 1%;
+    height: 32%;
+    width: 100%;
+    font-size: 0.8vw;
+    font-family: Oswald;
+}
+
+.liq4company{
+    height: 14%;
+    width: 100%;
+    text-align: center;
+}
+
+.liq-svg{
+    height: 90%;
+    width: 100%;
+    display: block;
+    position: relative;
 }
 
 #details{
