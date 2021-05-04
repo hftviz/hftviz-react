@@ -18,6 +18,7 @@ class BinSize extends React.Component {
             return(
 
                 <div id="binSize"> 
+                        <div id="bidTitle">BinSize</div>
                         <input 
                             id="inputRange" 
                             type="range" 

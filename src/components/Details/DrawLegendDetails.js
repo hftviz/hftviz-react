@@ -52,7 +52,7 @@ function DrawLegend(containerId, minVal, maxVal, startColor, endColor){
     svg.append("text")
         .attr("class","legend-text")
         .attr("text-anchor", "middle")
-        .attr("x","50%")
+        .attr("x","35%")
         .attr("y","66%")
         .attr("dy",0)
         .text(minVal);
@@ -61,7 +61,7 @@ function DrawLegend(containerId, minVal, maxVal, startColor, endColor){
     svg.append("text")
     .attr("class","legend-text")
     .attr("text-anchor", "middle")
-    .attr("x","50%")
+    .attr("x","35%")
     .attr("y","33%")
     .attr("dy",0)
     .text(maxVal);
