@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/hifriz-react/static/css/main.0face580.chunk.css",
-    "main.js": "/hifriz-react/static/js/main.1ef46d5c.chunk.js",
-    "main.js.map": "/hifriz-react/static/js/main.1ef46d5c.chunk.js.map",
-    "runtime-main.js": "/hifriz-react/static/js/runtime-main.e219ca1e.js",
-    "runtime-main.js.map": "/hifriz-react/static/js/runtime-main.e219ca1e.js.map",
-    "static/js/2.826890de.chunk.js": "/hifriz-react/static/js/2.826890de.chunk.js",
-    "static/js/2.826890de.chunk.js.map": "/hifriz-react/static/js/2.826890de.chunk.js.map",
-    "static/js/3.e7e8401b.chunk.js": "/hifriz-react/static/js/3.e7e8401b.chunk.js",
-    "static/js/3.e7e8401b.chunk.js.map": "/hifriz-react/static/js/3.e7e8401b.chunk.js.map",
-    "index.html": "/hifriz-react/index.html",
-    "static/css/main.0face580.chunk.css.map": "/hifriz-react/static/css/main.0face580.chunk.css.map",
-    "static/js/2.826890de.chunk.js.LICENSE.txt": "/hifriz-react/static/js/2.826890de.chunk.js.LICENSE.txt",
-    "static/media/components.css": "/hifriz-react/static/media/closeIconHover.163a64a8.png",
-    "static/media/corrwithMarket.8a1310df.png": "/hifriz-react/static/media/corrwithMarket.8a1310df.png",
-    "static/media/liq.334ce6e0.png": "/hifriz-react/static/media/liq.334ce6e0.png",
-    "static/media/liqCorr.ece7b11a.png": "/hifriz-react/static/media/liqCorr.ece7b11a.png",
-    "static/media/lob.0501cb99.png": "/hifriz-react/static/media/lob.0501cb99.png",
-    "static/media/overview-details2.a2b251f6.png": "/hifriz-react/static/media/overview-details2.a2b251f6.png",
-    "static/media/overview-details3.250c5b5a.png": "/hifriz-react/static/media/overview-details3.250c5b5a.png",
-    "static/media/overview.38b0ad21.png": "/hifriz-react/static/media/overview.38b0ad21.png"
+    "main.css": "/hftviz-react/static/css/main.94f7e2e9.chunk.css",
+    "main.js": "/hftviz-react/static/js/main.b8bcb946.chunk.js",
+    "main.js.map": "/hftviz-react/static/js/main.b8bcb946.chunk.js.map",
+    "runtime-main.js": "/hftviz-react/static/js/runtime-main.4afeffd4.js",
+    "runtime-main.js.map": "/hftviz-react/static/js/runtime-main.4afeffd4.js.map",
+    "static/js/2.826890de.chunk.js": "/hftviz-react/static/js/2.826890de.chunk.js",
+    "static/js/2.826890de.chunk.js.map": "/hftviz-react/static/js/2.826890de.chunk.js.map",
+    "static/js/3.e7e8401b.chunk.js": "/hftviz-react/static/js/3.e7e8401b.chunk.js",
+    "static/js/3.e7e8401b.chunk.js.map": "/hftviz-react/static/js/3.e7e8401b.chunk.js.map",
+    "index.html": "/hftviz-react/index.html",
+    "static/css/main.94f7e2e9.chunk.css.map": "/hftviz-react/static/css/main.94f7e2e9.chunk.css.map",
+    "static/js/2.826890de.chunk.js.LICENSE.txt": "/hftviz-react/static/js/2.826890de.chunk.js.LICENSE.txt",
+    "static/media/components.css": "/hftviz-react/static/media/closeIconHover.163a64a8.png",
+    "static/media/corrwithMarket.8a1310df.png": "/hftviz-react/static/media/corrwithMarket.8a1310df.png",
+    "static/media/liq.334ce6e0.png": "/hftviz-react/static/media/liq.334ce6e0.png",
+    "static/media/liqCorr.ece7b11a.png": "/hftviz-react/static/media/liqCorr.ece7b11a.png",
+    "static/media/lob.0501cb99.png": "/hftviz-react/static/media/lob.0501cb99.png",
+    "static/media/overview-details2.a2b251f6.png": "/hftviz-react/static/media/overview-details2.a2b251f6.png",
+    "static/media/overview-details3.250c5b5a.png": "/hftviz-react/static/media/overview-details3.250c5b5a.png",
+    "static/media/overview.38b0ad21.png": "/hftviz-react/static/media/overview.38b0ad21.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.e219ca1e.js",
+    "static/js/runtime-main.4afeffd4.js",
     "static/js/2.826890de.chunk.js",
-    "static/css/main.0face580.chunk.css",
-    "static/js/main.1ef46d5c.chunk.js"
+    "static/css/main.94f7e2e9.chunk.css",
+    "static/js/main.b8bcb946.chunk.js"
   ]
 }
