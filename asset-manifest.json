@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/hftviz-react/static/css/main.94f7e2e9.chunk.css",
-    "main.js": "/hftviz-react/static/js/main.b8bcb946.chunk.js",
-    "main.js.map": "/hftviz-react/static/js/main.b8bcb946.chunk.js.map",
+    "main.css": "/hftviz-react/static/css/main.3bb73513.chunk.css",
+    "main.js": "/hftviz-react/static/js/main.0d983d7d.chunk.js",
+    "main.js.map": "/hftviz-react/static/js/main.0d983d7d.chunk.js.map",
     "runtime-main.js": "/hftviz-react/static/js/runtime-main.4afeffd4.js",
     "runtime-main.js.map": "/hftviz-react/static/js/runtime-main.4afeffd4.js.map",
     "static/js/2.826890de.chunk.js": "/hftviz-react/static/js/2.826890de.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.e7e8401b.chunk.js": "/hftviz-react/static/js/3.e7e8401b.chunk.js",
     "static/js/3.e7e8401b.chunk.js.map": "/hftviz-react/static/js/3.e7e8401b.chunk.js.map",
     "index.html": "/hftviz-react/index.html",
-    "static/css/main.94f7e2e9.chunk.css.map": "/hftviz-react/static/css/main.94f7e2e9.chunk.css.map",
+    "static/css/main.3bb73513.chunk.css.map": "/hftviz-react/static/css/main.3bb73513.chunk.css.map",
     "static/js/2.826890de.chunk.js.LICENSE.txt": "/hftviz-react/static/js/2.826890de.chunk.js.LICENSE.txt",
     "static/media/components.css": "/hftviz-react/static/media/closeIconHover.163a64a8.png",
     "static/media/corrwithMarket.8a1310df.png": "/hftviz-react/static/media/corrwithMarket.8a1310df.png",
@@ -24,7 +24,7 @@
   "entrypoints": [
     "static/js/runtime-main.4afeffd4.js",
     "static/js/2.826890de.chunk.js",
-    "static/css/main.94f7e2e9.chunk.css",
-    "static/js/main.b8bcb946.chunk.js"
+    "static/css/main.3bb73513.chunk.css",
+    "static/js/main.0d983d7d.chunk.js"
   ]
 }
