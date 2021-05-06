@@ -1,4 +1,5 @@
 import React from 'react';
+import './selectedBox.css';
 
 class SelectedItem extends React.Component {
     constructor(props){
@@ -15,8 +16,7 @@ class SelectedItem extends React.Component {
         return(
 
             <div className="selectedItem"> 
-                {this.props.name.split('--')[1]}
-                <button type="button" className="closeSelectedItem" onClick={this.handleCancelClick} />
+                <div className="closeSelectedItem" onClick={this.handleCancelClick}> {"-  "+this.props.name.split('--')[1]} </div>
             </div>
 
         );

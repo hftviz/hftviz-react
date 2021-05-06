@@ -1,0 +1,7 @@
+#menuContainer{
+    z-index: 1;
+    position: absolute;
+    margin-top: 14%;
+    margin-left: 1%;
+    width: 100%;
+}

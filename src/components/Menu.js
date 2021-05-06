@@ -7,6 +7,7 @@ import Sort from './Sort/Sort';
 import BinSize from './BinSize/BinSize';
 import DateBox from './DateBox/DateBox';
 import ViewOD from './ViewOD/ViewOD';
+import aboutUs from "../pics/about-us-icon.png"
 
 
 
@@ -20,11 +21,14 @@ class Menu extends React.Component {
                     <img src={logo} alt="icon" className="img"/>
                 </div>
                 <div id="menu-description">
-                    <p style={{margin: '3%'}}>
+                    <div id="menu-description-icon">
+                        <img src={aboutUs} alt="about-us" className="img"/>
+                    </div>
+                    <div id="menu-description-text">
                         This design tends to visualize US stock market. 
                         By default, it shows the overview of the S&#38;P 500 companies on a default date. 
                         <br />You can select your stock by typing its name in search box below or click on its spot in the overview panel.
-                    </p>
+                    </div>
                 </div>
 
                 <ReadMe vizType={this.props.vizType}/>

@@ -19,7 +19,7 @@ function splitToChunksLegend(array, parts) {
 }
 
 function DrawLegend(containerId, beginRange, endRange, beginColor = "#00b300", middleColor = "#ffffff", endColor = "#b30000", svgWidth = '100%',
-    svgHeight = '50%', barWidth = '20%', barHeight = '50%', x1 = '0%', y1 = '50%', needMiddleColor = true, fontSize = '0.8vw', legendTitle = "") {
+    svgHeight = '50%', barWidth = '10%', barHeight = '40%', x1 = '0%', y1 = '50%', needMiddleColor = true, fontSize = '0.6vw', legendTitle = "") {
     var svgWidthInner = svgWidth,
         svgHeightInner = svgHeight,
         barWidthInner = barWidth,
@@ -91,7 +91,7 @@ function DrawLegend(containerId, beginRange, endRange, beginColor = "#00b300", m
         .attr("height", barHeightInner)
         .attr("x", x1Inner)
         .attr("y", y1Inner)
-        .attr('rx', '10%')
+        .attr('rx', '5%')
         .style("fill", "url(#linear-gradient)");
 
     //add text on either side of the bar

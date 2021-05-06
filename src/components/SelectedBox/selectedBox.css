@@ -1,0 +1,57 @@
+
+#SelectedBox{
+    height: 7%;
+    border: #ddd solid 1px;
+    border-radius: 3px;
+    width: 95%;
+    margin-top: 20%;
+    margin-left: 1.7%;
+    display:'inline-block';
+    float:'left';
+    position: relative;
+    padding: 0;
+}
+
+#SelectedBoxLegendText{
+    text-align: left;
+    font-size: 0.7vw;
+    font-family: 'Oswald';
+    color: rgb(161, 161, 161);
+    margin-left: 3%;
+}
+
+.selectedItem{
+    height: 23%;
+    width: 20%;
+    border: #777777 solid 1px;
+    border-radius: 5px;
+    margin: 1%;
+    display: inline-block;
+    position: relative;
+    background-color: rgb(180, 180, 180);
+    color: #fff;
+}
+
+.closeSelectedItem{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    font-size: 0.6vw;
+    font-family: 'Oswald';
+    /* top: 60%;
+    left: 30%;
+    border-radius: 30%;
+    border:rgba(116, 115, 115, 0.6) solid 1px;
+    background-size:cover;
+    background-position: center;
+    background-image: url("../../pics/close.png");
+    background-repeat: no-repeat; */
+}
+
+.closeSelectedItem:hover{
+    background-color: rgb(92, 92, 92);
+    border-radius: 5px;
+}

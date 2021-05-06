@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchMenuItem from './SearchMenuItem';
+import './searchBar.css';
 
 class SearchMenu extends React.Component {
     render() {
@@ -26,7 +27,7 @@ class SearchMenu extends React.Component {
 
         return(
 
-            <div>
+            <div id="menuContainer">
                 {rows}
             </div>
 

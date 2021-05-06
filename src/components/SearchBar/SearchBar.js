@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
     render() {
         return(
 
-            <div style={{display:'block', float:'left', width:'100%', position:'inherit'}}>
+            <div style={{display:'inline-block', float:'left', width:'100%', position:'relative', zIndex:1}}>
                 <input type="text" value={this.state.filterText} id="searchBar" onChange={this.handleFilterTextChange} 
                     placeholder="Search the stocks" autoComplete="off"/>
                 <SearchMenu 

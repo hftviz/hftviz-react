@@ -1,5 +1,6 @@
 import React from 'react';
 import SelectedItem from './SelectedItem';
+import './selectedBox.css';
 
 class SelectedBox extends React.Component {
     render() {
@@ -14,9 +15,10 @@ class SelectedBox extends React.Component {
 
         return(
 
-            <div id="SelectedBox">
+            <fieldset id="SelectedBox">
+                <legend id="SelectedBoxLegendText">Selected stocks:</legend>
                 {items}
-            </div>
+            </fieldset>
 
         );
     }

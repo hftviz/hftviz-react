@@ -24,6 +24,10 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
         localAskData = askData[symbol][date],
         localCancelData = cancelData[symbol][date],
         localVolumeData = volumeData[symbol][date];
+
+    // define the rectangle(cells for viz) position and specs
+    let offsetRectangles = 0.5,
+        widthRectangle = width_num/localBidData["time"].length;
     
     
     // convert date format
@@ -125,10 +129,10 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                         .enter()
                         .append("rect")
                         .attr("class", "lob-row-cell")
-                        .attr("width", 2)
-                        .attr("height", 1.1 * yScale * y.bandwidth())
+                        .attr("width", widthRectangle)
+                        .attr("height", 1.2 * yScale * y.bandwidth())
                         .attr("transform", d => {
-                            let xPos = x(d.time),
+                            let xPos = x(d.time) + offsetRectangles,
                                 yPos = y(d.section);
 
                             return "translate(" + xPos + "," + yPos + ")"
