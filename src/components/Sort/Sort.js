@@ -1,64 +1,60 @@
 import React from 'react';
 import './Sort.css';
 import SortItem from './SortItem';
+import sortIcon from '../../pics/sort.png';
+import Switch from "./Switch";
 
 class Sort extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: false, sortName:''};
-    
-        // This binding is necessary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this);
-        this.handleSortName = this.handleSortName.bind(this);
+        this.state = {isChecked:{"Volume": false, "MarketCap": true}};
+        
+        this.handleChecked = this.handleChecked.bind(this);
       }
-    
-    handleClick() {
-    this.setState(prevState => ({
-        isToggleOn: !prevState.isToggleOn
-        }));
-    }
 
-    handleSortName(name){
-        this.setState({
-            sortName: name
+
+    handleChecked(){
+        this.setState(prevState => {
+            return {isChecked: {"Volume": !prevState.isChecked["Volume"] , "MarketCap": !prevState.isChecked["MarketCap"]}}; 
         });
     }
     
 
     render() {
-
-        let children = [];
-
-        if(this.state.isToggleOn){
-            children = [
-                <SortItem 
-                    className="sortItem" 
-                    key='1' name="MarketCap" 
-                    data={this.props.sortData} 
-                    changeToggle={this.handleClick}
-                    changeSortName={this.handleSortName}
-                    onChangeSort={this.props.onChangeSort}
-                />,
-                <SortItem 
-                    className="sortItem" 
-                    key='2' 
-                    name="Volume" 
-                    data={this.props.sortData} 
-                    changeToggle={this.handleClick}
-                    changeSortName={this.handleSortName}
-                    onChangeSort={this.props.onChangeSort}
-                />
-            ]
-        };
-
         if(this.props.vizType === 'overview'){
 
             return(
-                <div style={{position:'inherit'}}>
-                    <button id="sortMenu" onClick={this.handleClick}>
-                        Sort By: {this.state.sortName}
-                    </button>
-                    {children}
+                <div id="sortMenu" >
+                    <div id="sortIcon">
+                        <img src={sortIcon} alt="sort icon" className="img"/>
+                    </div>
+                    <div id="sortButtons">
+                        <div id="MarketCap" className="sortButtonDiv">
+                            <div className="sortLabel"> Market Cap </div>
+                            <div className="sortButton">
+                                <Switch
+                                    name="MarketCap"
+                                    data={this.props.sortData} 
+                                    onChangeSort={this.props.onChangeSort}
+                                    checkState={this.state}
+                                    changeCheckState={this.handleChecked}
+                                />
+                            </div>
+
+                        </div>
+                        <div id="Volume" className="sortButtonDiv"> 
+                            <div className="sortLabel"> Volume </div>
+                            <div className="sortButton">
+                                <Switch
+                                    name="Volume"
+                                    data={this.props.sortData} 
+                                    onChangeSort={this.props.onChangeSort}
+                                    checkState={this.state}
+                                    changeCheckState={this.handleChecked}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
     
             );
