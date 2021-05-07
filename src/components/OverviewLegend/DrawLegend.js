@@ -19,7 +19,7 @@ function splitToChunksLegend(array, parts) {
 }
 
 function DrawLegend(containerId, beginRange, endRange, beginColor = "#00b300", middleColor = "#ffffff", endColor = "#b30000", svgWidth = '100%',
-    svgHeight = '50%', barWidth = '10%', barHeight = '40%', x1 = '0%', y1 = '50%', needMiddleColor = true, fontSize = '0.6vw', legendTitle = "") {
+    svgHeight = '50%', barWidth = '10%', barHeight = '40%', x1 = '30%', y1 = '50%', needMiddleColor = true, fontSize = '0.6vw', legendTitle = "Price Change") {
     var svgWidthInner = svgWidth,
         svgHeightInner = svgHeight,
         barWidthInner = barWidth,
@@ -96,8 +96,8 @@ function DrawLegend(containerId, beginRange, endRange, beginColor = "#00b300", m
 
     //add text on either side of the bar
     // from hifriz - v0.20
-    y1 = 50;
-    x1 = 24;
+    // y1 = 50;
+    // x1 = 24;
     svg.append("text")
         .attr("font-size", fontSize)
         .attr("font-family", "Oswald")
@@ -105,7 +105,7 @@ function DrawLegend(containerId, beginRange, endRange, beginColor = "#00b300", m
         .attr("text-anchor", "left")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("x", 1.1 * barWidthInner.split('%')[0] + '%')
+        .attr("x", '50%')
         .attr("y", (parseInt(y1Inner.split('%')[0]) + parseInt(barHeightInner.split('%')[0])) + '%')
         .attr("dy", 0)
         .text(beginRange + '%');
@@ -117,7 +117,7 @@ function DrawLegend(containerId, beginRange, endRange, beginColor = "#00b300", m
         .attr("text-anchor", "left")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("x", 1.1 * barWidthInner.split('%')[0] + '%')
+        .attr("x", '50%')
         .attr("y", (1.02) * parseInt(y1Inner.split('%')[0]) + '%')
         .attr("dy", 0)
         .text(endRange + '%');

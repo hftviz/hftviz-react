@@ -1,5 +1,6 @@
 import React from 'react';
 import './BinSize.css';
+import interval from '../../pics/interval.png';
 
 class BinSize extends React.Component {
     constructor(props){
@@ -18,7 +19,9 @@ class BinSize extends React.Component {
             return(
 
                 <div id="binSize"> 
-                        <div id="bidTitle">BinSize</div>
+                        <div id="bidTitle">
+                            <img src={interval} alt="binSize icon" className="img"/>
+                        </div>
                         <input 
                             id="inputRange" 
                             type="range" 

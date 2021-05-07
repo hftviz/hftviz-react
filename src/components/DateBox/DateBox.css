@@ -1,12 +1,18 @@
 #inputDate{
-    height: 3%;
+    height: 4%;
     color: rgb(150, 148, 148);
     border-radius: 5px;
     width: 94%;
-    font-size: 1vw;
+    font-size: 0.9vw;
     font-family: 'Oswald';
     text-align: center;
     position: inherit;
     margin-top: 5%;
     margin-left: 1%;
+    border: 1px solid #ddd;
+}
+
+input::-webkit-calendar-picker-indicator{
+    position: relative;
+    right: 87%;
 }

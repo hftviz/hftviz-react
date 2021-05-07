@@ -7,20 +7,21 @@
     font-family: 'Oswald';
     text-align: left;
     position: inherit;
-    margin-top: 5%;
+    margin-top: 12%;
     margin-left: 1%;
 }
 
 #inputRange{
     width: 55%;
-    float: center;
+    height: 65%;
+    float: left;
     display: inline-block;
     position: absolute;
-    left: 20%;
+    left: 15%;
 }
 
 #bidTitle{
-    width: 20%;
+    width: 14%;
     height: 100%;
     display: inline-block;
     position: absolute;
@@ -30,8 +31,8 @@
 
 #output{
     height: 100%;
-    width: 20%;
+    width: 25%;
     display: inline-block;
     float: right;
-    margin-top: 1%;
+    margin-top: 3%;
 }

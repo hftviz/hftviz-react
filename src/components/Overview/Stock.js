@@ -13,15 +13,20 @@ class Stock extends React.Component {
 
     handleClick(){
         let stockName = this.props.fullName + '--' + this.props.symbol;
-        this.props.onChangeSelectedStocks(stockName, 'add');
+
+        if(!this.props.isSelected){
+            this.props.onChangeSelectedStocks(stockName, 'add');
+        }else{
+            this.props.onChangeSelectedStocks(stockName, 'remove');
+        }
     }
 
     render() {
 
         if(this.props.isSelected){
             return(
-                <fieldset id={this.props.symbol} className="stockVizSelected">
-                    <legend className="stockNameLegend">{this.props.symbol}</legend>
+                <div id={this.props.symbol} className="stockVizSelected" onClick={this.handleClick}>
+                    <div className="stockNameLegend">{this.props.symbol}</div>
                     <Draw
                         dateTime={this.props.dateTime}
                         fullName={this.props.fullName}
@@ -31,7 +36,7 @@ class Stock extends React.Component {
                     <div className="stockVizText">
                         {this.props.fullName} 
                     </div>
-                </fieldset>
+                </div>
     
             );
         } else{
