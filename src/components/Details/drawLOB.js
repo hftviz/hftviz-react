@@ -149,37 +149,44 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                         .style("fill", d => {
                             return colorMapMessages(d.fillVal);
                         })
-                        .on("mouseover", (event,d) => {
-                            console.log(event, d);
+                        .on("mouseover", (event,mainData, index) => {
+                            console.log(event, mainData);
                                         // Specify where to put label of text
                             svg.append("text")
-                               .attr("id", d.id+"1") // Create an id for text so we can select it later for removing on mouseout
-                               .attr("x", function() { return x(d.time) })
-                               .attr("y", function() { return y(d.section) })
+                               .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
+                               .attr("class", "hoverlabel")
+                               .attr("x", function() { return x(mainData.time) })
+                               .attr("y", function() { return y(mainData.section) })
                                .attr("dy", "0.1vw")
                                .style("font-size", "0.5vw")
                                .text(function() {
-                                   let text = d.section + " value:" + Math.abs(d.value);  // Value of the text
+                                   let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
                                    return text;
                                 });
                             svg.append("text")
-                            .attr("id", d.id+"2") // Create an id for text so we can select it later for removing on mouseout
-                            .attr("x", function() { return x(d.time) })
-                            .attr("y", function() { return y(d.section) })
+                            .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
+                            .attr("class", "hoverlabel")
+                            .attr("x", function() { return x(mainData.time) })
+                            .attr("y", function() { return y(mainData.section) })
                             .attr("dy", "0.6vw")
                             .style("font-size", "0.5vw")
                             .text(function() {
-                                let text = "Number of messages: " + d.fillVal;  // Value of the text
+                                let text = "Number of messages: " + mainData.fillVal;  // Value of the text
                                 return text;
                                 });
-
+                            
+                            for (let otherSvg in allSvg){
+                                if (!(otherSvg === tempName)){
+                                    allSvg[otherSvg].selectAll("rect")
+                                                    .filter((d,i) => {console.log(d);})
+                                };
+                            };
 
 
 
                         })
                         .on("mouseout", (event,d) => {
-                            d3.select("#"+d.id+"1").remove();
-                            d3.select("#"+d.id+"2").remove();
+                            d3.selectAll(".hoverlabel").remove();
                         });
 
 
@@ -224,8 +231,6 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     
     // store svg beside all svgs
     handleLobSvg(tempName, svg);
-
-    console.log(allSvg);
 };
 
 export default drawLOB;
