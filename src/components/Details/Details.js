@@ -12,9 +12,18 @@ class Details extends React.Component {
         // state
         this.state = {zoomLevel: 1};
 
+        // all SVGs
+        this.lobSvg = {};
+
         // bind handlers
         this.handleZoomChange = this.handleZoomChange.bind(this);
+        this.handleLobSvg = this.handleLobSvg.bind(this);
     }
+
+
+    handleLobSvg(name, svg){
+        this.lobSvg[name] = svg;
+    };
 
     // THIS IS NOT COMPLETED YET
     handleZoomChange(){
@@ -64,7 +73,17 @@ class Details extends React.Component {
         let addedMarket = Array.from(this.props.selectedStocks);
         addedMarket.unshift("Market--Market_SPY");
 
+
+        // update all svg
+        for (let svgComp in this.lobSvg){
+            if (!(svgComp in addedMarket)){
+                delete this.lobSvg[svgComp];
+            };
+        };
+
+
         addedMarket.forEach(stock => {
+            let isLastStock = addedMarket.indexOf(stock) === (addedMarket.length - 1) ? true : false;
             lobs.push(
                 <Lob 
                     key={stock} 
@@ -74,8 +93,14 @@ class Details extends React.Component {
                     level = {level}
                     minMessageNum = {minMessageNum}
                     maxMessageNum = {maxMessageNum}
+                    isLastStock = {isLastStock}
+                    allSvg = {this.lobSvg}
+                    handleLobSvg = {this.handleLobSvg}
                 />
             );
+
+            let stockSymbol = stock.split("--")[1];
+            this.lobSvg[stockSymbol] = "";
         });
 
 

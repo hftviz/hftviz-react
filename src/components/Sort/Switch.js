@@ -58,12 +58,12 @@ class Switch extends React.Component {
         return(
 
             <div>
-                <label class="switch">
+                <label className="switch">
                     <input 
                         type="checkbox" 
                         checked={this.props.checkState.isChecked[this.props.name]} 
                         onChange={() => {this.handleSortType(this.props.name)}}/>
-                    <span class="slider round"></span>
+                    <span className="slider round"></span>
                 </label>
             </div>
 

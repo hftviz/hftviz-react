@@ -9,12 +9,16 @@
 
 .title{
     height: 2%;
-    width: 100%;
+    width: 30%;
     font-size: 1vw;
     font-family: Oswald;
     text-align: center;
+    color: rgb(255, 100, 53);
     display: inline-block;
     margin-bottom: 1%;
+    margin-left: 35%;
+    margin-top: 1%;
+    border-radius: 5px;
 }
 
 .liqTitle {
@@ -28,7 +32,7 @@
 }
 
 .lob-svg{
-    height: 90%;
+    height: 100%;
     width: 100%;
     display: block;
     position: relative;

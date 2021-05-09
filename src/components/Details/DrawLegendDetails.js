@@ -11,7 +11,7 @@ function DrawLegend(containerId, minVal, maxVal, startColor, endColor){
     const svg = d3.select("#" + containerId)
                   .append("svg")
                   .attr("width", "100%")
-                  .attr("height", "100%")
+                  .attr("height", "70%")
                   .attr("viewBox", "0 0 " +  0.5 * widthNum + " " + 0.5 * heightNum)
                   .style("display", "block");
 

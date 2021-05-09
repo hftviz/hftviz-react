@@ -33,6 +33,26 @@ class Liq4company extends React.Component {
 
     // will update with zoom levels
     componentDidUpdate(prevProps){
+        let date = "2012-06-21"; // for production, we need to use this.props.dateTime
+        let names = ["Apple Inc.--AAPL", "Microsoft Corp.--MSFT", "Intel Corp.--INTC", "Amazon.com Inc.--AMZN", "Alphabet Inc. (Class C)--GOOG"];
+        let name = names[Math.floor(Math.random() * names.length)]; 
+        // in production, you can change name var with "this.props.name"
+
+        // deep copy of data
+        let source = this.props.data;
+        // make copy from source
+        let data = JSON.parse(JSON.stringify(source));
+
+        drawLiq(
+            this.canvas.current.id,
+            name + "//" + this.props.name,
+            date,
+            data,
+            this.props.zoomLevel,
+            this.props.isLastStock
+        );
+
+        // add zoom here
     }
 
 

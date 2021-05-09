@@ -10,7 +10,7 @@ class LobLegend extends React.Component {
     }
 
     componentDidMount(){
-        DrawLegend(this.canvas.current.id, this.props.minMessageNum, this.props.maxMessageNum, "#e6ccff", "#26004d");
+        DrawLegend(this.canvas.current.id, this.props.minMessageNum, this.props.maxMessageNum, "#ffe680", "#ff3300");
     }
 
     componentDidUpdate(prevProps){

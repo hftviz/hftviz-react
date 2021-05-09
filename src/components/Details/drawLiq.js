@@ -13,7 +13,7 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
         widthNum = division.clientWidth,
         yAxisStartPoint= 0.055,
         xAxisStartPoint=0.028,
-        lastStockScale = isLastStock ? 0.5 : 0.5;
+        lastStockScale = isLastStock ? 0.5 : 2;
 
     // time parser
     let timeParser = d3.timeParse("%H:%M:%S.%L");
@@ -30,6 +30,7 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
     const minDate = d3.min(localData["time"]);
 
     // draw the viz
+    document.getElementById(container).innerHTML = "";
     let svg = d3.select('#' + container)
     .append('svg')
     .attr('id', symbol+'--svg')
@@ -92,14 +93,16 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
     .attr("class", "axis")
     .attr("transform", "translate("+ 0 +"," +  lastStockScale * heightNum + ")")
     .call(d3.axisBottom(x).ticks(5))
-    .selectAll("text")
-    .style("z-index", "1");
+    .select(".domain")
+    .attr("display", "none");
 
     svg.append("g")
         .attr("id", "yaxis")
         .attr("class", "axis")
         .attr("transform", "translate(0,0)")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y))
+        .select(".domain")
+        .attr("display", "none");
                             
 
     

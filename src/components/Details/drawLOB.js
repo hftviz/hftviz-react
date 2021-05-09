@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
 
-function drawLOB(container, date, name, volumeData, bidData, askData, cancelData, minMessageNum, maxMessageNum){
+function drawLOB(container, date, name, volumeData, bidData, askData, cancelData, minMessageNum, maxMessageNum, isLastStock, allSvg, handleLobSvg){
 
     // extract symbol
     let symbol = name.split('--')[1];
+
+    let tempName = container.split("-")[1]; // in production, Use name instead of tempName
 
     // time parser
     let timeParser = d3.timeParse("%H:%M:%S.%L");
@@ -15,8 +17,9 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
         xScale = 0.95,
         yScale = 0.65,
         startPoint = 0.09,
-        messageNumStartColor = "#e6ccff",
-        messageNumEndColor = "#26004d";
+        messageNumStartColor = "#ffe680",
+        messageNumEndColor = "#ff3300",
+        lastStockScale = isLastStock ? 0.65 : 2;
     
 
     // fetch data
@@ -56,16 +59,15 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     });
     
     // draw the viz
+    document.getElementById(container).innerHTML = "";
     let svg = d3.select('#' + container)
                 .append('svg')
-                .attr('id', symbol+'--svg')
+                .attr('id', tempName+'--svg')
                 .attr('class', 'lob-svg')
                 .attr("viewBox", `0 0 ${width_num} ${0.75 * height_num}`)
-                .append("g")
-                .attr('class', 'lob-svg');
+                .append("g");
     
     // set title
-    let tempName = container.split("-")[1]; // in production, Use name instead of tempName
     svg.append("text")
         .attr("x", "50%")             
         .attr("y", "0%")
@@ -84,17 +86,23 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
             .domain(["Volume", "Cancel", "Bid", "Ask"]);
 
     // assemble axis
-    svg.append("g")
-    .attr("id", "xaxis")
-    .attr("class", "axis")
-    .attr("transform", "translate(0," + yScale * height_num + ")")
-    .call(d3.axisBottom(x).ticks(5));
+    if(isLastStock){
+        svg.append("g")
+        .attr("id", "xaxis")
+        .attr("class", "axis")
+        .attr("transform", "translate(0," + lastStockScale * height_num + ")")
+        .call(d3.axisBottom(x).ticks(5))
+        .select(".domain")
+        .attr("display", "none");
+    }
 
     svg.append("g")
     .attr("id", "yaxis")
     .attr("class", "axis")
     .attr("transform", "translate("+ startPoint * width_num +",0)")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y))
+    .select(".domain")
+    .attr("display", "none");
 
     // create colormap for message numbers
     const colorMapMessages = d3.scaleLinear().domain([minMessageNum, maxMessageNum])
@@ -115,10 +123,11 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                             times.forEach(element => {
                                 let fillValIndex = times.indexOf(element);
                                 out.push({
+                                    id: tempName+Object.keys(d)[0]+fillValIndex, //in production, Use name instead of tempName
                                     section:Object.keys(d)[0], 
                                     time: element, 
                                     fillVal: d[Object.keys(d)[0]]["messageNum"][fillValIndex],
-                                    value: d[Object.keys(d)[0]]["value"][fillValIndex],
+                                    value: d[Object.keys(d)[0]]["value"][fillValIndex].toFixed(2),
                                     average: d3.sum(d[Object.keys(d)[0]]["value"])/d[Object.keys(d)[0]]["value"].length ,
                                     maxVal: d3.max(d[Object.keys(d)[0]]["value"])
                                 });
@@ -139,7 +148,40 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                         })
                         .style("fill", d => {
                             return colorMapMessages(d.fillVal);
+                        })
+                        .on("mouseover", (event,d) => {
+                            console.log(event, d);
+                                        // Specify where to put label of text
+                            svg.append("text")
+                               .attr("id", d.id+"1") // Create an id for text so we can select it later for removing on mouseout
+                               .attr("x", function() { return x(d.time) })
+                               .attr("y", function() { return y(d.section) })
+                               .attr("dy", "0.1vw")
+                               .style("font-size", "0.5vw")
+                               .text(function() {
+                                   let text = d.section + " value:" + Math.abs(d.value);  // Value of the text
+                                   return text;
+                                });
+                            svg.append("text")
+                            .attr("id", d.id+"2") // Create an id for text so we can select it later for removing on mouseout
+                            .attr("x", function() { return x(d.time) })
+                            .attr("y", function() { return y(d.section) })
+                            .attr("dy", "0.6vw")
+                            .style("font-size", "0.5vw")
+                            .text(function() {
+                                let text = "Number of messages: " + d.fillVal;  // Value of the text
+                                return text;
+                                });
+
+
+
+
+                        })
+                        .on("mouseout", (event,d) => {
+                            d3.select("#"+d.id+"1").remove();
+                            d3.select("#"+d.id+"2").remove();
                         });
+
 
 
     // extracting four path for values
@@ -178,6 +220,12 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
         .append("path")
         .attr("class", "lob-line")
         .attr("d", d => {return line(d)});
+
+    
+    // store svg beside all svgs
+    handleLobSvg(tempName, svg);
+
+    console.log(allSvg);
 };
 
 export default drawLOB;
