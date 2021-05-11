@@ -124,6 +124,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                 let fillValIndex = times.indexOf(element);
                                 out.push({
                                     id: tempName+Object.keys(d)[0]+fillValIndex, //in production, Use name instead of tempName
+                                    index: fillValIndex,
                                     section:Object.keys(d)[0], 
                                     time: element, 
                                     fillVal: d[Object.keys(d)[0]]["messageNum"][fillValIndex],
@@ -149,36 +150,36 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                         .style("fill", d => {
                             return colorMapMessages(d.fillVal);
                         })
-                        .on("mouseover", (event,mainData, index) => {
-                            console.log(event, mainData);
-                                        // Specify where to put label of text
-                            svg.append("text")
-                               .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
-                               .attr("class", "hoverlabel")
-                               .attr("x", function() { return x(mainData.time) })
-                               .attr("y", function() { return y(mainData.section) })
-                               .attr("dy", "0.1vw")
-                               .style("font-size", "0.5vw")
-                               .text(function() {
-                                   let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
-                                   return text;
-                                });
-                            svg.append("text")
-                            .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
-                            .attr("class", "hoverlabel")
-                            .attr("x", function() { return x(mainData.time) })
-                            .attr("y", function() { return y(mainData.section) })
-                            .attr("dy", "0.6vw")
-                            .style("font-size", "0.5vw")
-                            .text(function() {
-                                let text = "Number of messages: " + mainData.fillVal;  // Value of the text
-                                return text;
-                                });
-                            
+                        .on("mouseover", (event, mainData) => {
+
+                            // show time
+                            let showTime = (Object.keys(allSvg).indexOf(tempName) + 1) === Object.keys(allSvg).length ? true : false ;
+                            // first element
+                            let isFirst = tempName === "Market_SPY" ? true : false ;
+                            drawHover(mainData, svg, x, y, showTime, isFirst);
+
                             for (let otherSvg in allSvg){
-                                if (!(otherSvg === tempName)){
+                                // show time
+                                let showTime = (Object.keys(allSvg).indexOf(otherSvg) + 1) === Object.keys(allSvg).length ? true : false ;
+                                // first element
+                                let isFirst = otherSvg === "Market_SPY" ? true : false ;
+
+                                if (otherSvg !== tempName){
                                     allSvg[otherSvg].selectAll("rect")
-                                                    .filter((d,i) => {console.log(d);})
+                                                    .filter((d) => {
+                                                            return d.index === mainData.index;
+                                                    })
+                                                    .each((d) => {
+                                                        drawHover(d, allSvg[otherSvg], x, y, showTime, isFirst);
+                                                    })
+                                } else{
+                                    allSvg[otherSvg].selectAll("rect")
+                                                    .filter((d) => {
+                                                            return (d.section !== mainData.section) && (d.index === mainData.index);
+                                                    })
+                                                    .each((d) => {
+                                                        drawHover(d, allSvg[otherSvg], x, y, showTime, isFirst);
+                                                    })
                                 };
                             };
 
@@ -214,7 +215,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
             let time = element[key]["time"][index];
 
             let xPos = 1+x(time);
-            let yPos = 5 + y(key) + (y.bandwidth()/(4 * (maxVal - average))) * (value - average);
+            let yPos = 7 + y(key) - (y.bandwidth()/(4 * (maxVal - average))) * (value - average);
 
             paths[key].push([xPos, yPos]);
 
@@ -232,5 +233,66 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     // store svg beside all svgs
     handleLobSvg(tempName, svg);
 };
+
+
+function drawHover(mainData, svg, x, y, showTime, isFirst){
+
+        // adjust hover text from the edge of the viz
+        let adjustScale = (mainData.index > 80) ? 0.8 : 1.04;
+        // adjust hover line start point
+        let adjustLine = isFirst ? "0%":"-20%";
+
+        svg.append("line")
+        .attr("x1", x(mainData.time))
+        .attr("y1", adjustLine)
+        .attr("x2", x(mainData.time))
+        .attr("y2", "120%")
+        .attr("class", "hoverlabel")
+        .attr("stroke", "black")
+
+        // Specify where to put label of text
+        svg.append("text")
+        .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
+        .attr("class", "hoverlabel")
+        .attr("x", function() { return adjustScale * x(mainData.time) })
+        .attr("y", function() { return y(mainData.section) })
+        .attr("dy", "0.4vw")
+        .style("font-size", "0.5vw")
+        .text(function() {
+            let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
+            return text;
+            });
+        svg.append("text")
+        .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
+        .attr("class", "hoverlabel")
+        .attr("x", function() { return adjustScale * x(mainData.time) })
+        .attr("y", function() { return y(mainData.section) })
+        .attr("dy", "0.9vw")
+        .style("font-size", "0.5vw")
+        .text(function() {
+            let text = "Number of messages: " + mainData.fillVal;  // Value of the text
+            return text;
+            });
+            
+        if(showTime && (mainData.section === "Volume")){
+            // format the time 
+            let format = d3.timeFormat("%H:%M:%S.%L"),
+            time = format(mainData.time);
+
+
+            svg.append("text")
+            .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
+            .attr("class", "hoverlabel")
+            .attr("x", function() { return adjustScale * x(mainData.time) })
+            .attr("y", "115%")
+            .style("font-size", "0.6vw")
+            .style("color", "red")
+            .text(function() {
+                let text = "" + time;  // Value of the text
+                return text;
+                });
+        };
+};
+
 
 export default drawLOB;

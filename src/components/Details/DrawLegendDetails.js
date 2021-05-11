@@ -41,7 +41,7 @@ function DrawLegend(containerId, minVal, maxVal, startColor, endColor){
     // draw legend 
     svg.append("rect")
         .attr("fill","url(#legendGradient)")
-        .attr("x","0%")
+        .attr("x","50%")
         .attr("y","33%")
         .attr("width","20%")
         .attr("height","33%")
@@ -52,7 +52,7 @@ function DrawLegend(containerId, minVal, maxVal, startColor, endColor){
     svg.append("text")
         .attr("class","legend-text")
         .attr("text-anchor", "middle")
-        .attr("x","35%")
+        .attr("x","30%")
         .attr("y","66%")
         .attr("dy",0)
         .text(minVal);
@@ -61,12 +61,20 @@ function DrawLegend(containerId, minVal, maxVal, startColor, endColor){
     svg.append("text")
     .attr("class","legend-text")
     .attr("text-anchor", "middle")
-    .attr("x","35%")
-    .attr("y","33%")
+    .attr("x","20%")
+    .attr("y","34%")
     .attr("dy",0)
     .text(maxVal);
 
-
+    // add end text
+    svg.append("text")
+    .attr("class","legend-text")
+    .attr("text-anchor", "center")
+    .attr("x","0%")
+    .attr("y","31%")
+    .attr("dy",0)
+    .style("font-size","0.3vw")
+    .text("Number of messages");
 };
 
 export {DrawLegend};
