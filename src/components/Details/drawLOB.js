@@ -1,5 +1,8 @@
 import * as d3 from 'd3';
 
+
+let globalXAxis;
+
 function drawLOB(container, date, name, volumeData, bidData, askData, cancelData, minMessageNum, maxMessageNum, isLastStock, allSvg, handleLobSvg){
 
     // extract symbol
@@ -77,7 +80,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
         .text(tempName);
 
     // define axis
-    let x = d3.scaleTime()
+    let globalXAxis = d3.scaleTime()
             .domain(d3.extent([minDate, maxDate]))
             .range([startPoint*width_num, xScale * width_num]);
     
@@ -86,27 +89,30 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
             .domain(["Volume", "Cancel", "Bid", "Ask"]);
 
     // assemble axis
+    let xAxis, yAxis;
+
     if(isLastStock){
-        svg.append("g")
-        .attr("id", "xaxis")
-        .attr("class", "axis")
-        .attr("transform", "translate(0," + lastStockScale * height_num + ")")
-        .call(d3.axisBottom(x).ticks(5))
-        .select(".domain")
-        .attr("display", "none");
+        xAxis = svg.append("g")
+                .attr("id", "xaxis")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + lastStockScale * height_num + ")")
+                .call(d3.axisBottom(globalXAxis).ticks(5))
+                .select(".domain")
+                .attr("display", "none");
     }
 
-    svg.append("g")
-    .attr("id", "yaxis")
-    .attr("class", "axis")
-    .attr("transform", "translate("+ startPoint * width_num +",0)")
-    .call(d3.axisLeft(y))
-    .select(".domain")
-    .attr("display", "none");
+    yAxis = svg.append("g")
+            .attr("id", "yaxis")
+            .attr("class", "axis")
+            .attr("transform", "translate("+ startPoint * width_num +",0)")
+            .call(d3.axisLeft(y))
+            .select(".domain")
+            .attr("display", "none");
 
     // create colormap for message numbers
     const colorMapMessages = d3.scaleLinear().domain([minMessageNum, maxMessageNum])
     .range([messageNumStartColor, messageNumEndColor]);
+
 
     // create bars
     const bars = svg.selectAll(".lob-row-g")
@@ -142,7 +148,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                         .attr("width", widthRectangle)
                         .attr("height", 1.2 * yScale * y.bandwidth())
                         .attr("transform", d => {
-                            let xPos = x(d.time) + offsetRectangles,
+                            let xPos = globalXAxis(d.time) + offsetRectangles,
                                 yPos = y(d.section);
 
                             return "translate(" + xPos + "," + yPos + ")"
@@ -156,7 +162,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                             let showTime = (Object.keys(allSvg).indexOf(tempName) + 1) === Object.keys(allSvg).length ? true : false ;
                             // first element
                             let isFirst = tempName === "Market_SPY" ? true : false ;
-                            drawHover(mainData, svg, x, y, showTime, isFirst);
+                            drawHover(mainData, svg, globalXAxis, y, showTime, isFirst);
 
                             for (let otherSvg in allSvg){
                                 // show time
@@ -165,20 +171,20 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                 let isFirst = otherSvg === "Market_SPY" ? true : false ;
 
                                 if (otherSvg !== tempName){
-                                    allSvg[otherSvg].selectAll("rect")
+                                    allSvg[otherSvg].selectAll(".lob-row-cell")
                                                     .filter((d) => {
                                                             return d.index === mainData.index;
                                                     })
                                                     .each((d) => {
-                                                        drawHover(d, allSvg[otherSvg], x, y, showTime, isFirst);
+                                                        drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst);
                                                     })
                                 } else{
-                                    allSvg[otherSvg].selectAll("rect")
+                                    allSvg[otherSvg].selectAll(".lob-row-cell")
                                                     .filter((d) => {
                                                             return (d.section !== mainData.section) && (d.index === mainData.index);
                                                     })
                                                     .each((d) => {
-                                                        drawHover(d, allSvg[otherSvg], x, y, showTime, isFirst);
+                                                        drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst);
                                                     })
                                 };
                             };
@@ -214,7 +220,7 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
             let index = values.indexOf(value);
             let time = element[key]["time"][index];
 
-            let xPos = 1+x(time);
+            let xPos = 1+globalXAxis(time);
             let yPos = 7 + y(key) - (y.bandwidth()/(4 * (maxVal - average))) * (value - average);
 
             paths[key].push([xPos, yPos]);
@@ -229,12 +235,132 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
         .attr("class", "lob-line")
         .attr("d", d => {return line(d)});
 
+
+
+    // zooming
+
+    let zoom = d3.zoom()
+    .scaleExtent([1, 40])  // This control how much you can unzoom (x1) and zoom (x40)
+    .extent([[startPoint*width_num, 0], [xScale * width_num, yScale * height_num]])
+    .translateExtent([[startPoint*width_num, 0], [xScale * width_num, yScale * height_num]])
+    .on("zoom", (event) => {
+        updateZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+                   offsetRectangles, lastStockScale, height_num, width_num, 
+                   colorMapMessages, xScale, startPoint, groups);
+    });
+
+    svg.append("rect")
+        .attr("id","zoomPlane")
+        .attr("width", xScale * width_num - startPoint*width_num)
+        .attr("height", yScale * height_num)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr("transform", "translate(" + startPoint*width_num + "," + 0 + ")")
+        .lower();
+
+
+    svg.call(zoom);
+
+
+
     
     // store svg beside all svgs
     handleLobSvg(tempName, svg);
 };
 
+// update zoom
+function updateZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles, 
+                    lastStockScale, height_num, width_num, colorMapMessages, 
+                    xScale, startPoint, groups){
 
+        // recover the new scale
+        let newX = event.transform.rescaleX(x);
+
+        globalXAxis = newX;
+
+        // var newY = event.transform.rescaleY(y);
+        for (let compName in allSvg){
+
+            let svg = allSvg[compName];
+
+            // draw new axis
+            let isLastStock = Object.keys(allSvg).length === 1+Object.keys(allSvg).indexOf(compName) ? true : false ;
+            lastStockScale = isLastStock ? 0.65 : 2;
+
+
+            if(isLastStock){
+
+                svg.select("#xaxis").remove();
+                xAxis = svg.append("g")
+                            .attr("id", "xaxis")
+                            .attr("class", "axis")
+                            .attr("transform", "translate(0," + lastStockScale * height_num + ")")
+                            .call(d3.axisBottom(newX).ticks(5))
+                            .select(".domain")
+                            .attr("display", "none");
+            };
+
+            // yAxis.call(d3.axisLeft(newY));
+
+            svg.selectAll(".lob-row-cell")
+                .attr("transform", d => {
+                    let xPos = newX(d.time) + offsetRectangles,
+                        yPos = y(d.section);
+
+                    return "translate(" + xPos + "," + yPos + ")"
+                })
+                .style("fill", d => {
+                    if (newX(d.time) > (xScale * width_num)  || newX(d.time) < (startPoint * width_num)){
+                        return "none";
+                    } else {
+                        return colorMapMessages(d.fillVal);
+                    }
+                })
+
+
+            // update line chart
+            svg.selectAll(".lob-line").remove();
+
+            svg.selectAll(".lob-row-g")
+               .append("path")
+               .attr("class", "lob-line")
+               .attr("d", d => {
+                   
+                   let key = Object.keys(d)[0],
+                   localData = d[key];
+                   let line = d3.line(),
+                        path = [],
+                        xPos,
+                        yPos,
+                        time,
+                        maxVal = d3.max(localData.value),
+                        average = d3.sum(localData.value) / localData.value.length;
+
+                   localData.value.map((val, index) => {
+                        time = localData.time[index];
+                        xPos = 1+newX(time);
+                        yPos = 7 + y(key) - (y.bandwidth()/(4 * (maxVal - average))) * (val - average);
+
+
+                        if (!(xPos > (xScale * width_num)  || xPos < (startPoint * width_num))){
+                            path.push(
+                                [xPos, yPos]
+                            );
+                        }
+                   });
+
+
+                   return line(path);
+                   
+
+
+               } )
+
+            };
+
+};
+
+// update hover
 function drawHover(mainData, svg, x, y, showTime, isFirst){
 
         // adjust hover text from the edge of the viz
