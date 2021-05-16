@@ -122,7 +122,6 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock, divTitle, 
    
       
   // add svg for tracking the records
-  console.log(allLiqSvg);
   handleLiqSvg(divTitle.split("--")[1], liqName, svg);
 };
 
