@@ -26,7 +26,11 @@ class Liq4company extends React.Component {
             date,
             data,
             this.props.zoomLevel,
-            this.props.isLastStock
+            this.props.isLastLiq,
+            this.props.title,
+            this.props.allSvg,
+            this.props.allLiqSvg,
+            this.props.handleLiqSvg
         );
     }
 
@@ -49,7 +53,11 @@ class Liq4company extends React.Component {
             date,
             data,
             this.props.zoomLevel,
-            this.props.isLastStock
+            this.props.isLastLiq,
+            this.props.title,
+            this.props.allSvg,
+            this.props.allLiqSvg,
+            this.props.handleLiqSvg
         );
 
         // add zoom here
@@ -59,7 +67,7 @@ class Liq4company extends React.Component {
     render() {
         return(
 
-            <div id={"drawLiquidity-"+this.props.title.replace(" ", "") + this.props.divNum} className="liq4company" ref={this.canvas}>
+            <div id={"drawLiquidity-"+this.props.title.split("--")[1] + this.props.divNum} className="liq4company" ref={this.canvas}>
             </div>
 
         );

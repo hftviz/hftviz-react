@@ -17,19 +17,25 @@ class Liquidity extends React.Component {
     render() {
         let liq4company = [];
 
-        this.props.stocks.forEach(stock => {
-            let isLastStock = this.props.stocks.indexOf(stock) === (this.props.stocks.length - 1) ? true : false;
+        // in production, we'll remove this and use real data liquidity
+        let liqName = ["Effective Spread", "Realized Spread", "Price Impact"];
+
+        liqName.forEach(liq => {
+            let isLastLiq = liqName.indexOf(liq) === (liqName.length - 1) ? true : false;
             liq4company.push(
                 <Liq4company 
-                    key={stock}
-                    name={stock}
+                    key={liq}
+                    name={liq}
                     dateTime={this.props.dateTime} 
                     zoomLevel={this.props.zoomLevel}
                     data = {this.props.data}
-                    liqNum = {this.props.title}
-                    divNum = {this.props.stocks.indexOf(stock)}
-                    isLastStock = {isLastStock}
-                    title = {this.props.title}
+                    divNum = {liqName.indexOf(liq)}
+                    isLastLiq = {isLastLiq}
+                    title = {this.props.name}
+                    allSvg = {this.props.allSvg}
+                    allLiqSvg = {this.props.allLiqSvg}
+                    handleLobSvg = {this.props.handleLobSvg}
+                    handleLiqSvg = {this.props.handleLiqSvg}
                 />
             );
         });
@@ -38,8 +44,8 @@ class Liquidity extends React.Component {
 
         return(
 
-            <div id={this.props.title} className="liquidity">
-                <div className="liqTitle"> {this.props.title} </div>
+            <div id={this.props.name.split("--")[1]} className="liquidity">
+                <div className="liqTitle"> {this.props.name.split("--")[1]} </div>
                 {liq4company}
             </div>
 

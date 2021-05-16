@@ -4,6 +4,7 @@ import Lob from "./Lob";
 import levels from './levels.js';
 import LobLegend from './LobLegend';
 import Liquidity from './Liquidity';
+import { timeThursday } from 'd3-time';
 
 class Details extends React.Component {
     constructor(props){
@@ -14,15 +15,26 @@ class Details extends React.Component {
 
         // all SVGs
         this.lobSvg = {};
+        this.liqSvg = {};
 
         // bind handlers
         this.handleZoomChange = this.handleZoomChange.bind(this);
         this.handleLobSvg = this.handleLobSvg.bind(this);
+        this.handleLiqSvg = this.handleLiqSvg.bind(this);
     }
 
 
     handleLobSvg(name, svg){
         this.lobSvg[name] = svg;
+    };
+
+    handleLiqSvg(compName, liqName, svg){
+
+        if (compName in this.liqSvg){
+            this.liqSvg[compName].push([liqName, svg]);
+        } else {
+            this.liqSvg[compName] = [[liqName, svg]];
+        }
     };
 
     // THIS IS NOT COMPLETED YET
@@ -41,7 +53,8 @@ class Details extends React.Component {
 
 
     render() {
-        let lobs = [];
+        let lobs = [],
+            liqs = [];
 
         // filter the level data based on zoomLevel. Now is for zoom == 1.
         let level;
@@ -51,6 +64,7 @@ class Details extends React.Component {
             // make copy from source
             level = JSON.parse(JSON.stringify(source));
         };
+        // here we will add liquidities data for each stock
 
         // calculating min and max of messageNum for all data
         let maxMessageNum = 0,
@@ -78,6 +92,7 @@ class Details extends React.Component {
         for (let svgComp in this.lobSvg){
             if (!(svgComp in addedMarket)){
                 delete this.lobSvg[svgComp];
+                delete this.liqSvg[svgComp];
             };
         };
 
@@ -95,12 +110,32 @@ class Details extends React.Component {
                     maxMessageNum = {maxMessageNum}
                     isLastStock = {isLastStock}
                     allSvg = {this.lobSvg}
+                    allLiqSvg = {this.LiqSvg}
                     handleLobSvg = {this.handleLobSvg}
+                    handleLiqSvg = {this.handleLiqSvg}
+                />
+            );
+
+
+            liqs.push(
+                // we change the data in production
+                <Liquidity 
+                    key={stock} 
+                    name={stock} 
+                    dateTime={this.props.dateTime} 
+                    zoomLevel={this.state.zoomLevel}
+                    data = {level.bid}
+                    isLastStock = {isLastStock}
+                    allSvg = {this.lobSvg}
+                    allLiqSvg = {this.liqSvg}
+                    handleLobSvg = {this.handleLobSvg}
+                    handleLiqSvg = {this.handleLiqSvg}
                 />
             );
 
             let stockSymbol = stock.split("--")[1];
             this.lobSvg[stockSymbol] = "";
+            this.liqSvg[stockSymbol] = [];
         });
 
 
@@ -119,30 +154,8 @@ class Details extends React.Component {
                 </div>
                 <div id="metrics">
                     {/* the data will be replaced by liquidity data later */}
-                    <Liquidity  
-                                title="Effective Spread"
-                                key="L1" 
-                                stocks={addedMarket} 
-                                dateTime={this.props.dateTime} 
-                                zoomLevel={this.state.zoomLevel}
-                                data = {level.ask}
-                    />
-                    <Liquidity  
-                                title="Realized Spread"
-                                key="L2" 
-                                stocks={addedMarket} 
-                                dateTime={this.props.dateTime} 
-                                zoomLevel={this.state.zoomLevel}
-                                data = {level.ask}
-                    />
-                    <Liquidity  
-                                title="Price Impact"
-                                key="L3" 
-                                stocks={addedMarket} 
-                                dateTime={this.props.dateTime} 
-                                zoomLevel={this.state.zoomLevel}
-                                data = {level.ask}
-                    />
+                    <div className="title">Liquidity</div>
+                    {liqs} 
                 </div>
             </div>
 

@@ -1,15 +1,14 @@
 import * as d3 from 'd3';
 
 
-function drawLiq(container, name, date, data, zoomLevel, isLastStock){
-    
+function drawLiq(container, name, date, data, zoomLevel, isLastStock, divTitle, allSvg, allLiqSvg, handleLiqSvg){
     let names = name.split("//"); 
-    let tempName = names[1].split("--")[1];// in production, Use name instead of tempName
+    let liqName = names[1];// in production, Use name instead of liqName
     let symbol = names[0].split('--')[1]; // extract symbol
 
     // extract the size of the division
-    let division = document.getElementById("Effective Spread");
-    const heightNum = (0.98) * (1/6) * division.clientHeight,
+    let division = document.getElementById(divTitle.split("--")[1]);
+    const heightNum = (1/3) * division.clientHeight,
         widthNum = division.clientWidth,
         yAxisStartPoint= 0.055,
         xAxisStartPoint=0.028,
@@ -43,7 +42,7 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
             .range([0, widthNum]);
     let y = d3.scaleBand()
             .range([heightNum, 0])
-            .domain([tempName]);
+            .domain([liqName]);
 
 
 
@@ -74,7 +73,7 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
     
     // create area charts
     let bandSize = y.bandwidth(),
-        pivot = y(tempName);
+        pivot = y(liqName);
     svg.append("path")
         .datum(localData["time"])
         .attr("stroke", "#e6e6e6")
@@ -87,14 +86,16 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
                     }))
         .style("fill", "url(#liqGradient)");
 
-    // assemble axis
-    svg.append("g")
-    .attr("id", "xaxis")
-    .attr("class", "axis")
-    .attr("transform", "translate("+ 0 +"," +  lastStockScale * heightNum + ")")
-    .call(d3.axisBottom(x).ticks(5))
-    .select(".domain")
-    .attr("display", "none");
+    if(isLastStock){
+      // assemble axis
+      svg.append("g")
+      .attr("id", "xaxis")
+      .attr("class", "axis")
+      .attr("transform", "translate("+ 0 +"," +  lastStockScale * heightNum + ")")
+      .call(d3.axisBottom(x).ticks(5))
+      .select(".domain")
+      .attr("display", "none");
+    }
 
     svg.append("g")
         .attr("id", "yaxis")
@@ -103,10 +104,26 @@ function drawLiq(container, name, date, data, zoomLevel, isLastStock){
         .call(d3.axisLeft(y))
         .select(".domain")
         .attr("display", "none");
+
+
+    // add circles  for hovering in the area chart
+    svg.selectAll(".liqPoint")
+       .data(localData["time"])
+       .enter()
+       .append("circle")
+       .attr("class", "liqPoint")
+       .attr("cx", d => {return x(d)})
+       .attr("cy", d => {return syntData[localData["time"].indexOf(d)]})
+       .attr("r", "1")
+       .style("fill", "none")
                             
 
     
-        
+   
+      
+  // add svg for tracking the records
+  console.log(allLiqSvg);
+  handleLiqSvg(divTitle.split("--")[1], liqName, svg);
 };
 
 

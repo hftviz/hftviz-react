@@ -35,7 +35,9 @@ class Lob extends React.Component {
             this.props.maxMessageNum,
             this.props.isLastStock,
             this.props.allSvg,
-            this.props.handleLobSvg
+            this.props.allLiqSvg,
+            this.props.handleLobSvg,
+            this.props.handleLiqSvg
         );
     }
 
@@ -64,7 +66,9 @@ class Lob extends React.Component {
             this.props.maxMessageNum,
             this.props.isLastStock,
             this.props.allSvg,
-            this.props.handleLobSvg
+            this.props.allLiqSvg,
+            this.props.handleLobSvg,
+            this.props.handleLiqSvg
         );
 
         // add zoom and pan here
