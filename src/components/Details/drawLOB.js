@@ -202,41 +202,28 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                 };
                             };
 
-                            // // liquidity SVGs
-                            // for (let otherLiqSvg in allLiqSvg){
-                            //     // show time
-                            //     let showTime = (Object.keys(allLiqSvg).indexOf(otherLiqSvg) + 1) === Object.keys(allLiqSvg).length ? true : false ;
-                            //     // first element
-                            //     let isFirst = otherLiqSvg === "Market_SPY" ? true : false ;
+                            // liquidity SVGs
+                            for (let otherLiqSvg in allLiqSvg){
+                                // show time
+                                let showTime = (Object.keys(allLiqSvg).indexOf(otherLiqSvg) + 1) === Object.keys(allLiqSvg).length ? true : false ;
+                                // first element
+                                let isFirst = otherLiqSvg === "Market_SPY" ? true : false ;
 
-                            //     if (otherSvg !== tempName){
-                            //         allSvg[otherSvg].selectAll(".lob-row-cell")
-                            //                         .filter((d) => {
-                            //                                 return d.index === mainData.index;
-                            //                         })
-                            //                         .each((d) => {
-                            //                             if(d.time - mainData.time === 0){
-                            //                                 drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, true, showTimeValue);
-                            //                             }else{
-                            //                                 drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, false, showTimeValue);
-                            //                             }
-                                                        
-                            //                         })
-                            //     } else{
-                            //         allSvg[otherSvg].selectAll(".lob-row-cell")
-                            //                         .filter((d) => {
-                            //                                 return (d.section !== mainData.section) && (d.index === mainData.index);
-                            //                         })
-                            //                         .each((d) => {
-                            //                             if(d.time - mainData.time === 0){
-                                                            
-                            //                                 drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, true, showTimeValue);
-                            //                             }else{
-                            //                                 drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, false, showTimeValue);
-                            //                             }
-                            //                         })
-                            //     };
-                            // };
+                                // draw general line
+                                let adjustLine = isFirst? "0%":"-50%";
+
+
+                                allLiqSvg[otherLiqSvg].selectAll(".liqRow")
+                                    .each((d) => {
+                                        d.forEach(datum => {
+                                            if(datum.time - mainData.time === 0){
+                                                drawLiqHover(datum, allLiqSvg[otherLiqSvg], showTime, isFirst, isLastStock, true, mainData.time);
+                                            }else{
+                                                drawLiqHover(datum, allLiqSvg[otherLiqSvg], showTime, isFirst, isLastStock, false, mainData.time);
+                                            }
+                                        });
+                                    });
+                            };
 
 
 
@@ -473,6 +460,56 @@ function drawHover(mainData, svg, x, y, showTime, isFirst, hasText=false, showTi
                 return text;
                 });
         };
+};
+
+// hover on liquidity
+function drawLiqHover(d, svg, showTime, isFirst, isLastStock, hasText=false, showTimeValue){
+
+    // adjust hover text from the edge of the viz
+    let adjustLine = isFirst? "10%":"-50%",
+        yOffset = 15;
+
+    // adjust hover line start point
+
+    svg.append("line")
+    .attr("x1", d.xAxis(showTimeValue))
+    .attr("y1", adjustLine)
+    .attr("x2", d.xAxis(showTimeValue))
+    .attr("y2", "150%")
+    .attr("class", "hoverlabel")
+    .attr("stroke", "black")
+
+    if(hasText){
+        // Specify where to put label of text
+        svg.append("text")
+        .attr("class", "hoverlabel") // Create an id for text so we can select it later for removing on mouseout
+        .attr("x", d.xAxis(showTimeValue) + 5)
+        .attr("y", yOffset + d.yAxis(d.type))
+        .style("font-size", "0.8vw")
+        .text(function(){
+            return "Value: " + d.yValue.toPrecision(3);
+        });
+    }
+
+
+
+    if(showTime && d.type === "Effective Spread" && d.index === 1 ){
+
+        // format the time 
+        let format = d3.timeFormat("%H:%M:%S.%L"),
+        time = format(showTimeValue);
+
+
+        svg.append("text")
+        .attr("class", "hoverlabel")  // Create an id for text so we can select it later for removing on mouseout
+        .attr("x", d.xAxis(showTimeValue) + 5)
+        .attr("y", "100%")
+        .style("font-size", "0.6vw")
+        .text(function() {
+            let text = "" + time;  // Value of the text
+            return text;
+            });
+    };
 };
 
 

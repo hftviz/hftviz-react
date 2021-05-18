@@ -4,7 +4,6 @@ import Lob from "./Lob";
 import levels from './levels.js';
 import LobLegend from './LobLegend';
 import Liquidity from './Liquidity';
-import { timeThursday } from 'd3-time';
 
 class Details extends React.Component {
     constructor(props){
@@ -28,13 +27,8 @@ class Details extends React.Component {
         this.lobSvg[name] = svg;
     };
 
-    handleLiqSvg(compName, liqName, svg){
-
-        if (compName in this.liqSvg){
-            this.liqSvg[compName].push([liqName, svg]);
-        } else {
-            this.liqSvg[compName] = [[liqName, svg]];
-        }
+    handleLiqSvg(compName, svg){
+            this.liqSvg[compName] = svg;
     };
 
     // THIS IS NOT COMPLETED YET
@@ -110,7 +104,7 @@ class Details extends React.Component {
                     maxMessageNum = {maxMessageNum}
                     isLastStock = {isLastStock}
                     allSvg = {this.lobSvg}
-                    allLiqSvg = {this.LiqSvg}
+                    allLiqSvg = {this.liqSvg}
                     handleLobSvg = {this.handleLobSvg}
                     handleLiqSvg = {this.handleLiqSvg}
                 />
@@ -135,7 +129,7 @@ class Details extends React.Component {
 
             let stockSymbol = stock.split("--")[1];
             this.lobSvg[stockSymbol] = "";
-            this.liqSvg[stockSymbol] = [];
+            this.liqSvg[stockSymbol] = "";
         });
 
 

@@ -22,15 +22,16 @@ class Liq4company extends React.Component {
 
         drawLiq(
             this.canvas.current.id,
-            name + "//" + this.props.name,
+            name + "//" + this.props.name, // in production, you can change name var with "this.props.name"
             date,
             data,
             this.props.zoomLevel,
-            this.props.isLastLiq,
             this.props.title,
             this.props.allSvg,
             this.props.allLiqSvg,
-            this.props.handleLiqSvg
+            this.props.handleLiqSvg,
+            this.props.isLastStock,
+            this.props.liqNames
         );
     }
 
@@ -49,15 +50,16 @@ class Liq4company extends React.Component {
 
         drawLiq(
             this.canvas.current.id,
-            name + "//" + this.props.name,
+            name + "//" + this.props.name, // in production, you can change name var with "this.props.name"
             date,
             data,
             this.props.zoomLevel,
-            this.props.isLastLiq,
             this.props.title,
             this.props.allSvg,
             this.props.allLiqSvg,
-            this.props.handleLiqSvg
+            this.props.handleLiqSvg,
+            this.props.isLastStock,
+            this.props.liqNames
         );
 
         // add zoom here
@@ -67,7 +69,7 @@ class Liq4company extends React.Component {
     render() {
         return(
 
-            <div id={"drawLiquidity-"+this.props.title.split("--")[1] + this.props.divNum} className="liq4company" ref={this.canvas}>
+            <div id={"drawLiquidity-"+this.props.title.split("--")[1]} className="liq4company" ref={this.canvas}>
             </div>
 
         );

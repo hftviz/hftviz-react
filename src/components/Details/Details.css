@@ -21,16 +21,6 @@
     border-radius: 5px;
 }
 
-.liqTitle {
-    height: 2%;
-    width: 100%;
-    font-size: 0.8vw;
-    font-family: Oswald;
-    text-align: center;
-    display: inline-block;
-    margin-bottom: 2%;
-}
-
 .lob-svg{
     height: 100%;
     width: 100%;
@@ -59,25 +49,34 @@
 }
 
 .liquidity{
-    margin-top: 1%;
-    height: 14%;
+    height: 15%;
     width: 100%;
     font-size: 0.8vw;
     font-family: Oswald;
 }
 
 .liq4company{
-    height: 30%;
+    height: 100%;
     width: 100%;
     text-align: center;
 }
 
 .liq-svg{
-    height: 90%;
+    height: 100%;
     width: 100%;
     display: block;
     position: relative;
 }
+
+.liqRow{
+    height: 10%;
+    width: 100%;
+    display: block;
+}
+
+.tick line{
+    visibility:hidden;
+  }
 
 
 #details{
