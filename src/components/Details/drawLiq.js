@@ -150,7 +150,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
     .attr("y", "5%")
     .attr("text-anchor", "middle") 
     .style("margin-bottom", "1%")
-    .style("font-size", "0.8vw")  
+    .style("font-size", "0.7vw")  
     .text(realCompName);
    
       
