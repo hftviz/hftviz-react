@@ -285,6 +285,8 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
         updateZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
                    offsetRectangles, lastStockScale, height_num, width_num, 
                    colorMapMessages, xScale, startPoint, groups);
+
+        updateLiqZoom(event, globalXAxis, allLiqSvg);
     });
 
     svg.append("rect")
@@ -396,6 +398,64 @@ function updateZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
 
             };
 
+};
+
+// zoom on liquidity
+function updateLiqZoom(event, xAxis, allLiqSvg){
+        // find the number of stocks to put the xAxis in the position.
+        let division = document.getElementById("metrics"),
+        heightNum = division.clientHeight,
+        widthNum = division.clientWidth,
+        xPositionCoeff =  0.145;
+
+        // recover the new scale
+        let newX = event.transform.rescaleX(xAxis);
+
+        // set the range of xAxis
+        newX.range([0, widthNum]);
+
+        // update all LiqSVG
+        for (let compName in allLiqSvg){
+
+            let svg = allLiqSvg[compName];
+
+            // draw new axis
+            let isLastStock = Object.keys(allLiqSvg).length === 1+Object.keys(allLiqSvg).indexOf(compName) ? true : false ;
+
+            if(isLastStock){
+
+                svg.select("#xaxis").remove();
+
+                // assemble axis
+                svg.append("g")
+                .attr("id", "xaxis")
+                .attr("class", "axis")
+                .attr("transform", "translate("+ 0 +"," + xPositionCoeff * heightNum + ")")
+                .call(d3.axisBottom(newX).ticks(5))
+                .select(".domain")
+                .attr("display", "none");
+            }
+
+            // update area chart
+            let area = d3.area()
+                            .x(d => {return newX(d.time);})
+                            .y0(d => {return 0.5 * d.yAxis.bandwidth()})
+                            .y1(d => {
+                                return d.yValue;
+                            });
+            svg.selectAll(".liqPath").remove();
+
+            svg.selectAll(".liqRow")
+               .append("path")
+               .datum(d =>{return d})
+               .attr("class", "liqPath")
+               .attr("stroke", "#e6e6e6")
+               .attr("stroke-width", 0.5)
+               .attr("d", d => {return area(d)})
+               .style("fill", "url(#liqGradient)");
+
+
+        }
 };
 
 // update hover

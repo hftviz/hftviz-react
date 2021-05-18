@@ -33,7 +33,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
     .append('svg')
     .attr('id', symbol+'--svg')
     .attr('class', 'liq-svg')
-    .attr("viewBox", `0 0 ${widthNum} ${0.180*heightNum}`)
+    .attr("viewBox", `0 0 ${widthNum} ${0.185*heightNum}`)
     .append("g");
 
     // define axis
@@ -102,6 +102,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
       .attr("y", d => {return (yOffset + ((2-liqNames.indexOf(d[0].type))) * bandSize)})
       .append("path")
         .datum(makeUpData)
+        .attr("class", "liqPath")
         .attr("stroke", "#e6e6e6")
         .attr("stroke-width", 0.5)
         .attr("d", d3.area()
@@ -149,7 +150,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
     .attr("y", "5%")
     .attr("text-anchor", "middle") 
     .style("margin-bottom", "1%")
-    .style("font-size", "0.6vw")  
+    .style("font-size", "0.8vw")  
     .text(realCompName);
    
       
