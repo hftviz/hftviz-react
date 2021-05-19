@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hftviz-react/static/css/main.a9c0e9be.chunk.css",
-    "main.js": "/hftviz-react/static/js/main.bbbc4651.chunk.js",
-    "main.js.map": "/hftviz-react/static/js/main.bbbc4651.chunk.js.map",
+    "main.js": "/hftviz-react/static/js/main.8039ca7b.chunk.js",
+    "main.js.map": "/hftviz-react/static/js/main.8039ca7b.chunk.js.map",
     "runtime-main.js": "/hftviz-react/static/js/runtime-main.7dc130de.js",
     "runtime-main.js.map": "/hftviz-react/static/js/runtime-main.7dc130de.js.map",
     "static/js/2.c4a50831.chunk.js": "/hftviz-react/static/js/2.c4a50831.chunk.js",
@@ -14,6 +14,7 @@
     "static/js/2.c4a50831.chunk.js.LICENSE.txt": "/hftviz-react/static/js/2.c4a50831.chunk.js.LICENSE.txt",
     "static/media/about-us-icon.b7dd11e5.png": "/hftviz-react/static/media/about-us-icon.b7dd11e5.png",
     "static/media/corrwithMarket.8a1310df.png": "/hftviz-react/static/media/corrwithMarket.8a1310df.png",
+    "static/media/description-details.0fc9b7ad.png": "/hftviz-react/static/media/description-details.0fc9b7ad.png",
     "static/media/description-overview.8a0e212d.png": "/hftviz-react/static/media/description-overview.8a0e212d.png",
     "static/media/help-icon.864bc9d6.png": "/hftviz-react/static/media/help-icon.864bc9d6.png",
     "static/media/interval.d290a921.png": "/hftviz-react/static/media/interval.d290a921.png",
@@ -28,6 +29,6 @@
     "static/js/runtime-main.7dc130de.js",
     "static/js/2.c4a50831.chunk.js",
     "static/css/main.a9c0e9be.chunk.css",
-    "static/js/main.bbbc4651.chunk.js"
+    "static/js/main.8039ca7b.chunk.js"
   ]
 }
