@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
 
-
+// general axis
 let globalXAxis;
+
 
 function drawLOB(container, date, name, volumeData, bidData, askData, cancelData, minMessageNum, maxMessageNum, isLastStock, allSvg, allLiqSvg, handleLobSvg, handleLiqSvg){
 
@@ -341,8 +342,12 @@ function updateZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
             };
 
             // yAxis.call(d3.axisLeft(newY));
+            // just for level 1 and test
+            // let rectNum = 0.1 + Math.floor(100 * (newX.domain()[1] - newX.domain()[0]) / (x.domain()[1] - x.domain()[0])),
+            //     rectWidth = width_num / rectNum;
 
             svg.selectAll(".lob-row-cell")
+                // .attr("width", rectWidth)
                 .attr("transform", d => {
                     let xPos = newX(d.time) + offsetRectangles,
                         yPos = y(d.section);

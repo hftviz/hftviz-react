@@ -3,6 +3,7 @@ import Popup from './Popup';
 import SlideShow from './SlideShow';
 import helpIcon from '../../pics/help-icon.png';
 import overvieDesc from "../../pics/description-overview.png";
+import detailsDesc from "../../pics/description-details.png";
 
 class ReadMe extends React.Component {
     constructor(props){
@@ -27,6 +28,12 @@ class ReadMe extends React.Component {
           <img src={overvieDesc} alt="overview-desc-icon" className="img"/>
           <br/><br/>For more details, please click on the help icon.
           </div>;
+      } 
+      if (this.props.vizType === "details") {
+        pics = <div id="readMe-description">
+              <img src={detailsDesc} alt="details-desc-icon" className="img"/>
+              <br/><br/>For more details, please click on the help icon.
+              </div>;
       }
 
       return (
