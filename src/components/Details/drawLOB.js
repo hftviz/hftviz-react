@@ -164,8 +164,22 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                 showTimeValue = mainData.time;
 
                             // first element
-                            let isFirst = tempName === "Market_SPY" ? true : false ;
-                            drawHover(mainData, svg, globalXAxis, y, showTime, isFirst, true, showTimeValue);
+                            let isFirst = tempName === "Market_SPY" ? true : false ,
+                                hoverPack = {
+                                    mainData: mainData,
+                                    svg: svg,
+                                    y: y,
+                                    showTime: showTime,
+                                    isFirst: isFirst,
+                                    hasText: true,
+                                    showTimeValue: showTimeValue
+                                };
+
+
+                            updateHoverZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+                                offsetRectangles, lastStockScale, height_num, width_num, 
+                                colorMapMessages, xScale, startPoint, true, hoverPack);
+                            // drawHover(mainData, svg, globalXAxis, y, showTime, isFirst, true, showTimeValue);
 
                             // lob SVGs
                             for (let otherSvg in allSvg){
@@ -181,9 +195,33 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                                     })
                                                     .each((d) => {
                                                         if(d.time - mainData.time === 0){
-                                                            drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, true, showTimeValue);
+                                                            hoverPack = {
+                                                                mainData: d,
+                                                                svg: allSvg[otherSvg],
+                                                                y: y,
+                                                                showTime: showTime,
+                                                                isFirst: isFirst,
+                                                                hasText: true,
+                                                                showTimeValue: showTimeValue
+                                                            };
+                                                            updateHoverZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+                                                                offsetRectangles, lastStockScale, height_num, width_num, 
+                                                                colorMapMessages, xScale, startPoint, true, hoverPack);
+                                                            // drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, true, showTimeValue);
                                                         }else{
-                                                            drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, false, showTimeValue);
+                                                            hoverPack = {
+                                                                mainData: d,
+                                                                svg: allSvg[otherSvg],
+                                                                y: y,
+                                                                showTime: showTime,
+                                                                isFirst: isFirst,
+                                                                hasText: false,
+                                                                showTimeValue: showTimeValue
+                                                            };
+                                                            updateHoverZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+                                                                offsetRectangles, lastStockScale, height_num, width_num, 
+                                                                colorMapMessages, xScale, startPoint, true, hoverPack);
+                                                            // drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, false, showTimeValue);
                                                         }
                                                         
                                                     })
@@ -194,10 +232,33 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                                     })
                                                     .each((d) => {
                                                         if(d.time - mainData.time === 0){
-                                                            
-                                                            drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, true, showTimeValue);
+                                                            hoverPack = {
+                                                                mainData: d,
+                                                                svg: allSvg[otherSvg],
+                                                                y: y,
+                                                                showTime: showTime,
+                                                                isFirst: isFirst,
+                                                                hasText: true,
+                                                                showTimeValue: showTimeValue
+                                                            };
+                                                            updateHoverZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+                                                                offsetRectangles, lastStockScale, height_num, width_num, 
+                                                                colorMapMessages, xScale, startPoint, true, hoverPack);
+                                                            // drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, true, showTimeValue);
                                                         }else{
-                                                            drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, false, showTimeValue);
+                                                            hoverPack = {
+                                                                mainData: d,
+                                                                svg: allSvg[otherSvg],
+                                                                y: y,
+                                                                showTime: showTime,
+                                                                isFirst: isFirst,
+                                                                hasText: false,
+                                                                showTimeValue: showTimeValue
+                                                            };
+                                                            updateHoverZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+                                                                offsetRectangles, lastStockScale, height_num, width_num, 
+                                                                colorMapMessages, xScale, startPoint, true, hoverPack);
+                                                            // drawHover(d, allSvg[otherSvg], globalXAxis, y, showTime, isFirst, false, showTimeValue);
                                                         }
                                                     })
                                 };
@@ -283,9 +344,9 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     .extent([[startPoint*width_num, 0], [xScale * width_num, yScale * height_num]])
     .translateExtent([[startPoint*width_num, 0], [xScale * width_num, yScale * height_num]])
     .on("zoom", (event) => {
-        updateZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
+        updateHoverZoom(event, globalXAxis, y, allSvg, xAxis, yAxis, 
                    offsetRectangles, lastStockScale, height_num, width_num, 
-                   colorMapMessages, xScale, startPoint, groups);
+                   colorMapMessages, xScale, startPoint);
 
         updateLiqZoom(event, globalXAxis, allLiqSvg);
     });
@@ -309,98 +370,194 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     handleLobSvg(tempName, svg);
 };
 
+// put flag for controlling zoom
+let isStart = true,
+    modalX;
+
 // update zoom
-function updateZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles, 
+function updateHoverZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles, 
                     lastStockScale, height_num, width_num, colorMapMessages, 
-                    xScale, startPoint, groups){
+                    xScale, startPoint, isHover = false, hoverPack = {
+                        mainData: "",
+                        svg: "",
+                        y: "",
+                        showTime: "",
+                        isFirst: "",
+                        hasText: "",
+                        showTimeValue: ""
+                    }){
 
-        // recover the new scale
-        let newX = event.transform.rescaleX(x);
+            if(isStart){
+                modalX = x;
+            }
 
-        globalXAxis = newX;
+            if (!isHover){
 
-        // var newY = event.transform.rescaleY(y);
-        for (let compName in allSvg){
+                // recover the new scale
+                let newX = event.transform.rescaleX(x);
+                isStart = false;
 
-            let svg = allSvg[compName];
+                modalX = newX;
 
-            // draw new axis
-            let isLastStock = Object.keys(allSvg).length === 1+Object.keys(allSvg).indexOf(compName) ? true : false ;
-            lastStockScale = isLastStock ? 0.65 : 2;
+                // var newY = event.transform.rescaleY(y);
+                for (let compName in allSvg){
+
+                    let svg = allSvg[compName];
+
+                    // draw new axis
+                    let isLastStock = Object.keys(allSvg).length === 1+Object.keys(allSvg).indexOf(compName) ? true : false ;
+                    lastStockScale = isLastStock ? 0.65 : 2;
 
 
-            if(isLastStock){
+                    if(isLastStock){
 
-                svg.select("#xaxis").remove();
-                xAxis = svg.append("g")
-                            .attr("id", "xaxis")
-                            .attr("class", "axis")
-                            .attr("transform", "translate(0," + lastStockScale * height_num + ")")
-                            .call(d3.axisBottom(newX).ticks(5))
-                            .select(".domain")
-                            .attr("display", "none");
+                        svg.select("#xaxis").remove();
+                        xAxis = svg.append("g")
+                                    .attr("id", "xaxis")
+                                    .attr("class", "axis")
+                                    .attr("transform", "translate(0," + lastStockScale * height_num + ")")
+                                    .call(d3.axisBottom(newX).ticks(5))
+                                    .select(".domain")
+                                    .attr("display", "none");
+                    };
+
+                    // yAxis.call(d3.axisLeft(newY));
+                    // just for level 1 and test
+                    // let rectNum = 0.1 + Math.floor(100 * (newX.domain()[1] - newX.domain()[0]) / (x.domain()[1] - x.domain()[0])),
+                    //     rectWidth = width_num / rectNum;
+
+                    svg.selectAll(".lob-row-cell")
+                        // .attr("width", rectWidth)
+                        .attr("transform", d => {
+                            let xPos = newX(d.time) + offsetRectangles,
+                                yPos = y(d.section);
+
+                            return "translate(" + xPos + "," + yPos + ")"
+                        })
+                        .style("fill", d => {
+                            if (newX(d.time) > (xScale * width_num)  || newX(d.time) < (startPoint * width_num)){
+                                return "none";
+                            } else {
+                                return colorMapMessages(d.fillVal);
+                            }
+                        })
+
+
+                    // update line chart
+                    svg.selectAll(".lob-line").remove();
+
+                    svg.selectAll(".lob-row-g")
+                    .append("path")
+                    .attr("class", "lob-line")
+                    .attr("d", d => {
+                        
+                        let key = Object.keys(d)[0],
+                        localData = d[key];
+                        let line = d3.line(),
+                                path = [],
+                                xPos,
+                                yPos,
+                                time,
+                                maxVal = d3.max(localData.value),
+                                average = d3.sum(localData.value) / localData.value.length;
+
+                        localData.value.map((val, index) => {
+                                time = localData.time[index];
+                                xPos = 1+newX(time);
+                                yPos = 7 + y(key) - (y.bandwidth()/(4 * (maxVal - average))) * (val - average);
+
+
+                                if (!(xPos > (xScale * width_num)  || xPos < (startPoint * width_num))){
+                                    path.push(
+                                        [xPos, yPos]
+                                    );
+                                }
+                        });
+
+
+                        return line(path);
+                        
+
+
+                    } )
+
+                    };
             };
 
-            // yAxis.call(d3.axisLeft(newY));
-            // just for level 1 and test
-            // let rectNum = 0.1 + Math.floor(100 * (newX.domain()[1] - newX.domain()[0]) / (x.domain()[1] - x.domain()[0])),
-            //     rectWidth = width_num / rectNum;
+            // if there is hover, the function will run
+            if (isHover){
+                let mainData = hoverPack.mainData,
+                svg = hoverPack.svg,
+                y = hoverPack.y,
+                showTime = hoverPack.showTime,
+                isFirst = hoverPack.isFirst,
+                hasText = hoverPack.hasText,
+                showTimeValue = hoverPack.showTimeValue;
+                drawHover(mainData, svg, modalX, y, showTime, isFirst, hasText, showTimeValue);
+            };
 
-            svg.selectAll(".lob-row-cell")
-                // .attr("width", rectWidth)
-                .attr("transform", d => {
-                    let xPos = newX(d.time) + offsetRectangles,
-                        yPos = y(d.section);
+            // update hover
+            function drawHover(mainData, svg, x, y, showTime, isFirst, hasText=false, showTimeValue){
 
-                    return "translate(" + xPos + "," + yPos + ")"
-                })
-                .style("fill", d => {
-                    if (newX(d.time) > (xScale * width_num)  || newX(d.time) < (startPoint * width_num)){
-                        return "none";
-                    } else {
-                        return colorMapMessages(d.fillVal);
-                    }
-                })
+                // adjust hover text from the edge of the viz
+                let adjustScale = (mainData.index > 80) ? 0.8 : 1.04;
+                // adjust hover line start point
+                let adjustLine = isFirst ? "0%":"-20%";
 
+                svg.append("line")
+                .attr("x1", x(showTimeValue))
+                .attr("y1", adjustLine)
+                .attr("x2", x(showTimeValue))
+                .attr("y2", "120%")
+                .attr("class", "hoverlabel")
+                .attr("stroke", "black")
 
-            // update line chart
-            svg.selectAll(".lob-line").remove();
-
-            svg.selectAll(".lob-row-g")
-               .append("path")
-               .attr("class", "lob-line")
-               .attr("d", d => {
-                   
-                   let key = Object.keys(d)[0],
-                   localData = d[key];
-                   let line = d3.line(),
-                        path = [],
-                        xPos,
-                        yPos,
-                        time,
-                        maxVal = d3.max(localData.value),
-                        average = d3.sum(localData.value) / localData.value.length;
-
-                   localData.value.map((val, index) => {
-                        time = localData.time[index];
-                        xPos = 1+newX(time);
-                        yPos = 7 + y(key) - (y.bandwidth()/(4 * (maxVal - average))) * (val - average);
-
-
-                        if (!(xPos > (xScale * width_num)  || xPos < (startPoint * width_num))){
-                            path.push(
-                                [xPos, yPos]
-                            );
-                        }
-                   });
-
-
-                   return line(path);
-                   
+                if(hasText){
+                    // Specify where to put label of text
+                    svg.append("text")
+                    .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
+                    .attr("class", "hoverlabel")
+                    .attr("x", function() { return adjustScale * x(showTimeValue) })
+                    .attr("y", function() { return y(mainData.section) })
+                    .attr("dy", "0.4vw")
+                    .style("font-size", "0.5vw")
+                    .text(function() {
+                        let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
+                        return text;
+                        });
+                    svg.append("text")
+                    .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
+                    .attr("class", "hoverlabel")
+                    .attr("x", function() { return adjustScale * x(showTimeValue) })
+                    .attr("y", function() { return y(mainData.section) })
+                    .attr("dy", "0.9vw")
+                    .style("font-size", "0.5vw")
+                    .text(function() {
+                        let text = "Number of messages: " + mainData.fillVal;  // Value of the text
+                        return text;
+                        });
+                }
 
 
-               } )
 
+                if(showTime && mainData.section === "Volume"){
+                    // format the time 
+                    let format = d3.timeFormat("%H:%M:%S.%L"),
+                    time = format(showTimeValue);
+
+
+                    svg.append("text")
+                    .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
+                    .attr("class", "hoverlabel")
+                    .attr("x", function() { return adjustScale * x(showTimeValue) })
+                    .attr("y", "115%")
+                    .style("font-size", "0.6vw")
+                    .style("color", "red")
+                    .text(function() {
+                        let text = "" + time;  // Value of the text
+                        return text;
+                        });
+                };
             };
 
 };
@@ -463,69 +620,7 @@ function updateLiqZoom(event, xAxis, allLiqSvg){
         }
 };
 
-// update hover
-function drawHover(mainData, svg, x, y, showTime, isFirst, hasText=false, showTimeValue){
 
-        // adjust hover text from the edge of the viz
-        let adjustScale = (mainData.index > 80) ? 0.8 : 1.04;
-        // adjust hover line start point
-        let adjustLine = isFirst ? "0%":"-20%";
-
-        svg.append("line")
-        .attr("x1", x(mainData.time))
-        .attr("y1", adjustLine)
-        .attr("x2", x(mainData.time))
-        .attr("y2", "120%")
-        .attr("class", "hoverlabel")
-        .attr("stroke", "black")
-
-        if(hasText){
-            // Specify where to put label of text
-            svg.append("text")
-            .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
-            .attr("class", "hoverlabel")
-            .attr("x", function() { return adjustScale * x(mainData.time) })
-            .attr("y", function() { return y(mainData.section) })
-            .attr("dy", "0.4vw")
-            .style("font-size", "0.5vw")
-            .text(function() {
-                let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
-                return text;
-                });
-            svg.append("text")
-            .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
-            .attr("class", "hoverlabel")
-            .attr("x", function() { return adjustScale * x(mainData.time) })
-            .attr("y", function() { return y(mainData.section) })
-            .attr("dy", "0.9vw")
-            .style("font-size", "0.5vw")
-            .text(function() {
-                let text = "Number of messages: " + mainData.fillVal;  // Value of the text
-                return text;
-                });
-        }
-
-
-
-        if(showTime && mainData.section === "Volume"){
-            // format the time 
-            let format = d3.timeFormat("%H:%M:%S.%L"),
-            time = format(showTimeValue);
-
-
-            svg.append("text")
-            .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
-            .attr("class", "hoverlabel")
-            .attr("x", function() { return adjustScale * x(mainData.time) })
-            .attr("y", "115%")
-            .style("font-size", "0.6vw")
-            .style("color", "red")
-            .text(function() {
-                let text = "" + time;  // Value of the text
-                return text;
-                });
-        };
-};
 
 // hover on liquidity
 function drawLiqHover(d, svg, showTime, isFirst, isLastStock, hasText=false, showTimeValue){

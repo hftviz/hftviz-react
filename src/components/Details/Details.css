@@ -1,7 +1,7 @@
 .LOB{
     height: 15%;
     width: 100%;
-    background-color: #faf9f9;
+    background-color: #ffffff;
     display: inline-block;
     float: left;
     position: inherit;
@@ -83,14 +83,14 @@
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: #faf9f9;
+    background-color: #ffffff;
 }
 
 #lob{
     height: 100%;
     width: 40%;
     float: left;
-    background-color: #faf9f9;
+    background-color: #ffffff;
     display: inline-block;
     position: relative;
 }
@@ -99,7 +99,7 @@
     height: 100%;
     width: 5%;
     float: left;
-    background-color: #faf9f9;
+    background-color: #ffffff;
     display: inline-block;
     position: relative;
 }
@@ -113,7 +113,7 @@
     height: 100%;
     width: 55%;
     float: left;
-    background-color: #faf9f9;
+    background-color: #ffffff;
     display: inline-block;
     position: relative;
 }
