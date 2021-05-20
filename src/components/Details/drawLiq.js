@@ -135,91 +135,89 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
         .select(".domain")
         .attr("display", "none");
                             
-
+    // set title
+    svg.append("text")
+        .attr("x", "50%")             
+        .attr("y", "5%")
+        .attr("text-anchor", "middle") 
+        .style("margin-bottom", "1%")
+        .style("font-size", "0.7vw")  
+        .text(realCompName);
+    
     // hovering
-    svg.on("mouseover", (event) => {
-      console.log(d3.pointer(event), event, x.invert(d3.pointer(event)[0]));
+
+    // liq hover
+    svg.selectAll(".liqRow")
+       .on("mouseover", (event, d) => {
+            // receive the updated axis 
+            let newX = d[0].xAxis,
+                showTime = newX.invert(d3.pointer(event)[0]),
+                liqType = d[0].type,
+                hoveredValue;
+
+            // d.forEach(datum => {
+            //   if (datum.time - showTime === 0){
+            //     hoveredValue = datum.yValue;
+
+            //     console.log(hoveredValue);
+                
+            //     return false;
+            //   } else {
+            //     hoveredValue = "";
+            //   }
+
+
+            // });
+
+            for(let companyName in allLiqSvg){
+              let isFirst = companyName === "Market_SPY" ? true : false,
+                  isLastComp = (Object.keys(allLiqSvg).indexOf(companyName) + 1) === Object.keys(allLiqSvg).length ? true : false
+
+              // check if it's current hover
+              if (companyName === realCompName){
+
+                allLiqSvg[companyName].selectAll(".liqRow")
+                                      .each(d => {
+
+                                      })
+
+
+              } else {
+
+              }
+            }
 
 
       
     })
 
-    // set title
-    svg.append("text")
-    .attr("x", "50%")             
-    .attr("y", "5%")
-    .attr("text-anchor", "middle") 
-    .style("margin-bottom", "1%")
-    .style("font-size", "0.7vw")  
-    .text(realCompName);
+
+    // lob hover
+
+
+    // liq / lob zoom
    
       
   // add svg for tracking the records
   handleLiqSvg(divTitle.split("--")[1], svg);
 };
 
-
-function drawHover(mainData, svg, x, y, showTime, isFirst, hasText=false, showTimeValue){
+function drawHoverLiq(svg, newX, showText, showTime, isFirst){
 
   // adjust hover text from the edge of the viz
-  let adjustScale = (mainData.index > 80) ? 0.8 : 1.04;
-  // adjust hover line start point
-  let adjustLine = isFirst ? "0%":"-50%";
+  let adjustLine = isFirst? "10%":"-50%",
+  yOffset = 15;
 
+  // draw line
   svg.append("line")
-  .attr("x1", x(mainData.time))
+  .attr("x1", newX(showTime))
   .attr("y1", adjustLine)
-  .attr("x2", x(mainData.time))
-  .attr("y2", "120%")
+  .attr("x2", newX(showTime))
+  .attr("y2", "150%")
   .attr("class", "hoverlabel")
   .attr("stroke", "black")
 
-  if(hasText){
-      // Specify where to put label of text
-      svg.append("text")
-      .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
-      .attr("class", "hoverlabel")
-      .attr("x", function() { return adjustScale * x(mainData.time) })
-      .attr("y", function() { return y(mainData.section) })
-      .attr("dy", "0.4vw")
-      .style("font-size", "0.5vw")
-      .text(function() {
-          let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
-          return text;
-          });
-      svg.append("text")
-      .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
-      .attr("class", "hoverlabel")
-      .attr("x", function() { return adjustScale * x(mainData.time) })
-      .attr("y", function() { return y(mainData.section) })
-      .attr("dy", "0.9vw")
-      .style("font-size", "0.5vw")
-      .text(function() {
-          let text = "Number of messages: " + mainData.fillVal;  // Value of the text
-          return text;
-          });
-  }
 
-
-
-  if(showTime && mainData.section === "Volume"){
-      // format the time 
-      let format = d3.timeFormat("%H:%M:%S.%L"),
-      time = format(showTimeValue);
-
-
-      svg.append("text")
-      .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
-      .attr("class", "hoverlabel")
-      .attr("x", function() { return adjustScale * x(mainData.time) })
-      .attr("y", "115%")
-      .style("font-size", "0.6vw")
-      .style("color", "red")
-      .text(function() {
-          let text = "" + time;  // Value of the text
-          return text;
-          });
-  };
 };
 
 

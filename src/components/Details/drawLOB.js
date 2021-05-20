@@ -603,13 +603,14 @@ function updateLiqZoom(event, xAxis, allLiqSvg){
                             .x(d => {return newX(d.time);})
                             .y0(d => {return 0.5 * d.yAxis.bandwidth()})
                             .y1(d => {
+                                d.xAxis = newX;
                                 return d.yValue;
                             });
             svg.selectAll(".liqPath").remove();
 
             svg.selectAll(".liqRow")
                .append("path")
-               .datum(d =>{return d})
+               .datum(d =>{return d;})
                .attr("class", "liqPath")
                .attr("stroke", "#e6e6e6")
                .attr("stroke-width", 0.5)
