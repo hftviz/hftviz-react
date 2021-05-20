@@ -271,19 +271,25 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                 // first element
                                 let isFirst = otherLiqSvg === "Market_SPY" ? true : false ;
 
-                                // draw general line
-                                let adjustLine = isFirst? "0%":"-50%";
-
-
                                 allLiqSvg[otherLiqSvg].selectAll(".liqRow")
                                     .each((d) => {
-                                        d.forEach(datum => {
-                                            if(datum.time - mainData.time === 0){
-                                                drawLiqHover(datum, allLiqSvg[otherLiqSvg], showTime, isFirst, isLastStock, true, mainData.time);
-                                            }else{
-                                                drawLiqHover(datum, allLiqSvg[otherLiqSvg], showTime, isFirst, isLastStock, false, mainData.time);
+                                        let nearest = d.reduce((a,b) => {
+                                            let aDiff = Math.abs(a.time - mainData.time);
+                                            let bDiff = Math.abs(b.time - mainData.time);
+  
+                                            if (aDiff == bDiff) {
+                                                // Choose largest vs smallest (> vs <)
+                                                return a.time > b.time ? a : b;
+                                            } else {
+                                                return bDiff < aDiff ? b : a;
                                             }
                                         });
+
+                                        if(nearest.time - mainData.time === 0){
+                                            drawLiqHover(nearest, allLiqSvg[otherLiqSvg], showTime, isFirst, isLastStock, true, mainData.time);
+                                        }else{
+                                            drawLiqHover(nearest, allLiqSvg[otherLiqSvg], showTime, isFirst, isLastStock, false, mainData.time);
+                                        }
                                     });
                             };
 
@@ -500,7 +506,7 @@ function updateHoverZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
             function drawHover(mainData, svg, x, y, showTime, isFirst, hasText=false, showTimeValue){
 
                 // adjust hover text from the edge of the viz
-                let adjustScale = (mainData.index > 80) ? 0.8 : 1.04;
+                let adjustScale = (mainData.index > 80) ? 0.83 : 1.04;
                 // adjust hover line start point
                 let adjustLine = isFirst ? "0%":"-20%";
 
@@ -648,13 +654,13 @@ function drawLiqHover(d, svg, showTime, isFirst, isLastStock, hasText=false, sho
         .attr("y", yOffset + d.yAxis(d.type))
         .style("font-size", "0.8vw")
         .text(function(){
-            return "Value: " + d.yValue.toPrecision(3);
+            return d.type +": " + d.yValue.toPrecision(3);
         });
     }
 
 
 
-    if(showTime && d.type === "Effective Spread" && d.index === 1 ){
+    if(showTime && d.type === "Effective Spread"){
 
         // format the time 
         let format = d3.timeFormat("%H:%M:%S.%L"),

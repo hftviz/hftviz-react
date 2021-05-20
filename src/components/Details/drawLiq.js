@@ -153,43 +153,91 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
             let newX = d[0].xAxis,
                 showTime = newX.invert(d3.pointer(event)[0]),
                 liqType = d[0].type,
-                hoveredValue;
+                hoveredValue,
+                isFirst = realCompName === "Market_SPY" ? true : false,
+                isLastComp = (Object.keys(allLiqSvg).indexOf(realCompName) + 1) === Object.keys(allLiqSvg).length ? true : false;
 
-            // d.forEach(datum => {
-            //   if (datum.time - showTime === 0){
-            //     hoveredValue = datum.yValue;
+                // hover to the nearest value
+                hoveredValue = d.reduce((a,b) => {
+                    let aDiff = Math.abs(a.time - showTime);
+                    let bDiff = Math.abs(b.time - showTime);
 
-            //     console.log(hoveredValue);
-                
-            //     return false;
-            //   } else {
-            //     hoveredValue = "";
-            //   }
+                    if (aDiff == bDiff) {
+                        // Choose largest vs smallest (> vs <)
+                        return a.time > b.time ? a : b;
+                    } else {
+                        return bDiff < aDiff ? b : a;
+                    }
+                });
 
 
-            // });
+                drawHoverLiq(hoveredValue, svg, newX, true, showTime, isFirst, isLastComp);
 
             for(let companyName in allLiqSvg){
               let isFirst = companyName === "Market_SPY" ? true : false,
-                  isLastComp = (Object.keys(allLiqSvg).indexOf(companyName) + 1) === Object.keys(allLiqSvg).length ? true : false
+                  isLastComp = (Object.keys(allLiqSvg).indexOf(companyName) + 1) === Object.keys(allLiqSvg).length ? true : false;
 
               // check if it's current hover
               if (companyName === realCompName){
 
                 allLiqSvg[companyName].selectAll(".liqRow")
                                       .each(d => {
+                                        let type = d[0].type;
+
+                                        if (type !== liqType){
+                                              let nearest = d.reduce((a,b) => {
+                                                let aDiff = Math.abs(a.time - hoveredValue.time);
+                                                let bDiff = Math.abs(b.time - hoveredValue.time);
+                            
+                                                if (aDiff == bDiff) {
+                                                    // Choose largest vs smallest (> vs <)
+                                                    return a.time > b.time ? a : b;
+                                                } else {
+                                                    return bDiff < aDiff ? b : a;
+                                                }
+                                                });
+                                              
+                                              if (nearest.time - hoveredValue.time === 0){
+                                                drawHoverLiq(nearest, allLiqSvg[companyName], newX, true, showTime, isFirst, isLastComp);
+                                              } else {
+                                                drawHoverLiq(nearest, allLiqSvg[companyName], newX, false, showTime, isFirst, isLastComp);
+                                              };
+                                        }
 
                                       })
-
-
               } else {
+                allLiqSvg[companyName].selectAll(".liqRow")
+                                      .each(d => {
 
+                                        let nearest = d.reduce((a,b) => {
+                                          let aDiff = Math.abs(a.time - hoveredValue.time);
+                                          let bDiff = Math.abs(b.time - hoveredValue.time);
+
+                                          if (aDiff == bDiff) {
+                                              // Choose largest vs smallest (> vs <)
+                                              return a.time > b.time ? a : b;
+                                          } else {
+                                              return bDiff < aDiff ? b : a;
+                                          }
+                                          });
+                                        
+                                        if (nearest.time - hoveredValue.time === 0){
+                                          drawHoverLiq(nearest, allLiqSvg[companyName], newX, true, showTime, isFirst, isLastComp);
+                                        } else {
+                                          drawHoverLiq(nearest, allLiqSvg[companyName], newX, false, showTime, isFirst, isLastComp);
+                                        };
+
+                                      })
               }
             }
 
 
       
-    })
+        })
+       .on("mouseout", (event,d) => {
+          d3.selectAll(".hoverlabel").remove();
+        });
+
 
 
     // lob hover
@@ -202,10 +250,10 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
   handleLiqSvg(divTitle.split("--")[1], svg);
 };
 
-function drawHoverLiq(svg, newX, showText, showTime, isFirst){
+function drawHoverLiq(hoveredData, svg, newX, showText, showTime, isFirst, isLastComp){
 
   // adjust hover text from the edge of the viz
-  let adjustLine = isFirst? "10%":"-50%",
+  let adjustLine = isFirst? "8%":"-50%",
   yOffset = 15;
 
   // draw line
@@ -216,6 +264,40 @@ function drawHoverLiq(svg, newX, showText, showTime, isFirst){
   .attr("y2", "150%")
   .attr("class", "hoverlabel")
   .attr("stroke", "black")
+
+  if(showText){
+    // Specify where to put label of text
+    svg.append("text")
+    .attr("class", "hoverlabel") // Create an id for text so we can select it later for removing on mouseout
+    .attr("x", hoveredData.xAxis(showTime) + 5)
+    .attr("y", yOffset + hoveredData.yAxis(hoveredData.type))
+    .style("font-size", "0.8vw")
+    .text(function(){
+        return hoveredData.type + ": " + hoveredData.yValue.toPrecision(3);
+    });
+
+
+
+    }
+
+if(isLastComp && hoveredData.type === "Effective Spread"){
+
+  // format the time 
+  let format = d3.timeFormat("%H:%M:%S.%L"),
+  time = format(showTime);
+
+
+  svg.append("text")
+  .attr("class", "hoverlabel")  // Create an id for text so we can select it later for removing on mouseout
+  .attr("x", hoveredData.xAxis(showTime) + 5)
+  .attr("y", "100%")
+  .style("font-size", "0.7vw")
+  .text(function() {
+      let text = "" + time;  // Value of the text
+      return text;
+      });
+
+  }
 
 
 };
