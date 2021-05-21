@@ -137,7 +137,11 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
                                     fillVal: d[Object.keys(d)[0]]["messageNum"][fillValIndex],
                                     value: d[Object.keys(d)[0]]["value"][fillValIndex].toFixed(2),
                                     average: d3.sum(d[Object.keys(d)[0]]["value"])/d[Object.keys(d)[0]]["value"].length ,
-                                    maxVal: d3.max(d[Object.keys(d)[0]]["value"])
+                                    maxVal: d3.max(d[Object.keys(d)[0]]["value"]),
+                                    x: globalXAxis,
+                                    y: y,
+                                    divHeight: height_num,
+                                    divWidth: width_num
                                 });
                             });
 
@@ -509,6 +513,8 @@ function updateHoverZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
                 let adjustScale = (mainData.index > 80) ? 0.83 : 1.04;
                 // adjust hover line start point
                 let adjustLine = isFirst ? "0%":"-20%";
+
+                mainData.x = x;
 
                 svg.append("line")
                 .attr("x1", x(showTimeValue))

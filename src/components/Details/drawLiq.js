@@ -172,7 +172,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
 
 
                 drawHoverLiq(hoveredValue, svg, newX, true, showTime, isFirst, isLastComp);
-
+            // all liq svg
             for(let companyName in allLiqSvg){
               let isFirst = companyName === "Market_SPY" ? true : false,
                   isLastComp = (Object.keys(allLiqSvg).indexOf(companyName) + 1) === Object.keys(allLiqSvg).length ? true : false;
@@ -229,6 +229,56 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
 
                                       })
               }
+            };
+
+            // all svg
+            for (let otherSvg in allSvg){
+              let showTimeLabel = (Object.keys(allSvg).indexOf(otherSvg) + 1) === Object.keys(allSvg).length ? true : false ;
+              // first element
+              let isFirst = otherSvg === "Market_SPY" ? true : false ,
+                  drawNumber = 0,
+                  nearest = {prev:"", curr:"", isBegin: true};
+
+
+              allSvg[otherSvg].selectAll(".lob-row-cell")
+                              .each((d) => {
+                                if(nearest.isBegin){
+                                  nearest.prev = d;
+                                  nearest.isBegin = false;
+                                } else{
+
+                                  nearest.curr = d;
+                                  // console.log(nearest.curr.time - showTime, nearest.prev.time - showTime);
+                                  if( (nearest.curr.time - showTime > 0) && (nearest.prev.time - showTime <= 0) && (nearest.curr.section === nearest.prev.section)){
+                                      
+                                      if (nearest.curr.time - showTime === 0){
+                                        drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, true, showTime);
+                                      } else{
+                                        drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, false, showTime);
+                                      }
+
+                                      nearest.prev = nearest.curr;
+                                      nearest.curr = "";
+                                  } else{
+                                      nearest.prev = nearest.curr;
+                                      nearest.curr = "";
+                                  }
+
+                                }
+                                // if(d.time - showTime === 0){
+                                //   if (drawNumber <= 4){
+                                //     drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, true, showTime);
+                                //     drawNumber = drawNumber + 1;
+                                //   } 
+                                  
+                                // } else{
+                                //   if (drawNumber <= 4){
+                                //     console.log(d);
+                                //     drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, false, showTime);
+                                //     drawNumber = drawNumber + 1;
+                                //   }
+                                // }
+                              })
             }
 
 
@@ -271,7 +321,7 @@ function drawHoverLiq(hoveredData, svg, newX, showText, showTime, isFirst, isLas
     .attr("class", "hoverlabel") // Create an id for text so we can select it later for removing on mouseout
     .attr("x", hoveredData.xAxis(showTime) + 5)
     .attr("y", yOffset + hoveredData.yAxis(hoveredData.type))
-    .style("font-size", "0.8vw")
+    .style("font-size", "0.6vw")
     .text(function(){
         return hoveredData.type + ": " + hoveredData.yValue.toPrecision(3);
     });
@@ -300,6 +350,69 @@ if(isLastComp && hoveredData.type === "Effective Spread"){
   }
 
 
+};
+
+function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValue){
+
+  // adjust hover text from the edge of the viz
+  let adjustScale = (mainData.index > 80) ? 0.83 : 1.04;
+  // adjust hover line start point
+  let adjustLine = isFirst ? "0%":"-20%";
+
+  svg.append("line")
+  .attr("x1", mainData.x(showTimeValue))
+  .attr("y1", adjustLine)
+  .attr("x2", mainData.x(showTimeValue))
+  .attr("y2", "120%")
+  .attr("class", "hoverlabel")
+  .attr("stroke", "black")
+
+  if(hasText){
+      // Specify where to put label of text
+      svg.append("text")
+      .attr("id", mainData.id+"1") // Create an id for text so we can select it later for removing on mouseout
+      .attr("class", "hoverlabel")
+      .attr("x", function() { return adjustScale * mainData.x(showTimeValue) })
+      .attr("y", function() { return mainData.y(mainData.section) })
+      .attr("dy", "0.4vw")
+      .style("font-size", "0.5vw")
+      .text(function() {
+          let text = mainData.section + " value:" + Math.abs(mainData.value);  // Value of the text
+          return text;
+          });
+      svg.append("text")
+      .attr("id", mainData.id+"2") // Create an id for text so we can select it later for removing on mouseout
+      .attr("class", "hoverlabel")
+      .attr("x", function() { return adjustScale * mainData.x(showTimeValue) })
+      .attr("y", function() { return mainData.y(mainData.section) })
+      .attr("dy", "0.9vw")
+      .style("font-size", "0.5vw")
+      .text(function() {
+          let text = "Number of messages: " + mainData.fillVal;  // Value of the text
+          return text;
+          });
+  }
+
+
+
+  if(showTime && mainData.section === "Volume"){
+      // format the time 
+      let format = d3.timeFormat("%H:%M:%S.%L"),
+      time = format(showTimeValue);
+
+
+      svg.append("text")
+      .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
+      .attr("class", "hoverlabel")
+      .attr("x", function() { return adjustScale * mainData.x(showTimeValue) })
+      .attr("y", "115%")
+      .style("font-size", "0.6vw")
+      .style("color", "red")
+      .text(function() {
+          let text = "" + time;  // Value of the text
+          return text;
+          });
+  };
 };
 
 
