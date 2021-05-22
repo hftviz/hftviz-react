@@ -146,7 +146,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
     
     // hovering
 
-    // liq hover
+    // liq-lob hover
     svg.selectAll(".liqRow")
        .on("mouseover", (event, d) => {
             // receive the updated axis 
@@ -288,12 +288,28 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
           d3.selectAll(".hoverlabel").remove();
         });
 
-
-
-    // lob hover
-
-
     // liq / lob zoom
+    let zoom = d3.zoom()
+    .scaleExtent([1, 40])  // This control how much you can unzoom (x1) and zoom (x40)
+    .extent([[0, yOffset], [widthNum, 0.163*heightNum]])
+    .translateExtent([[0, yOffset], [widthNum, 0.163*heightNum]])
+    .on("zoom", (event) => {
+        console.log(event);
+
+        updateZoom();
+    });
+
+    svg.append("rect")
+    .attr("id","zoomPlane")
+    .attr("width", widthNum)
+    .attr("height", 0.163*heightNum - yOffset)
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .attr("transform", "translate(" + 0 + "," + yOffset + ")")
+    .lower();
+
+
+    svg.call(zoom);
    
       
   // add svg for tracking the records
@@ -414,6 +430,8 @@ function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValu
           });
   };
 };
+
+function updateZoom(){};
 
 
 export default drawLiq;
