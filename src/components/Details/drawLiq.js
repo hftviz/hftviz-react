@@ -171,7 +171,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                 });
 
 
-                drawHoverLiq(hoveredValue, svg, newX, true, showTime, isFirst, isLastComp);
+                drawHoverLiq(hoveredValue, svg, newX, true, hoveredValue.time, isFirst, isLastComp);
             // all liq svg
             for(let companyName in allLiqSvg){
               let isFirst = companyName === "Market_SPY" ? true : false,
@@ -185,22 +185,22 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                                         let type = d[0].type;
 
                                         if (type !== liqType){
-                                              let nearest = d.reduce((a,b) => {
-                                                let aDiff = Math.abs(a.time - hoveredValue.time);
-                                                let bDiff = Math.abs(b.time - hoveredValue.time);
-                            
-                                                if (aDiff == bDiff) {
-                                                    // Choose largest vs smallest (> vs <)
-                                                    return a.time > b.time ? a : b;
-                                                } else {
-                                                    return bDiff < aDiff ? b : a;
-                                                }
-                                                });
+                                          let nearest = d.reduce((a,b) => {
+                                            let aDiff = Math.abs(a.time - hoveredValue.time);
+                                            let bDiff = Math.abs(b.time - hoveredValue.time);
+  
+                                            if (aDiff == bDiff) {
+                                                // Choose largest vs smallest (> vs <)
+                                                return a.time > b.time ? a : b;
+                                            } else {
+                                                return bDiff < aDiff ? b : a;
+                                            }
+                                            });
                                               
                                               if (nearest.time - hoveredValue.time === 0){
-                                                drawHoverLiq(nearest, allLiqSvg[companyName], newX, true, showTime, isFirst, isLastComp);
+                                                drawHoverLiq(nearest, allLiqSvg[companyName], newX, true, hoveredValue.time, isFirst, isLastComp);
                                               } else {
-                                                drawHoverLiq(nearest, allLiqSvg[companyName], newX, false, showTime, isFirst, isLastComp);
+                                                drawHoverLiq(nearest, allLiqSvg[companyName], newX, false, hoveredValue.time, isFirst, isLastComp);
                                               };
                                         }
 
@@ -222,9 +222,9 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                                           });
                                         
                                         if (nearest.time - hoveredValue.time === 0){
-                                          drawHoverLiq(nearest, allLiqSvg[companyName], newX, true, showTime, isFirst, isLastComp);
+                                          drawHoverLiq(nearest, allLiqSvg[companyName], newX, true, hoveredValue.time, isFirst, isLastComp);
                                         } else {
-                                          drawHoverLiq(nearest, allLiqSvg[companyName], newX, false, showTime, isFirst, isLastComp);
+                                          drawHoverLiq(nearest, allLiqSvg[companyName], newX, false, hoveredValue.time, isFirst, isLastComp);
                                         };
 
                                       })
@@ -249,12 +249,12 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
 
                                   nearest.curr = d;
                                   // console.log(nearest.curr.time - showTime, nearest.prev.time - showTime);
-                                  if( (nearest.curr.time - showTime > 0) && (nearest.prev.time - showTime <= 0) && (nearest.curr.section === nearest.prev.section)){
+                                  if( (nearest.curr.time - hoveredValue.time >= 0) && (nearest.prev.time - hoveredValue.time <= 0) && (nearest.curr.section === nearest.prev.section)){
                                       
-                                      if (nearest.curr.time - showTime === 0){
-                                        drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, true, showTime);
+                                      if (nearest.curr.time - hoveredValue.time === 0){
+                                        drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, true, hoveredValue.time);
                                       } else{
-                                        drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, false, showTime);
+                                        drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, false, hoveredValue.time);
                                       }
 
                                       nearest.prev = nearest.curr;
