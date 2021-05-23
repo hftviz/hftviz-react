@@ -562,8 +562,8 @@ function updateHoverZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
                     .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
                     .attr("class", "hoverlabel")
                     .attr("x", function() { return adjustScale * x(showTimeValue) })
-                    .attr("y", "115%")
-                    .style("font-size", "0.6vw")
+                    .attr("y", "116%")
+                    .style("font-size", "0.5vw")
                     .style("color", "red")
                     .text(function() {
                         let text = "" + time;  // Value of the text
@@ -658,7 +658,7 @@ function drawLiqHover(d, svg, showTime, isFirst, isLastStock, hasText=false, sho
         .attr("class", "hoverlabel") // Create an id for text so we can select it later for removing on mouseout
         .attr("x", d.xAxis(showTimeValue) + 5)
         .attr("y", yOffset + d.yAxis(d.type))
-        .style("font-size", "0.8vw")
+        .style("font-size", "0.6vw")
         .text(function(){
             return d.type +": " + d.yValue.toPrecision(3);
         });

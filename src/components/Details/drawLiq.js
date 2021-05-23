@@ -260,6 +260,13 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                                       nearest.prev = nearest.curr;
                                       nearest.curr = "";
                                   } else{
+                                      if (nearest.curr.section !== nearest.prev.section){
+                                        if (nearest.prev.time - hoveredValue.time === 0){
+                                          drawHover(nearest.prev, allSvg[otherSvg], showTimeLabel, isFirst, true, hoveredValue.time);
+                                        } else{
+                                          drawHover(nearest.prev, allSvg[otherSvg], showTimeLabel, isFirst, false, hoveredValue.time);
+                                        }
+                                      }
                                       nearest.prev = nearest.curr;
                                       nearest.curr = "";
                                   }
@@ -320,7 +327,9 @@ function drawHoverLiq(hoveredData, svg, newX, showText, showTime, isFirst, isLas
 
   // adjust hover text from the edge of the viz
   let adjustLine = isFirst? "8%":"-50%",
-  yOffset = 15;
+  // adjust hover text from the edge of the viz
+      adjustScale = (hoveredData.index > 90) ? 0.87 : 1,
+      yOffset = 15;
 
   // draw line
   svg.append("line")
@@ -335,7 +344,7 @@ function drawHoverLiq(hoveredData, svg, newX, showText, showTime, isFirst, isLas
     // Specify where to put label of text
     svg.append("text")
     .attr("class", "hoverlabel") // Create an id for text so we can select it later for removing on mouseout
-    .attr("x", hoveredData.xAxis(showTime) + 5)
+    .attr("x", adjustScale * (hoveredData.xAxis(showTime) + 5))
     .attr("y", yOffset + hoveredData.yAxis(hoveredData.type))
     .style("font-size", "0.6vw")
     .text(function(){
@@ -355,7 +364,7 @@ if(isLastComp && hoveredData.type === "Effective Spread"){
 
   svg.append("text")
   .attr("class", "hoverlabel")  // Create an id for text so we can select it later for removing on mouseout
-  .attr("x", hoveredData.xAxis(showTime) + 5)
+  .attr("x", 0.9 * (hoveredData.xAxis(showTime) + 5))
   .attr("y", "100%")
   .style("font-size", "0.7vw")
   .text(function() {
@@ -420,9 +429,9 @@ function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValu
       svg.append("text")
       .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
       .attr("class", "hoverlabel")
-      .attr("x", function() { return adjustScale * mainData.x(showTimeValue) })
-      .attr("y", "115%")
-      .style("font-size", "0.6vw")
+      .attr("x", function() { return 0.9 * mainData.x(showTimeValue) })
+      .attr("y", "116%")
+      .style("font-size", "0.5vw")
       .style("color", "red")
       .text(function() {
           let text = "" + time;  // Value of the text
