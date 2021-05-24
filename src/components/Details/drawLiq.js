@@ -162,7 +162,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                     let aDiff = Math.abs(a.time - showTime);
                     let bDiff = Math.abs(b.time - showTime);
 
-                    if (aDiff == bDiff) {
+                    if (aDiff === bDiff) {
                         // Choose largest vs smallest (> vs <)
                         return a.time > b.time ? a : b;
                     } else {
@@ -189,7 +189,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                                             let aDiff = Math.abs(a.time - hoveredValue.time);
                                             let bDiff = Math.abs(b.time - hoveredValue.time);
   
-                                            if (aDiff == bDiff) {
+                                            if (aDiff === bDiff) {
                                                 // Choose largest vs smallest (> vs <)
                                                 return a.time > b.time ? a : b;
                                             } else {
@@ -213,7 +213,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
                                           let aDiff = Math.abs(a.time - hoveredValue.time);
                                           let bDiff = Math.abs(b.time - hoveredValue.time);
 
-                                          if (aDiff == bDiff) {
+                                          if (aDiff === bDiff) {
                                               // Choose largest vs smallest (> vs <)
                                               return a.time > b.time ? a : b;
                                           } else {
@@ -301,9 +301,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
     .extent([[0, yOffset], [widthNum, 0.163*heightNum]])
     .translateExtent([[0, yOffset], [widthNum, 0.163*heightNum]])
     .on("zoom", (event) => {
-        console.log(event);
-
-        updateZoom();
+        updateZoom(event, x, allSvg, allLiqSvg);
     });
 
     svg.append("rect")
@@ -440,7 +438,14 @@ function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValu
   };
 };
 
-function updateZoom(){};
+function updateZoom(event, x, allSvg, allLiqSvg){
+  let newX = event.transform.rescaleX(x);
+
+  // all liq svg
+  for(let company in allLiqSvg){
+    
+  };
+};
 
 
 export default drawLiq;
