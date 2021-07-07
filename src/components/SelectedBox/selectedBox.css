@@ -1,10 +1,11 @@
 
 #SelectedBox{
-    height: 7%;
+    height: 5%;
     border: #ddd solid 1px;
     border-radius: 3px;
     width: 95%;
-    margin-top: 20%;
+    margin-top: 1%;
+    margin-bottom: 15%;
     margin-left: 1.7%;
     display:'inline-block';
     float:'left';
@@ -21,28 +22,28 @@
 }
 
 .selectedItem{
-    height: 23%;
-    width: 20%;
-    border: #777777 solid 1px;
-    border-radius: 5px;
+    height: 25%;
+    width: 16%;
+    border: #777777 solid 0.5px;
+    border-radius: 1px;
     margin: 1%;
     display: inline-block;
     position: relative;
     background-color: rgb(180, 180, 180);
     color: #fff;
+    text-align: center;
+    font-size: 0.4vw;
+    font-family: 'Helvetica';
 }
 
 .closeSelectedItem{
     height: 100%;
-    width: 100%;
+    width: 10%;
     position: relative;
     display: inline-block;
     float: left;
-    text-align: center;
-    font-size: 0.6vw;
-    font-family: 'Oswald';
+    left: 3%;
     /* top: 60%;
-    left: 30%;
     border-radius: 30%;
     border:rgba(116, 115, 115, 0.6) solid 1px;
     background-size:cover;
@@ -51,7 +52,8 @@
     background-repeat: no-repeat; */
 }
 
+
 .closeSelectedItem:hover{
-    background-color: rgb(92, 92, 92);
+    color: red;
     border-radius: 5px;
 }

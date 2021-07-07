@@ -16,7 +16,8 @@ class SelectedItem extends React.Component {
         return(
 
             <div className="selectedItem"> 
-                <div className="closeSelectedItem" onClick={this.handleCancelClick}> {"-  "+this.props.name.split('--')[1]} </div>
+                <div className="closeSelectedItem" onClick={this.handleCancelClick}> {"X  "} </div>
+                <div className="itemText">{"  "+this.props.name.split('--')[1]}</div>
             </div>
 
         );

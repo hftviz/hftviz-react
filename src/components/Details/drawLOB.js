@@ -510,7 +510,7 @@ function updateHoverZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
             function drawHover(mainData, svg, x, y, showTime, isFirst, hasText=false, showTimeValue){
 
                 // adjust hover text from the edge of the viz
-                let adjustScale = (mainData.index > 80) ? 0.83 : 1.04;
+                let adjustScale = (mainData.index > 80) ? 0.82 : 1.04;
                 // adjust hover line start point
                 let adjustLine = isFirst ? "0%":"-20%";
 
@@ -555,7 +555,8 @@ function updateHoverZoom(event, x, y, allSvg, xAxis, yAxis, offsetRectangles,
                 if(showTime && mainData.section === "Volume"){
                     // format the time 
                     let format = d3.timeFormat("%H:%M:%S.%L"),
-                    time = format(showTimeValue);
+                    time = format(showTimeValue),
+                    adjustScale = (mainData.index > 80) ? 0.9 : 1.05;
 
 
                     svg.append("text")
@@ -632,8 +633,6 @@ function updateLiqZoom(event, xAxis, allLiqSvg){
 
         }
 };
-
-
 
 // hover on liquidity
 function drawLiqHover(d, svg, showTime, isFirst, isLastStock, hasText=false, showTimeValue){

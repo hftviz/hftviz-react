@@ -237,11 +237,16 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
               // first element
               let isFirst = otherSvg === "Market_SPY" ? true : false ,
                   drawNumber = 0,
-                  nearest = {prev:"", curr:"", isBegin: true};
+                  nearest = {prev:"", curr:"", isBegin: true, isDraw: false};
 
 
               allSvg[otherSvg].selectAll(".lob-row-cell")
                               .each((d) => {
+                                // set axis 
+                                // d.x = newX;
+                                // d.x.range([0.09 * d.divWidth, 0.95 * d.divWidth]);
+
+                                //
                                 if(nearest.isBegin){
                                   nearest.prev = d;
                                   nearest.isBegin = false;
@@ -249,22 +254,27 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
 
                                   nearest.curr = d;
                                   // console.log(nearest.curr.time - showTime, nearest.prev.time - showTime);
-                                  if( (nearest.curr.time - hoveredValue.time >= 0) && (nearest.prev.time - hoveredValue.time <= 0) && (nearest.curr.section === nearest.prev.section)){
+                                  if( !nearest.isDraw && (nearest.curr.time - hoveredValue.time >= 0) && (nearest.prev.time - hoveredValue.time <= 0) && (nearest.curr.section === nearest.prev.section)){
                                       
                                       if (nearest.curr.time - hoveredValue.time === 0){
                                         drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, true, hoveredValue.time);
+                                        nearest.isDraw = (d.section === "Volume");
                                       } else{
                                         drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, false, hoveredValue.time);
+                                        console.log(d.section ,d.section === "Volume");
+                                        nearest.isDraw = (d.section === "Volume");
                                       }
 
                                       nearest.prev = nearest.curr;
                                       nearest.curr = "";
                                   } else{
-                                      if (nearest.curr.section !== nearest.prev.section){
+                                      if (nearest.curr.section !== nearest.prev.section && !nearest.isDraw){
                                         if (nearest.prev.time - hoveredValue.time === 0){
                                           drawHover(nearest.prev, allSvg[otherSvg], showTimeLabel, isFirst, true, hoveredValue.time);
+                                          nearest.isDraw = (d.section === "Volume");
                                         } else{
                                           drawHover(nearest.prev, allSvg[otherSvg], showTimeLabel, isFirst, false, hoveredValue.time);
+                                          nearest.isDraw = (d.section === "Volume");
                                         }
                                       }
                                       nearest.prev = nearest.curr;
@@ -307,7 +317,7 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
     svg.append("rect")
     .attr("id","zoomPlane")
     .attr("width", widthNum)
-    .attr("height", 0.163*heightNum - yOffset)
+    .attr("height", 0.163 * heightNum - yOffset)
     .style("fill", "none")
     .style("pointer-events", "all")
     .attr("transform", "translate(" + 0 + "," + yOffset + ")")
@@ -357,12 +367,13 @@ if(isLastComp && hoveredData.type === "Effective Spread"){
 
   // format the time 
   let format = d3.timeFormat("%H:%M:%S.%L"),
-  time = format(showTime);
+  time = format(showTime),
+  adjustScale = (hoveredData.index > 90) ? 0.9 : 1.01;
 
 
   svg.append("text")
   .attr("class", "hoverlabel")  // Create an id for text so we can select it later for removing on mouseout
-  .attr("x", 0.9 * (hoveredData.xAxis(showTime) + 5))
+  .attr("x", adjustScale * (hoveredData.xAxis(showTime)))
   .attr("y", "100%")
   .style("font-size", "0.7vw")
   .text(function() {
@@ -378,7 +389,7 @@ if(isLastComp && hoveredData.type === "Effective Spread"){
 function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValue){
 
   // adjust hover text from the edge of the viz
-  let adjustScale = (mainData.index > 80) ? 0.83 : 1.04;
+  let adjustScale = (mainData.index > 80) ? 0.82 : 1.04;
   // adjust hover line start point
   let adjustLine = isFirst ? "0%":"-20%";
 
@@ -421,13 +432,14 @@ function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValu
   if(showTime && mainData.section === "Volume"){
       // format the time 
       let format = d3.timeFormat("%H:%M:%S.%L"),
-      time = format(showTimeValue);
+      time = format(showTimeValue),
+      adjustScale = (mainData.index > 80) ? 0.9 : 1.05;
 
 
       svg.append("text")
       .attr("id", mainData.id+"time") // Create an id for text so we can select it later for removing on mouseout
       .attr("class", "hoverlabel")
-      .attr("x", function() { return 0.9 * mainData.x(showTimeValue) })
+      .attr("x", function() { return adjustScale * mainData.x(showTimeValue) })
       .attr("y", "116%")
       .style("font-size", "0.5vw")
       .style("color", "red")
@@ -439,13 +451,67 @@ function drawHover(mainData, svg, showTime, isFirst, hasText=false, showTimeValu
 };
 
 function updateZoom(event, x, allSvg, allLiqSvg){
+  // remove hovers
+  d3.selectAll(".hoverlabel").remove();
+
+  // find the number of stocks to put the xAxis in the position.
+  let division = document.getElementById("metrics"),
+  heightNum = division.clientHeight,
+  widthNum = division.clientWidth,
+  xPositionCoeff =  0.145;
+
+  // recover the new scale
   let newX = event.transform.rescaleX(x);
 
-  // all liq svg
-  for(let company in allLiqSvg){
-    
-  };
-};
+  // update all LiqSVG
+  for (let compName in allLiqSvg){
+
+      let svg = allLiqSvg[compName];
+
+      // draw new axis
+      let isLastStock = Object.keys(allLiqSvg).length === 1+Object.keys(allLiqSvg).indexOf(compName) ? true : false ;
+
+      if(isLastStock){
+
+          svg.select("#xaxis").remove();
+
+          // assemble axis
+          svg.append("g")
+          .attr("id", "xaxis")
+          .attr("class", "axis")
+          .attr("transform", "translate("+ 0 +"," + xPositionCoeff * heightNum + ")")
+          .call(d3.axisBottom(newX).ticks(5))
+          .select(".domain")
+          .attr("display", "none");
+      }
+
+      // update area chart
+      let area = d3.area()
+                      .x(d => {return newX(d.time);})
+                      .y0(d => {return 0.5 * d.yAxis.bandwidth()})
+                      .y1(d => {
+                          d.xAxis = newX;
+                          return d.yValue;
+                      });
+      svg.selectAll(".liqPath").remove();
+
+      svg.selectAll(".liqRow")
+         .append("path")
+         .datum(d =>{return d;})
+         .attr("class", "liqPath")
+         .attr("stroke", "#e6e6e6")
+         .attr("stroke-width", 0.5)
+         .attr("d", d => {return area(d)})
+         .style("fill", "url(#liqGradient)");
+  }
+
+  // update all SVG
+  for (let compName in allSvg){
+    let svg = allLiqSvg[compName];
+
+
+  }
+}
 
 
 export default drawLiq;

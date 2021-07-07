@@ -28,6 +28,8 @@ class OverviewStocks extends React.Component {
                     dateTime={this.props.dateTime}
                     fullName={stock.Name}
                     symbol={stock.Symbol}
+                    volume={stock.Volume}
+                    marketCap={stock.MarketCap} 
                     isSelected={isSelected} 
                     binSize={this.props.binSize}
                     onChangeSelectedStocks = {this.props.onChangeSelectedStocks}
