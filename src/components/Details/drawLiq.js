@@ -254,14 +254,13 @@ function drawLiq(container, name, date, data, zoomLevel, divTitle, allSvg, allLi
 
                                   nearest.curr = d;
                                   // console.log(nearest.curr.time - showTime, nearest.prev.time - showTime);
-                                  if( !nearest.isDraw && (nearest.curr.time - hoveredValue.time >= 0) && (nearest.prev.time - hoveredValue.time <= 0) && (nearest.curr.section === nearest.prev.section)){
+                                  if((nearest.curr.time - hoveredValue.time >= 0) && (nearest.prev.time - hoveredValue.time <= 0) && (nearest.curr.section === nearest.prev.section)){
                                       
                                       if (nearest.curr.time - hoveredValue.time === 0){
                                         drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, true, hoveredValue.time);
                                         nearest.isDraw = (d.section === "Volume");
                                       } else{
                                         drawHover(d, allSvg[otherSvg], showTimeLabel, isFirst, false, hoveredValue.time);
-                                        console.log(d.section ,d.section === "Volume");
                                         nearest.isDraw = (d.section === "Volume");
                                       }
 
@@ -505,7 +504,7 @@ function updateZoom(event, x, allSvg, allLiqSvg){
          .style("fill", "url(#liqGradient)");
   }
 
-  // update all SVG
+  // update all SVG - need to be updated
   for (let compName in allSvg){
     let svg = allLiqSvg[compName];
 
