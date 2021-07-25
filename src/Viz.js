@@ -11,7 +11,7 @@ class Viz extends React.Component {
         this.state = {
             selectedStocks: [],
             sortData: this.props.stockNames,
-            binSize: 5,
+            binSize: 39,
             dateTime: '2019-01-04',
             vizType: 'overview',
             zoomLevel: 1,

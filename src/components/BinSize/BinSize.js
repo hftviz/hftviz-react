@@ -10,7 +10,10 @@ class BinSize extends React.Component {
     }
 
     handleChange(e){
-        this.props.onChangeBinSize(e.target.value);
+        console.log(e.target.value);
+        setTimeout(()=>{
+            this.props.onChangeBinSize(e.target.value);
+        }, 1000);
     }
 
     render() {
@@ -27,7 +30,6 @@ class BinSize extends React.Component {
                             type="range" 
                             min="5" 
                             max="39" 
-                            value={this.props.binSize}
                             onChange={this.handleChange}
                             step="1"
                         />
