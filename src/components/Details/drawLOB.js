@@ -27,10 +27,10 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
     
 
     // fetch data
-    let localBidData = bidData[symbol][date],
-        localAskData = askData[symbol][date],
-        localCancelData = cancelData[symbol][date],
-        localVolumeData = volumeData[symbol][date];
+    let localBidData = bidData[tempName][date],
+        localAskData = askData[tempName][date],
+        localCancelData = cancelData[tempName][date],
+        localVolumeData = volumeData[tempName][date];
 
     // define the rectangle(cells for viz) position and specs
     let offsetRectangles = 0.5,

@@ -50,8 +50,8 @@ class Stock extends React.Component {
         </div>,
             <div className="stockVizText" key="2" id={this.props.symbol + "-hoverlabel"}>
                 <div className="hoverTextTitle">{this.props.fullName}</div> 
-                <div className="hoverTextDetails">Volume: {this.props.volume}</div>
-                <div className="hoverTextDetails">Market Cap: {this.props.marketCap}</div>
+                <div className="hoverTextDetails">Volume: {(this.props.volume/ 1000000).toFixed(2) + " Million Shares"}</div>
+                <div className="hoverTextDetails">Market Cap: {(this.props.marketCap / 1000000000).toFixed(2) + " Billion USD"}</div>
             </div>
         ];
 
@@ -68,8 +68,8 @@ class Stock extends React.Component {
                 </div>,
             <div className="stockVizText" key="2" id={this.props.symbol + "-hoverlabel"}>
                 <div className="hoverTextTitle">{this.props.fullName}</div> 
-                <div className="hoverTextDetails">Volume: {this.props.volume}</div>
-                <div className="hoverTextDetails">Market Cap: {this.props.marketCap}</div>
+                <div className="hoverTextDetails">Volume: {(this.props.volume/ 1000000).toFixed(2) + " Million Shares"}</div>
+                <div className="hoverTextDetails">Market Cap: {(this.props.marketCap / 1000000000).toFixed(2) + " Billion USD"}</div>
             </div>
         ]
     

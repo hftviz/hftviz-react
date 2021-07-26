@@ -38,8 +38,8 @@
 }
 
 .lob-line{
-    stroke: chocolate;
-    stroke-width: 1;
+    stroke: rgb(4, 0, 226);
+    stroke-width: 0.5;
     fill: none;
 }
 
