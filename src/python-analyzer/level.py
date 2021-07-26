@@ -62,17 +62,17 @@ def chunk(timeline, data, parts, type):
 
 
 with open("./ask-level3.json", "w") as f:
-    out = chunk(timeline, ask_data, 10000, "ask")
+    out = chunk(timeline, ask_data, 100, "ask")
     json.dump(out, f)
 
 with open("./bid-level3.json", "w") as f:
-    out = chunk(timeline, bid_data, 10000, "bid")
+    out = chunk(timeline, bid_data, 100, "bid")
     json.dump(out, f)
 
 with open("./cancel-level3.json", "w") as f:
-    out = chunk(timeline, cancel_data, 10000, "cancel")
+    out = chunk(timeline, cancel_data, 100, "cancel")
     json.dump(out, f)
 
 with open("./volume-level3.json", "w") as f:
-    out = chunk(timeline, volume_data, 10000, "volume")
+    out = chunk(timeline, volume_data, 100, "volume")
     json.dump(out, f)       
