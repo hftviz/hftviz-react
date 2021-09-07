@@ -50,7 +50,9 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
 
 
     // create group of data
-    const groups = [{"Volume": localVolumeData}, {"Cancel": localCancelData}, {"Bid": localBidData}, {"Ask": localAskData}]
+    // const groups = [{"Volume": localVolumeData}, {"Cancel": localCancelData}, {"Bid": localBidData}, {"Ask": localAskData}]
+    const groups = [{"Volume": localVolumeData}, {"Cancel": localVolumeData}, {"Bid": localVolumeData}, {"Ask": localVolumeData}];
+
 
     // extract min and max of the features
 
@@ -308,12 +310,13 @@ function drawLOB(container, date, name, volumeData, bidData, askData, cancelData
 
 
 
-    // extracting four path for values
+    // extracting four paths for values
 
     let line = d3.line(),
         paths = {"Volume":[], "Cancel":[], "Bid":[], "Ask":[]},
         pathData = [(paths["Volume"]), (paths["Cancel"]), (paths["Bid"]), (paths["Ask"])];
 
+    
 
     groups.forEach(element => {
         let key = Object.keys(element)[0];
