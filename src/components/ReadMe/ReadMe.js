@@ -26,19 +26,21 @@ class ReadMe extends React.Component {
       if(this.props.vizType === "overview"){
         pics = <div id="readMe-description">
           <img src={overvieDesc} alt="overview-desc-icon" className="img"/>
-          <br/><br/>For more details, please click on the help icon.
+          {/* <br/><br/>For more details, please click on the help icon. */}
           </div>;
       } 
       if (this.props.vizType === "details") {
         pics = <div id="readMe-description">
               <img src={detailsDesc} alt="details-desc-icon" className="img"/>
-              <br/><br/>For more details, please click on the help icon.
+              {/* <br/><br/>For more details, please click on the help icon. */}
               </div>;
       }
 
       return (
         <div id="readMe-container">
-          <div onClick={this.showModal} id="readMe-icon"><img src={helpIcon} alt="readMe-icon" className="img"/></div>
+          {/* <div onClick={this.showModal} id="readMe-icon"><img src={helpIcon} alt="readMe-icon" className="img"/></div> */}
+          <div id="readMe-icon"><img src={helpIcon} alt="readMe-icon" className="img"/></div>
+
           {pics}
           <Popup show={this.state.show} handleClose={this.hideModal} >
                 <SlideShow vizType={this.props.vizType} />
