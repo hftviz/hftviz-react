@@ -45,6 +45,7 @@ class Menu extends React.Component {
                     vizType={this.props.vizType} 
                     sortData={this.props.sortData}
                     onChangeSort={this.props.onChangeSort}
+                    dateTime={this.props.dateTime}
                 />
                 <BinSize binSize={this.props.binSize} vizType={this.props.vizType} onChangeBinSize={this.props.onChangeBinSize}/>
                 <DateBox dateTime={this.props.dateTime} onChangeDate={this.props.onChangeDate}/>

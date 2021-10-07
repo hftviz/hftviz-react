@@ -12,8 +12,9 @@ class Draw extends React.Component {
 
     componentDidMount(){
 
-        let dates = ["2019-01-03"]; // in production: this.props.dateTime
-        let date = dates[Math.floor(Math.random() * dates.length)];
+        let dates = ["2019-01-04"]; // in production: this.props.dateTime
+        // let date = dates[Math.floor(Math.random() * dates.length)];
+        let date = this.props.dateTime;
 
         // draw
         DrawOverview(

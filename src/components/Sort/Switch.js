@@ -1,4 +1,5 @@
 import React from 'react';
+import overviewData from '../../data/overviewSampleData.json';
 
 class Switch extends React.Component {
     constructor(props){
@@ -14,7 +15,7 @@ class Switch extends React.Component {
         let sortType = this.props.name;
 
         if(isChecked){
-            this.sortWithCriteria(this.props.data, sortType);
+            this.sortWithCriteria(this.props.data, sortType, this.props.checkState, this.props.dateTime)
         }
         
 
@@ -23,7 +24,7 @@ class Switch extends React.Component {
     componentDidUpdate(prevProps){
         let name = this.props.name;
         if ((prevProps.checkState.isChecked[name] === false) && (this.props.checkState.isChecked[name] === true)){
-            this.sortWithCriteria(this.props.data, name);
+            this.sortWithCriteria(this.props.data, name, this.props.checkState, this.props.dateTime);
         }
     }
 
@@ -33,16 +34,59 @@ class Switch extends React.Component {
         let isChecked = this.props.checkState.isChecked[this.props.name];
 
         if (isChecked === false){
-            this.sortWithCriteria(this.props.data, sortType);
+            this.sortWithCriteria(this.props.data, sortType, this.props.checkState, this.props.dateTime);
         }
-        this.props.changeCheckState();
+        this.props.changeCheckState(sortType);
     }
 
-    sortWithCriteria(data, name){
+    sortWithCriteria(data, name, checkState, date){
         let sortedData = data;
 
         sortedData.sort(function(a, b){
-            return b[name] - a[name];
+
+            // add default format for sorting
+            if (checkState.isChecked["Default"] === true){
+                let price_change_a = overviewData[a["Symbol"]][date]["priceChange"];
+                let price_change_b = overviewData[b["Symbol"]][date]["priceChange"];
+
+                let count_pos_a = 0,
+                    count_neg_a = 0,
+                    count_pos_b = 0,
+                    count_neg_b = 0,
+                    av_a,
+                    av_b;
+
+                price_change_a.forEach(element => {
+                    if (element <= 0){
+                        count_neg_a++;
+                    }else{
+                        count_pos_a++;
+                    }
+                });
+
+
+                price_change_b.forEach(element => {
+                    if (element <= 0){
+                        count_neg_b++;
+                    }else{
+                        count_pos_b++;
+                    }
+                });
+
+                av_a = (2*count_pos_a - count_neg_a)/3;
+                av_b = (2*count_pos_b - count_neg_b)/3;
+
+                console.log(a["Symbol"], count_pos_a, count_neg_a);
+
+
+                return av_b - av_a;
+
+
+
+            } else {
+                return b[name] - a[name];
+            }
+            
         });
 
         this.props.onChangeSort(sortedData);

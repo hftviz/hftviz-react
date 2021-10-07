@@ -7,16 +7,32 @@ import Switch from "./Switch";
 class Sort extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isChecked:{"Volume": false, "MarketCap": true}};
+        this.state = {isChecked:{"Volume": false, "MarketCap": false, "Default": true}};
         
         this.handleChecked = this.handleChecked.bind(this);
       }
 
 
-    handleChecked(){
-        this.setState(prevState => {
-            return {isChecked: {"Volume": !prevState.isChecked["Volume"] , "MarketCap": !prevState.isChecked["MarketCap"]}}; 
-        });
+    handleChecked(name){
+        console.log(name);
+
+        if (name === "Volume"){
+            this.setState(prevState => {
+                return {isChecked: {"Volume": !prevState.isChecked["Volume"] , "MarketCap": prevState.isChecked["MarketCap"], "Default": prevState.isChecked["Default"]}}; 
+            });
+        }
+
+        if (name === "MarketCap"){
+            this.setState(prevState => {
+                return {isChecked: {"Volume": prevState.isChecked["Volume"] , "MarketCap": !prevState.isChecked["MarketCap"], "Default": prevState.isChecked["Default"]}}; 
+            });
+        }
+
+        if (name === "Default"){
+            this.setState(prevState => {
+                return {isChecked: {"Volume": prevState.isChecked["Volume"] , "MarketCap": prevState.isChecked["MarketCap"], "Default": !prevState.isChecked["Default"]}}; 
+            });
+        }
     }
     
 
@@ -38,6 +54,7 @@ class Sort extends React.Component {
                                     onChangeSort={this.props.onChangeSort}
                                     checkState={this.state}
                                     changeCheckState={this.handleChecked}
+                                    dateTime={this.props.dateTime}
                                 />
                             </div>
 
@@ -51,6 +68,20 @@ class Sort extends React.Component {
                                     onChangeSort={this.props.onChangeSort}
                                     checkState={this.state}
                                     changeCheckState={this.handleChecked}
+                                    dateTime={this.props.dateTime}
+                                />
+                            </div>
+                        </div>
+                        <div id="Default" className="sortButtonDiv"> 
+                            <div className="sortLabel"> Default </div>
+                            <div className="sortButton">
+                                <Switch
+                                    name="Default"
+                                    data={this.props.sortData} 
+                                    onChangeSort={this.props.onChangeSort}
+                                    checkState={this.state}
+                                    changeCheckState={this.handleChecked}
+                                    dateTime={this.props.dateTime}
                                 />
                             </div>
                         </div>

@@ -24,6 +24,8 @@ function splitToChunks(array, parts) {
 function DrawOverview(allData, companyName, date, container, binSize){
     let dataFiltered = allData[companyName][date]["priceChange"];
 
+    console.log(companyName, dataFiltered);
+
     // console.log('im running ---' + container + '---- at :'+ binSize 
     //     + ' with min and max' + minVal + ',' + maxVal + ' with data ' + allData);
     
