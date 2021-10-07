@@ -45,6 +45,19 @@ class Sort extends React.Component {
                         <img src={sortIcon} alt="sort icon" className="img"/>
                     </div>
                     <div id="sortButtons">
+                        <div id="Default" className="sortButtonDiv"> 
+                            <div className="sortLabel">Default</div>
+                            <div className="sortButton">
+                                <Switch
+                                    name="Default"
+                                    data={this.props.sortData} 
+                                    onChangeSort={this.props.onChangeSort}
+                                    checkState={this.state}
+                                    changeCheckState={this.handleChecked}
+                                    dateTime={this.props.dateTime}
+                                />
+                            </div>
+                        </div>
                         <div id="MarketCap" className="sortButtonDiv">
                             <div className="sortLabel"> Market Cap </div>
                             <div className="sortButton">
@@ -64,19 +77,6 @@ class Sort extends React.Component {
                             <div className="sortButton">
                                 <Switch
                                     name="Volume"
-                                    data={this.props.sortData} 
-                                    onChangeSort={this.props.onChangeSort}
-                                    checkState={this.state}
-                                    changeCheckState={this.handleChecked}
-                                    dateTime={this.props.dateTime}
-                                />
-                            </div>
-                        </div>
-                        <div id="Default" className="sortButtonDiv"> 
-                            <div className="sortLabel"> Default </div>
-                            <div className="sortButton">
-                                <Switch
-                                    name="Default"
                                     data={this.props.sortData} 
                                     onChangeSort={this.props.onChangeSort}
                                     checkState={this.state}
