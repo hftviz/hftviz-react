@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hftviz-react/static/css/main.30fc5623.chunk.css",
-    "main.js": "/hftviz-react/static/js/main.6278f349.chunk.js",
-    "main.js.map": "/hftviz-react/static/js/main.6278f349.chunk.js.map",
+    "main.js": "/hftviz-react/static/js/main.6313de6b.chunk.js",
+    "main.js.map": "/hftviz-react/static/js/main.6313de6b.chunk.js.map",
     "runtime-main.js": "/hftviz-react/static/js/runtime-main.7dc130de.js",
     "runtime-main.js.map": "/hftviz-react/static/js/runtime-main.7dc130de.js.map",
     "static/js/2.9a872d79.chunk.js": "/hftviz-react/static/js/2.9a872d79.chunk.js",
@@ -29,6 +29,6 @@
     "static/js/runtime-main.7dc130de.js",
     "static/js/2.9a872d79.chunk.js",
     "static/css/main.30fc5623.chunk.css",
-    "static/js/main.6278f349.chunk.js"
+    "static/js/main.6313de6b.chunk.js"
   ]
 }
