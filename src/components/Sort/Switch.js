@@ -55,9 +55,15 @@ class Switch extends React.Component {
                     count_neg_b = 0,
                     av_a,
                     av_b;
+                
+                let minVal_a = Math.min(...price_change_a);
+                let maxVal_a = Math.max(...price_change_a);
+
+                let minVal_b = Math.min(...price_change_b);
+                let maxVal_b = Math.max(...price_change_b);
 
                 price_change_a.forEach(element => {
-                    if (element <= 0){
+                    if (element < 0.5*(minVal_a+maxVal_a)){
                         count_neg_a++;
                     }else{
                         count_pos_a++;
@@ -66,15 +72,15 @@ class Switch extends React.Component {
 
 
                 price_change_b.forEach(element => {
-                    if (element <= 0){
+                    if (element < 0.5*(minVal_b+maxVal_b)){
                         count_neg_b++;
                     }else{
                         count_pos_b++;
                     }
                 });
 
-                av_a = (2*count_pos_a - count_neg_a)/3;
-                av_b = (2*count_pos_b - count_neg_b)/3;
+                av_a = (count_pos_a - count_neg_a);
+                av_b = (count_pos_b - count_neg_b);
 
                 console.log(a["Symbol"], count_pos_a, count_neg_a);
 

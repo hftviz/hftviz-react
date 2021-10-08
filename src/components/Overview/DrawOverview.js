@@ -24,13 +24,13 @@ function splitToChunks(array, parts) {
 function DrawOverview(allData, companyName, date, container, binSize){
     let dataFiltered = allData[companyName][date]["priceChange"];
 
-    console.log(companyName, dataFiltered);
-
     // console.log('im running ---' + container + '---- at :'+ binSize 
     //     + ' with min and max' + minVal + ',' + maxVal + ' with data ' + allData);
     
     // split data to chunks
     let dataPrice = splitToChunks(dataFiltered, binSize);
+
+    console.log(companyName, dataPrice, dataFiltered, binSize, dataFiltered.length);
 
     let minVal = Math.min(...dataPrice);
     let maxVal = Math.max(...dataPrice);
@@ -79,6 +79,7 @@ function DrawOverview(allData, companyName, date, container, binSize){
     const colorMap = d3.scaleLinear()
         .domain([minVal, 0.5 * (minVal + maxVal), maxVal])
         .range([startColor, middleColor, endColor])
+
 
     // Generate rows and columns and add
     // color fills.
